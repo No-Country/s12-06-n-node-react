@@ -1,0 +1,35 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Ignorar node_modules globalmente
+node_modules/
+
+# Archivos de bloqueo de paquetes
+package-lock.json
+
+# Variables de entorno
+.env
+
+# Directorios y archivos del editor
+.vscode/
+!.vscode/extensions.json
+.idea/
+.DS_Store
+
+# Archivos específicos de ciertos entornos de desarrollo
+*.local
+
+# Archivos de entornos de desarrollo específicos de Visual Studio
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Windows OS
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
