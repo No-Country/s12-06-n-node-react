@@ -1,22 +1,29 @@
 module.exports = {
 	root: true,
 	env: { browser: true, es2021: true },
-	extends: ['standard', 'eslint:recommended', 'plugin:react/recommended', 'plugin:react/jsx-runtime', 'plugin:react-hooks/recommended', 'eslint-config-prettier'],
-	ignorePatterns: ['dist', 'package-lock.json', '.eslintrc.cjs'],
+	extends: [
+		"standard",
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"plugin:react/jsx-runtime",
+		"plugin:react-hooks/recommended",
+		"eslint-config-prettier",
+	],
+	ignorePatterns: ["dist", "package-lock.json", ".eslintrc.cjs"],
 	parserOptions: {
-		ecmaVersion: 'latest',
-		sourceType: 'module',
+		ecmaVersion: "latest",
+		sourceType: "module",
 	},
 	settings: {
 		react: {
-			version: 'detect',
+			version: "detect",
 		},
 	},
-	plugins: ['react-refresh'],
+	plugins: ["react-refresh"],
 	rules: {
-		'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
-		'no-unused-vars': 'warn',
-		'react/prop-types': 'off',
-		'react/no-unknown-property': 'off',
+		"react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
+		"no-unused-vars": "warn",
+		"react/prop-types": "off",
+		"react/no-unknown-property": "off",
 	},
 };
