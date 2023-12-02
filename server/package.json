@@ -1,13 +1,13 @@
 {
 	"name": "yummiverse_backend",
 	"description": "backend",
-	"main": "index.js",
+	"main": "app.js",
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
 		"dev": "./node_modules/.bin/nodemon",
 		"dev-win": ".\\node_modules\\.bin\\nodemon",
-		"start": "node index.js",
+		"start": "node app.js",
 		"lint": "eslint . --ext js,cjs --report-unused-disable-directives --max-warnings 0",
 		"format": "prettier --write ."
 	},
