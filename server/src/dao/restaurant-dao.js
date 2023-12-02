@@ -11,7 +11,7 @@ const RestaurantDAO = {
 		}
 	},
 
-	async getRestaurantById() {
+	async getRestaurantById(id) {
 		try {
 			const restaurant = await RestaurantModel.findById(id);
 			console.log("DAO RESTAURANT GET ONE:", restaurant);

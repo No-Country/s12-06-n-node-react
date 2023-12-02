@@ -8,7 +8,6 @@ const RestaurantController = {
 			res.status(200).json(restaurants);
 		} catch (error) {
 			res.status(500).json({ error: error.message });
-			return;
 		}
 	},
 
@@ -22,7 +21,6 @@ const RestaurantController = {
 			res.status(200).json(restaurant);
 		} catch (error) {
 			res.status(500).json({ error: error.message });
-			return;
 		}
 	},
 };
