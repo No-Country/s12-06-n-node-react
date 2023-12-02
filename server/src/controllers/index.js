@@ -1,3 +1,3 @@
-import RestaurantController from "./restaurant-controller";
+import RestaurantController from "./restaurant-controller.js";
 
 export { RestaurantController };

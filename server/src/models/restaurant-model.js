@@ -1,19 +1,33 @@
 import mongoose from "mongoose";
 
 // Se define un schema de restaurant
-const restaurant = new mongoose.Schema({
-	name: String,
-	type: String,
-	description: String,
-	phone: String,
-	address: String,
-	img_logo: String,
+const restaurantSchema = new mongoose.Schema({
+	name: {
+		type: String,
+		required: true,
+	},
+	type: {
+		type: String,
+		required: true,
+	},
+	description: {
+		type: String,
+		required: true,
+	},
+	phone: {
+		type: String,
+		required: true,
+	},
+	address: {
+		type: String,
+		required: true,
+	},
+	url_img_restaurant: {
+		type: String,
+		required: true,
+	},
 });
 
-/**
- * Se define un modelo Restaurant utilizando buenas practicas de mongoose.
- * Se mapea el schema restaurant en la collection restaurants de mongoDB en Atlas.
- */
-const Restaurant = mongoose.model("Restaurant", restaurant);
-
-export default Restaurant;
+const RestaurantModel = mongoose.model("Restaurant", restaurantSchema);
+console.log("MODEL RESTAURANT GET ALL:", RestaurantModel);
+export default RestaurantModel;
