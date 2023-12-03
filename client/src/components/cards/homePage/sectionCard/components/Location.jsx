@@ -1,4 +1,4 @@
-import locationIcon from "../../../assets/icons/location.svg";
+import locationIcon from "../../../../../assets/icons/location.svg";
 
 export default function Location({ location }) {
 	return (

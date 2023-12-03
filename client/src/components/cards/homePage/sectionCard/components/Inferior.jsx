@@ -1,9 +1,9 @@
-import ButtonOpenOrClose from "../../button/ButtonOpenOrClose";
-import classicIcon from "../../../assets/icons/classic.svg";
-import grillIcon from "../../../assets/icons/grill.svg";
-import hamburgerIcon from "../../../assets/icons/hamburger.svg";
-import pizzaIcon from "../../../assets/icons/pizza.svg";
-import starIcon from "../../../assets/icons/star.svg";
+import ButtonOpenOrClose from "../../../../button/ButtonOpenOrClose";
+import classicIcon from "../../../../../assets/icons/classic.svg";
+import grillIcon from "../../../../../assets/icons/grill.svg";
+import hamburgerIcon from "../../../../../assets/icons/hamburger.svg";
+import pizzaIcon from "../../../../../assets/icons/pizza.svg";
+import starIcon from "../../../../../assets/icons/star.svg";
 
 const categoryIcons = {
 	classic: classicIcon,
