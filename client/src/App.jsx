@@ -1,6 +1,9 @@
-import { AppRouter } from "./routes";
 function App() {
-	return <AppRouter />;
+	return (
+		<>
+			<h1 className="text-red-500">HOLA</h1>
+		</>
+	);
 }
 
 export default App;
