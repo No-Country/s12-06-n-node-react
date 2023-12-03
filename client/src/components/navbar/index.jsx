@@ -1,4 +1,13 @@
+import React, { useState } from 'react';
+
 export default function Navbar() {
+
+const [isOpen, setIsOpen] = useState(false)
+
+const toggleNavbar = () => {
+  setIsOpen(!isOpen)
+}
+
 	return (
 		<div className="max-w-2xl mx-auto">
 			<nav class="px-2 mt-2">
@@ -20,7 +29,7 @@ export default function Navbar() {
 					</li>
 					<li className="ml-40">
 						<a href="#" className="" aria-current="page">
-							<button className="bg-yellow-400 font-semibold py-2 px-4 rounded-lg">
+							<button className="bg-yellow-400 font-semibold py-2 px-4 rounded-lg md:bg-yellow-400 font-semibold py-2 px-4 rounded-lg sm:bg-yellow-400 font-semibold py-2 px-4 rounded-lg ">
 								Publicar Tienda
 							</button>
 						</a>
