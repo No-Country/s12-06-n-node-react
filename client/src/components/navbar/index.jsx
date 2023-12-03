@@ -1,13 +1,4 @@
-import React, { useState } from 'react';
-
 export default function Navbar() {
-
-const [isOpen, setIsOpen] = useState(false)
-
-const toggleNavbar = () => {
-  setIsOpen(!isOpen)
-}
-
 	return (
 		<div className="max-w-2xl mx-auto">
 			<nav class="px-2 mt-2">
