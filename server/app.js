@@ -1,10 +1,11 @@
 import "dotenv/config.js";
 import express from "express";
+import cors from "cors";
 import { dbConnect } from "./src/config/index.js";
 import { restaurantRoutes } from "./src/routes/index.js";
-console.clear();
+// console.clear();
 const app = express();
-
+app.use(cors());
 app.use(express.json());
 
 // Utiliza las ruta base por entidad

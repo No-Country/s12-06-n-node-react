@@ -1,26 +1,53 @@
-import { RestaurantDAO } from "../dao/index.js";
+import { RestaurantService } from "../services/index.js";
+import { handleHttp } from "../utils/error-handle.js";
 
 const RestaurantController = {
-	async getAllRestaurants(req, res) {
+	async getRestaurants(req, res) {
 		try {
-			const restaurants = await RestaurantDAO.getAllRestaurants();
-			console.log("CONTROLLER RESTAURANT GET ALL:", restaurants);
-			res.status(200).json(restaurants);
-		} catch (error) {
-			res.status(500).json({ error: error.message });
+			const response = await RestaurantService.getAllRestaurants();
+			return res.status(200).json(response);
+		} catch (e) {
+			handleHttp(res, "ERROR_GET_RESTAURANTS", e);
 		}
 	},
 
-	async getRestaurantById(req, res) {
-		const { id } = req.query;
+	async getRestaurant(req, res) {
+		const { id } = req.params;
 		try {
-			const restaurant = await RestaurantDAO.getRestaurantById(id);
-			if (!restaurant) {
-				return res.status(404).json({ message: "Restaurant not found" });
-			}
-			res.status(200).json(restaurant);
-		} catch (error) {
-			res.status(500).json({ error: error.message });
+			const response = await RestaurantService.getRestaurantById(id);
+			return res.status(200).json(response);
+		} catch (e) {
+			handleHttp(res, "ERROR_GET_RESTAURANT", e);
+		}
+	},
+
+	async postRestaurant({ body }, res) {
+		try {
+			const response = await RestaurantService.createRestaurant(body);
+			return res.status(201).json(response);
+		} catch (e) {
+			handleHttp(res, "ERROR_POST_RESTAURANT", e);
+		}
+	},
+
+	async putRestaurant(req, res) {
+		try {
+			const { id } = req.params;
+			const body = req.body;
+			const response = await RestaurantService.updateRestaurant(id, body);
+			return res.status(200).json(response);
+		} catch (e) {
+			handleHttp(res, "ERROR_PUT_RESTAURANT", e);
+		}
+	},
+
+	async deleteRestaurant(req, res) {
+		try {
+			const { id } = req.params;
+			const response = await RestaurantService.removeRestaurant(id);
+			return res.status(200).json(response);
+		} catch (e) {
+			handleHttp(res, "ERROR_DELETE_RESTAURANT", e);
 		}
 	},
 };
