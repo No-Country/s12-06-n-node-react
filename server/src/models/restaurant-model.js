@@ -1,33 +1,63 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 
-// Se define un schema de restaurant
-const restaurantSchema = new mongoose.Schema({
-	name: {
-		type: String,
-		required: true,
+const restaurantSchema = new Schema(
+	{
+		name: {
+			type: String,
+			required: true,
+		},
+		categories: {
+			type: String,
+			required: true,
+			enum: ["Española", "Italiana", "Japonesa", "Americana", "Mexicana", "Pizza", "Fast food"],
+		},
+		description: {
+			type: String,
+			required: true,
+		},
+		phone: {
+			type: String,
+			required: true,
+		},
+		address: {
+			street: {
+				type: String,
+				required: true,
+			},
+			city: {
+				type: String,
+				required: true,
+			},
+			state: {
+				type: String,
+				required: true,
+			},
+			country: {
+				type: String,
+				required: true,
+			},
+		},
+		imgBrand: {
+			type: String,
+			required: true,
+		},
+		isOpen: {
+			type: Boolean,
+			default: true,
+			required: true,
+		},
+		stars: {
+			type: Number,
+			default: 0,
+		},
+		totalRatings: {
+			type: Number,
+			default: 0,
+		},
 	},
-	type: {
-		type: String,
-		required: true,
-	},
-	description: {
-		type: String,
-		required: true,
-	},
-	phone: {
-		type: String,
-		required: true,
-	},
-	address: {
-		type: String,
-		required: true,
-	},
-	url_img_restaurant: {
-		type: String,
-		required: true,
-	},
-});
+	{ timestamps: true, versionKey: false }
+);
 
-const RestaurantModel = mongoose.model("Restaurant", restaurantSchema);
-console.log("MODEL RESTAURANT GET ALL:", RestaurantModel);
+const RestaurantModel = model("restaurants", restaurantSchema);
+
 export default RestaurantModel;
