@@ -3,24 +3,24 @@ module.exports = {
 		es2021: true,
 		node: true,
 	},
-	extends: ['standard', 'eslint:recommended', 'eslint-config-prettier'],
-	ignorePatterns: ['.eslintrc.cjs', 'package-lock.json', 'README.md'],
+	extends: ["standard", "eslint:recommended", "eslint-config-prettier"],
+	ignorePatterns: [".eslintrc.cjs", "package-lock.json", "README.md"],
 	overrides: [
 		{
 			env: {
 				node: true,
 			},
-			files: ['.eslintrc.{js,cjs}'],
+			files: [".eslintrc.{js,cjs}"],
 			parserOptions: {
-				sourceType: 'script',
+				sourceType: "script",
 			},
 		},
 	],
 	parserOptions: {
-		ecmaVersion: 'latest',
-		sourceType: 'module',
+		ecmaVersion: "latest",
+		sourceType: "module",
 	},
 	rules: {
-		'no-unused-vars': 'warn',
+		"no-unused-vars": "warn",
 	},
 };
