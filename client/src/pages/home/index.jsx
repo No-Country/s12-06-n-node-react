@@ -162,7 +162,39 @@ export default function HomePage() {
           numberOfScores={item.numberOfScores}
           scores={item.scores}
         />}
-
+      </Slider>
+      <Slider data={restaurantData} title='Categoria'>
+        {item => <SectionCardHomePage
+          location={item.location}
+          nameRestaurant={item.nameRestaurant}
+          imageRestaurant={item.imageRestaurant}
+          categories={item.categories}
+          openRestaurant={item.openRestaurant}
+          numberOfScores={item.numberOfScores}
+          scores={item.scores}
+        />}
+      </Slider>
+      <Slider data={restaurantData} title='Categoria'>
+        {item => <SectionCardHomePage
+          location={item.location}
+          nameRestaurant={item.nameRestaurant}
+          imageRestaurant={item.imageRestaurant}
+          categories={item.categories}
+          openRestaurant={item.openRestaurant}
+          numberOfScores={item.numberOfScores}
+          scores={item.scores}
+        />}
+      </Slider>
+      <Slider data={restaurantData} title='Categoria'>
+        {item => <SectionCardHomePage
+          location={item.location}
+          nameRestaurant={item.nameRestaurant}
+          imageRestaurant={item.imageRestaurant}
+          categories={item.categories}
+          openRestaurant={item.openRestaurant}
+          numberOfScores={item.numberOfScores}
+          scores={item.scores}
+        />}
       </Slider>
     </main>
   );
