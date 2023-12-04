@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import SectionSlider from "../../components/sliders/section-slider";
+import axios from "axios";
 
 export default function HomePage() {
 	const restaurantData = [
