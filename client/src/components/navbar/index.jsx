@@ -1,4 +1,9 @@
+import React, { useState } from 'react'
+
 export default function Navbar() {
+
+const [isMenuOpen, setIsMenuOpen] = useState(false);
+
 	return (
 		<nav className="px-2 mt-2">
 			<div className="max-w-2xl mx-auto">
