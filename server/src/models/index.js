@@ -1,3 +1,4 @@
 import RestaurantModel from "./restaurant-model.js";
+import MenuModel from "./menu-model.js";
 
-export { RestaurantModel };
+export { RestaurantModel, MenuModel };
