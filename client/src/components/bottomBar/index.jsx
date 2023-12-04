@@ -107,7 +107,7 @@ const BottomBar = () => {
 				</div>
 				<div
 					className={
-						`transition-all flex flex-col flex-wrap items-center justify-center content-center cursor-pointer px-5 w-2/4` +
+						`transition-all flex flex-col flex-wrap items-center justify-center content-center text-center cursor-pointer px-5 w-2/4` +
 						(currentTab === 3 ? " bg-neutral-950 shrink rounded-tr-xl" : "")
 					}
 					onClick={() => changeTab(3)}

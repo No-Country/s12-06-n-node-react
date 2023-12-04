@@ -24,7 +24,6 @@ export const Layout = () => {
 				>
 					Parrilla
 				</CategoryCard>
-
 				<BottomBar />
 			</div>
 
