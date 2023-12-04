@@ -6,11 +6,6 @@ const restaurantSchema = new Schema(
 			type: String,
 			required: true,
 		},
-		categories: {
-			type: String,
-			required: true,
-			enum: ["Española", "Italiana", "Japonesa", "Americana", "Mexicana", "Pizza", "Fast food"],
-		},
 		description: {
 			type: String,
 			required: true,
