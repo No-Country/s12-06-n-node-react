@@ -6,6 +6,6 @@ const router = Router();
 router.post("/create", CommentController.create);
 router.get("/:RestaurantId", CommentController.getCommentsByRestaurantId);
 router.get("/", CommentController.getComments);
-router.patch("/:id", CommentController.update);
+router.patch("/:CommentId/:userId", CommentController.update);
 
 export default router;
