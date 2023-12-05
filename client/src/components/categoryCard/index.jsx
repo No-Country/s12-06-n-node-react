@@ -1,9 +1,7 @@
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 /**
- *
- *
+ * Renders a link with an image and text inside using react-router-dom.
  * @param {string} className - The CSS class name for the component.
  * @param {ReactNode} children - The child elements to be rendered inside the link.
  * @param {string} href - The URL to navigate to when the link is clicked.

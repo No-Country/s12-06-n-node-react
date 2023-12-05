@@ -12,7 +12,7 @@ export default function SectionCardHomePage({
 }) {
 	return (
 		<div className="w-[208px] flex flex-col justify-between gap-4">
-			<div className="relative h-[158px]">
+			<div className="relative h-[158px] drop-shadow-md">
 				<img
 					src={imageRestaurant}
 					alt={nameRestaurant}
