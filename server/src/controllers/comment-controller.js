@@ -6,7 +6,9 @@ import { commentPartialValidator } from "../middlewares/comment-middleware.js";
 const CommentController = {
 	async create(req, res) {
 		try {
-			const result = commentValidator(req.body);
+			const body = req.body;
+			const result = commentValidator(body);
+			
 			if (result.error) {
 				handleHttp(res, "ERROR_POST_COMMENT", result.error);
 			}
@@ -51,6 +53,26 @@ const CommentController = {
 			return res.status(200).json(comments);
 		} catch (e) {
 			handleHttp(res, "ERROR_GET_COMMENT", e);
+		}
+	},
+	async update(req, res) {
+		try {
+			const id = req.params.id;
+			const body = req.body;
+
+			const result = commentPartialValidator(body);
+			if (result.error) {
+				handleHttp(res, "ERROR_UPDATE_COMMENT", result.error);
+			}
+
+			const comment = await CommentService.updateComment(id, result.data);
+			if (comment.error) {
+				handleHttp(res, "ERROR_UPDATE_COMMENT", comment.error);
+			}
+
+			return res.status(200).json(comment);
+		} catch (e) {
+			handleHttp(res, "ERROR_UPDATE_COMMENT", e);
 		}
 	}
 };
