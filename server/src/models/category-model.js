@@ -11,10 +11,7 @@ const categorySchema = new Schema(
 			require: true,
 		},
 	},
-	{
-		timestamps: true,
-		versionKey: false,
-	}
+	{ timestamps: true, versionKey: false }
 );
 
 const CategoryModel = model("categories", categorySchema);

@@ -39,6 +39,6 @@ const commentSchema = new Schema(
 	{ timestamps: true, versionKey: false }
 );
 
-const CommentModel = model("Comment", commentSchema);
+const CommentModel = model("comments", commentSchema);
 
 export default CommentModel;
