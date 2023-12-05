@@ -151,7 +151,6 @@ export default function HomePage() {
       <Slider data={categoryData}>
         {item => <CategoryCard title={item.title} href={item.href} imgSrc={item.imgSrc} />}
       </Slider>
-      
       <Slider data={restaurantData} title='Categoria'>
         {item => <SectionCardHomePage
           location={item.location}
@@ -163,6 +162,7 @@ export default function HomePage() {
           scores={item.scores}
         />}
       </Slider>
+
       <Slider data={restaurantData} title='Categoria'>
         {item => <SectionCardHomePage
           location={item.location}
@@ -174,6 +174,7 @@ export default function HomePage() {
           scores={item.scores}
         />}
       </Slider>
+
       <Slider data={restaurantData} title='Categoria'>
         {item => <SectionCardHomePage
           location={item.location}
@@ -185,6 +186,7 @@ export default function HomePage() {
           scores={item.scores}
         />}
       </Slider>
+
       <Slider data={restaurantData} title='Categoria'>
         {item => <SectionCardHomePage
           location={item.location}
