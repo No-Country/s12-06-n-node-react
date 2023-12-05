@@ -4,7 +4,7 @@ const commentSchema = z.object({
 	id: z.string().optional().readonly(),
 	comment: z
 		.string()
-		.refine(data => data.trim() !== "", { message: "El comentario no puede estar vacio" }), // ¿deberíamos de validar que el comentario no esté vacío?
+		.refine(data => data.trim() !== "", { message: "El comentario no puede estar vacío" }), // ¿deberíamos de validar que el comentario no esté vacío?
 	user_id: z.string(),
 	restaurant_id: z.string(),
 	// ¿deberíamos de validar que el rating sea un número entero entre 1 y 5?
