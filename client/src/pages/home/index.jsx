@@ -99,7 +99,7 @@ export default function HomePage() {
     {
       id: 1,
       title: "Parrilla",
-      href: "https://www.facebook.com/",
+      href: "/",
       imgSrc: "grill",
     },
     {
