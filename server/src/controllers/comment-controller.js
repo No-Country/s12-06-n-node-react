@@ -58,14 +58,14 @@ const CommentController = {
 	async update(req, res) {
 		try {
 			const id = req.params.id;
-			const body = req.body;
+			const body = {id, ...req.body};
 
 			const result = commentPartialValidator(body);
 			if (result.error) {
 				handleHttp(res, "ERROR_UPDATE_COMMENT", result.error);
 			}
 
-			const comment = await CommentService.updateComment(id, result.data);
+			const comment = await CommentService.updateComment(result.data);
 			if (comment.error) {
 				handleHttp(res, "ERROR_UPDATE_COMMENT", comment.error);
 			}
