@@ -15,6 +15,28 @@ const CommentService = {
 			message: "SERVICE CREATE COMMENT",
 		};
 	},
+	async getCommentsById(body) {
+		const { id } = body;
+		const comments = await CommentModel.find({ restaurant_id: id });
+
+		console.log("SERVICE GET COMMENT:", comments);
+		return {
+			error: false,
+			message: "SERVICE GET COMMENT",
+			// data: comments, // remover
+		};
+	},
+	async getComments(body){
+		const comments = await CommentModel.find();
+
+		console.log("SERVICE GET COMMENT:", comments);
+		return {
+			error: false,
+			message: "SERVICE GET COMMENT",
+			// data: comments, // remover
+		};
+
+	}
 };
 
 export default CommentService;
