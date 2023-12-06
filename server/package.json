@@ -1,13 +1,13 @@
 {
 	"name": "yummiverse_backend",
 	"description": "backend",
-	"main": "index.js",
+	"main": "app.js",
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
 		"dev": "./node_modules/.bin/nodemon",
 		"dev-win": ".\\node_modules\\.bin\\nodemon",
-		"start": "node index.js",
+		"start": "node app.js",
 		"lint": "eslint . --ext js,cjs --report-unused-disable-directives --max-warnings 0",
 		"format": "prettier --write ."
 	},
@@ -15,16 +15,18 @@
 		"cors": "^2.8.5",
 		"dotenv": "^16.3.1",
 		"express": "^4.18.2",
-		"mongoose": "^8.0.2"
+		"express-validator": "^7.0.1",
+		"mongoose": "^8.0.2",
+		"zod": "^3.22.4"
 	},
 	"devDependencies": {
-		"eslint": "^8.54.0",
-		"eslint-config-prettier": "^9.0.0",
+		"eslint": "^8.55.0",
+		"eslint-config-prettier": "^9.1.0",
 		"eslint-config-standard": "^17.1.0",
 		"eslint-plugin-import": "^2.29.0",
 		"eslint-plugin-n": "^16.3.1",
 		"eslint-plugin-promise": "^6.1.1",
-		"nodemon": "^3.0.1",
+		"nodemon": "^3.0.2",
 		"prettier": "^3.1.0"
 	}
 }
