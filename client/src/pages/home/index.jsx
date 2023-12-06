@@ -3,6 +3,8 @@ import Slider from "../../components/sliders/section-slider";
 import CategoryCard from "../../components/cards/homePage/categoryCard";
 import SectionCardHomePage from "../../components/cards/homePage/sectionCard";
 
+import { getRestaurant } from "../../api/yumiverse_api";
+
 export default function HomePage() {
   const restaurantData = [
     {
@@ -145,6 +147,23 @@ export default function HomePage() {
       imgSrc: "pizza",
     },
   ];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+
+        const response = await getRestaurant();
+        console.log(response.data);
+
+      } catch (error) {
+
+        console.error("Error fetching restaurant data:", error);
+
+      }
+    }
+
+    fetchData();
+  }, []);
 
   return (
     <main className="flex flex-col gap-8 overflow-hidden">

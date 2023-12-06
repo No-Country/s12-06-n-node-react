@@ -3,6 +3,7 @@ import { Layout } from "./Layout";
 import HomePage from "../pages/home";
 import { AuthRoutes } from "./auth/AuthRoutes";
 import Ratings from "../pages/ratings";
+import RestaurantPage from "../pages/restaurants";
 
 export const AppRouter = () => {
 	return (
@@ -12,6 +13,7 @@ export const AppRouter = () => {
 				<Route index element={<HomePage />} />
 				<Route path="auth/*" element={<AuthRoutes />} />
 				<Route path="calificaciones" element={<Ratings />} />
+				<Route path="restaurant" element={<RestaurantPage />} />
 			</Route>
 		</Routes>
 	);
