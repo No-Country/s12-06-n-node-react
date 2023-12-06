@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Slider from "../../components/sliders/section-slider";
 import CategoryCard from "../../components/cards/homePage/categoryCard";
 import SectionCardHomePage from "../../components/cards/homePage/sectionCard";

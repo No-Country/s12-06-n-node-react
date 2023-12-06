@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const getRestaurant = async () => {
 	return await axios.get("http://localhost:3000/api/v1/restaurant");
