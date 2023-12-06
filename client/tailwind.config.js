@@ -11,6 +11,10 @@ export default {
 				secundario: "#FEFCF1",
 				texts: "#180801",
 			},
+			boxShadow: {
+				"3xl": "0 1px 2px 0 rgba(0, 0, 0, 0.25)",
+				"4xl": "0 1px 2px 1px rgba(254, 252, 241, 0.25)",
+			},
 		},
 		screens: {
 			tablet: "375px",
