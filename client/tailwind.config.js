@@ -10,6 +10,7 @@ export default {
 				principal: "#F2C81B",
 				secundario: "#FEFCF1",
 				texts: "#180801",
+				disabled: "#878787",
 			},
 			boxShadow: {
 				"3xl": "0 1px 2px 0 rgba(0, 0, 0, 0.25)",
