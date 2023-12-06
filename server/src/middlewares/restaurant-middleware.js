@@ -1,9 +1,25 @@
-import { check } from "express-validator";
-import { validateResult } from "../utils/index.js";
+import { check, validationResult } from "express-validator";
 import { RestaurantModel } from "../models/index.js";
 
-const restaurantValidations = {
-	postValidation: [
+const validateResult = (req, res, next) => {
+	try {
+		validationResult(req).throw();
+		return next();
+	} catch (error) {
+		res.status(403);
+		res.send({ errors: error.array() });
+	}
+};
+
+const restaurantValidation = {
+	// Valida petición GET.
+	getAll: [],
+
+	// Valida petición GET BY ID.
+	getOne: [],
+
+	// Valida petición POST
+	create: [
 		check("name")
 			.exists()
 			.notEmpty()
@@ -20,7 +36,16 @@ const restaurantValidations = {
 			.exists()
 			.notEmpty()
 			.isArray()
-			.withMessage("Las categorías son requeridas y deben ser un Array"),
+			.withMessage("Las categorías son requeridas y deben ser un Array")
+			.custom(value => {
+				const isValid = value.every(categoryId =>
+					RestaurantModel.Types.ObjectId.isValid(categoryId)
+				);
+				if (!isValid) {
+					throw new Error("Las categorías deben contener ObjectIds válidos de MongoDB");
+				}
+				return true;
+			}),
 		check("description")
 			.exists()
 			.notEmpty()
@@ -121,6 +146,12 @@ const restaurantValidations = {
 			}),
 		(req, res, next) => validateResult(req, res, next),
 	],
+
+	// Valida petición PUT
+	update: [],
+
+	// Valida petición DELETE
+	delete: [],
 };
 
-export default restaurantValidations;
+export default restaurantValidation;
