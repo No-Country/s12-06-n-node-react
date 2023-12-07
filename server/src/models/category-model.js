@@ -4,11 +4,11 @@ const categorySchema = new Schema(
 	{
 		category: {
 			type: String,
-			require: true,
+			required: true,
 		},
 		urlImgCategories: {
 			type: String,
-			require: true,
+			required: true,
 		},
 	},
 	{ timestamps: true, versionKey: false }
