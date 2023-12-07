@@ -1,5 +1,7 @@
 import React from "react";
-import SectionSlider from "../../components/sliders/section-slider";
+import Slider from "../../components/sliders/section-slider";
+import CategoryCard from "../../components/cards/homePage/categoryCard";
+import SectionCardHomePage from "../../components/cards/homePage/sectionCard";
 
 export default function HomePage() {
 	const restaurantData = [
@@ -97,44 +99,38 @@ export default function HomePage() {
 		{
 			id: 1,
 			title: "Parrilla",
-			href: "https://www.facebook.com/",
+			href: "/",
 			imgSrc: "grill",
-			className: "",
 		},
 		{
 			id: 2,
 			title: "Pizzería",
 			href: "/",
 			imgSrc: "pizza",
-			className: "",
 		},
 		{
 			id: 3,
 			title: "Pizzería",
 			href: "/",
 			imgSrc: "pizza",
-			className: "",
 		},
 		{
 			id: 4,
 			title: "Pizzería",
 			href: "/",
 			imgSrc: "pizza",
-			className: "",
 		},
 		{
 			id: 5,
 			title: "Pizzería",
 			href: "/",
 			imgSrc: "pizza",
-			className: "",
 		},
 		{
 			id: 6,
 			title: "Pizzería",
 			href: "/",
 			imgSrc: "pizza",
-			className: "",
 		},
 		{
 			id: 7,
@@ -152,10 +148,64 @@ export default function HomePage() {
 
 	return (
 		<main className="flex flex-col gap-8 overflow-hidden">
-			<SectionSlider data={categoryData} cardType={true} />
-			<SectionSlider title={"Cerca de tí"} data={restaurantData} />
-			<SectionSlider title={"Top Ranked"} data={restaurantData} />
-			<SectionSlider title={"Pizzas"} data={restaurantData} />
+			<Slider data={categoryData}>
+				{item => <CategoryCard title={item.title} href={item.href} imgSrc={item.imgSrc} />}
+			</Slider>
+			<Slider data={restaurantData} title="Categoria">
+				{item => (
+					<SectionCardHomePage
+						location={item.location}
+						nameRestaurant={item.nameRestaurant}
+						imageRestaurant={item.imageRestaurant}
+						categories={item.categories}
+						openRestaurant={item.openRestaurant}
+						numberOfScores={item.numberOfScores}
+						scores={item.scores}
+					/>
+				)}
+			</Slider>
+
+			<Slider data={restaurantData} title="Categoria">
+				{item => (
+					<SectionCardHomePage
+						location={item.location}
+						nameRestaurant={item.nameRestaurant}
+						imageRestaurant={item.imageRestaurant}
+						categories={item.categories}
+						openRestaurant={item.openRestaurant}
+						numberOfScores={item.numberOfScores}
+						scores={item.scores}
+					/>
+				)}
+			</Slider>
+
+			<Slider data={restaurantData} title="Categoria">
+				{item => (
+					<SectionCardHomePage
+						location={item.location}
+						nameRestaurant={item.nameRestaurant}
+						imageRestaurant={item.imageRestaurant}
+						categories={item.categories}
+						openRestaurant={item.openRestaurant}
+						numberOfScores={item.numberOfScores}
+						scores={item.scores}
+					/>
+				)}
+			</Slider>
+
+			<Slider data={restaurantData} title="Categoria">
+				{item => (
+					<SectionCardHomePage
+						location={item.location}
+						nameRestaurant={item.nameRestaurant}
+						imageRestaurant={item.imageRestaurant}
+						categories={item.categories}
+						openRestaurant={item.openRestaurant}
+						numberOfScores={item.numberOfScores}
+						scores={item.scores}
+					/>
+				)}
+			</Slider>
 		</main>
 	);
 }
