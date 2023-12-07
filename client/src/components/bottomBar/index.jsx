@@ -146,7 +146,11 @@ const BottomBar = () => {
 							stroke-width="1.5"
 						/>
 					</svg>
-					<span className={`text-xs transition-all text-center` + (currentTab === 3 ? " text-yellow-400" : "")}>
+					<span
+						className={
+							`text-xs transition-all text-center` + (currentTab === 3 ? " text-yellow-400" : "")
+						}
+					>
 						Mis Tiendas
 					</span>
 				</div>
