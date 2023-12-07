@@ -14,7 +14,7 @@ function Slider({ data, children, title }) {
 				spaceBetween={16}
 				loop={true}
 				freemodesticky={"true"}
-				className="mySwiper w-full overflow-visible"
+				className="mySwiper w-full"
 			>
 				{data.map(item => (
 					<SwiperSlide key={item.id} className="w-auto">
@@ -23,24 +23,20 @@ function Slider({ data, children, title }) {
 				))}
 			</Swiper>
 		</section>
-
 	);
-
 }
 
-const SliderItem = ({ children, key, className = 'w-auto' }) => {
+const SliderItem = ({ children, key, className = "w-auto" }) => {
 	return (
 		<SwiperSlide key={key} className={className}>
 			{children}
 		</SwiperSlide>
-	)
-}
+	);
+};
 
 const Title = ({ children }) => {
-	return (
-		<h2 className="font-bold">{children}</h2>
-	)
-}
+	return <h2 className="font-bold">{children}</h2>;
+};
 
 Slider.Title = Title;
 Slider.Item = SliderItem;
