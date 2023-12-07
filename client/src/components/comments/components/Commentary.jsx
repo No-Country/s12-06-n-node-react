@@ -1,4 +1,4 @@
-import Dropdown from "../../button/Dropdown";
+import Dropdown from "../../dropdown";
 import Ratings from "./Ratings";
 import menuIcon from "../../../assets/icons/menu-points.svg";
 
