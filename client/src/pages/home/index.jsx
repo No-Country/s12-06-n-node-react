@@ -3,7 +3,7 @@ import Slider from "../../components/sliders/section-slider";
 import CategoryCard from "../../components/cards/homePage/categoryCard";
 import SectionCardHomePage from "../../components/cards/homePage/sectionCard";
 
-import { getRestaurant } from "../../api/yumiverse_api";
+import { getAllRestaurants } from "../../api/yumiverse_api";
 
 export default function HomePage() {
 	const restaurantData = [
@@ -152,7 +152,7 @@ export default function HomePage() {
     const fetchData = async () => {
       try {
 
-        const response = await getRestaurant();
+        const response = await getAllRestaurants();
         console.log(response.data);
 
       } catch (error) {

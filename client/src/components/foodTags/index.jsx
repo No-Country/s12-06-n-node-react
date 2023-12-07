@@ -22,7 +22,7 @@ export default function FoodTags() {
     ]
 
     return (
-        <div className="flex gap-2 p-4">
+        <div className="flex gap-2 p-4 bg-secundario">
             {
                 tags.map(tag => (
                     <FoodTag key={tag.id} categorie={tag.categorie} />

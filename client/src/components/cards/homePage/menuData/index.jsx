@@ -11,7 +11,7 @@ export default function MenuData({ categories, phoneNumber, schedule, openRestau
 	};
 
 	return (
-		<div className="flex flex-col items-start justify-start p-4 w-[375px] bg-secundario">
+		<div className="flex flex-col items-start justify-start p-4 bg-secundario">
 			<div className="flex flex-row items-start justify-start gap-4 mb-5 w-full">
 				<button onClick={() => changeSection(true)} className="text-sm/5 font-medium">
 					Contacto{showContact && <div className="bg-principal h-1 rounded-lg mt-2"></div>}
