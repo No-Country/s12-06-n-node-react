@@ -14,7 +14,7 @@ function Slider({ data, children, title }) {
 				spaceBetween={16}
 				loop={true}
 				freemodesticky={"true"}
-				className="mySwiper w-full overflow-visible"
+				className="mySwiper w-full"
 			>
 				{data.map(item => (
 					<SwiperSlide key={item.id} className="w-auto">
