@@ -160,7 +160,7 @@ export default function HomePage() {
 			</Slider>
 			{
 				(data && data?.length > 0) &&
-				<Slider data={data} title="Categoria">
+				<Slider data={data} title="Cerca de tí">
 					{item => (
 						<SectionCardHomePage
 							location={String(item.address)}
@@ -174,8 +174,38 @@ export default function HomePage() {
 					)}
 				</Slider>
 			}
-
-
+			{
+				(data && data?.length > 0) &&
+				<Slider data={data} title="Los Mejores Puntuados">
+					{item => (
+						<SectionCardHomePage
+							location={String(item.address)}
+							nameRestaurant={item.name}
+							imageRestaurant={item.url_img_restaurant}
+							categories={item.categories}
+							openRestaurant={item.isOpen}
+							numberOfScores={item.stars}
+							scores={item.totalRating}
+						/>
+					)}
+				</Slider>
+			}
+			{
+				(data && data?.length > 0) &&
+				<Slider data={data} title="Pizzas">
+					{item => (
+						<SectionCardHomePage
+							location={String(item.address)}
+							nameRestaurant={item.name}
+							imageRestaurant={item.url_img_restaurant}
+							categories={item.categories}
+							openRestaurant={item.isOpen}
+							numberOfScores={item.stars}
+							scores={item.totalRating}
+						/>
+					)}
+				</Slider>
+			}
 		</main>
 	);
 }
