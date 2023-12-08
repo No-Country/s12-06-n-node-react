@@ -4,6 +4,7 @@ import CategoryCard from "../../components/cards/homePage/categoryCard";
 import SectionCardHomePage from "../../components/cards/homePage/sectionCard";
 
 import { getAllRestaurants } from "../../api/yumiverse_api";
+import { useFetch } from "../../hooks/useFetch";
 
 export default function HomePage() {
 	const restaurantData = [
@@ -148,83 +149,33 @@ export default function HomePage() {
 		},
 	];
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
+	const { data, loading, error } = useFetch(getAllRestaurants);
 
-        const response = await getAllRestaurants();
-        console.log(response.data);
-
-      } catch (error) {
-
-        console.error("Error fetching restaurant data:", error);
-
-      }
-    }
-
-    fetchData();
-  }, []);
+	console.log(data);
 
 	return (
 		<main className="flex flex-col gap-8 overflow-hidden">
 			<Slider data={categoryData}>
 				{item => <CategoryCard title={item.title} href={item.href} imgSrc={item.imgSrc} />}
 			</Slider>
-			<Slider data={restaurantData} title="Categoria">
-				{item => (
-					<SectionCardHomePage
-						location={item.location}
-						nameRestaurant={item.nameRestaurant}
-						imageRestaurant={item.imageRestaurant}
-						categories={item.categories}
-						openRestaurant={item.openRestaurant}
-						numberOfScores={item.numberOfScores}
-						scores={item.scores}
-					/>
-				)}
-			</Slider>
+			{
+				(data && data?.length > 0) &&
+				<Slider data={data} title="Categoria">
+					{item => (
+						<SectionCardHomePage
+							location={String(item.address)}
+							nameRestaurant={item.name}
+							imageRestaurant={item.url_img_restaurant}
+							categories={item.categories}
+							openRestaurant={item.isOpen}
+							numberOfScores={item.stars}
+							scores={item.totalRating}
+						/>
+					)}
+				</Slider>
+			}
 
-			<Slider data={restaurantData} title="Categoria">
-				{item => (
-					<SectionCardHomePage
-						location={item.location}
-						nameRestaurant={item.nameRestaurant}
-						imageRestaurant={item.imageRestaurant}
-						categories={item.categories}
-						openRestaurant={item.openRestaurant}
-						numberOfScores={item.numberOfScores}
-						scores={item.scores}
-					/>
-				)}
-			</Slider>
 
-			<Slider data={restaurantData} title="Categoria">
-				{item => (
-					<SectionCardHomePage
-						location={item.location}
-						nameRestaurant={item.nameRestaurant}
-						imageRestaurant={item.imageRestaurant}
-						categories={item.categories}
-						openRestaurant={item.openRestaurant}
-						numberOfScores={item.numberOfScores}
-						scores={item.scores}
-					/>
-				)}
-			</Slider>
-
-			<Slider data={restaurantData} title="Categoria">
-				{item => (
-					<SectionCardHomePage
-						location={item.location}
-						nameRestaurant={item.nameRestaurant}
-						imageRestaurant={item.imageRestaurant}
-						categories={item.categories}
-						openRestaurant={item.openRestaurant}
-						numberOfScores={item.numberOfScores}
-						scores={item.scores}
-					/>
-				)}
-			</Slider>
 		</main>
 	);
 }
