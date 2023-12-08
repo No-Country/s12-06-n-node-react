@@ -16,7 +16,8 @@ const commentSchema = new Schema(
 			required: true,
 		},
 		restaurant_id: {
-			type: String,
+			type: Schema.Types.ObjectId,
+			ref: "restaurants",
 			required: true,
 		},
 		rating: {
