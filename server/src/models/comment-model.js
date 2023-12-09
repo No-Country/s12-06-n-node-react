@@ -16,7 +16,8 @@ const commentSchema = new Schema(
 			required: true,
 		},
 		restaurant_id: {
-			type: String,
+			type: Schema.Types.ObjectId,
+			ref: "restaurants",
 			required: true,
 		},
 		rating: {
@@ -39,6 +40,6 @@ const commentSchema = new Schema(
 	{ timestamps: true, versionKey: false }
 );
 
-const CommentModel = model("Comment", commentSchema);
+const CommentModel = model("comments", commentSchema);
 
 export default CommentModel;

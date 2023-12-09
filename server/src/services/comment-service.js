@@ -15,8 +15,10 @@ const CommentService = {
 			message: "SERVICE CREATE COMMENT",
 		};
 	},
+
 	async getCommentsById(body) {
 		const { id } = body;
+		// Comentario de Victor: Marvin, se puede usar findById() acá?
 		const comments = await CommentModel.find({ restaurant_id: id });
 
 		console.log("SERVICE GET COMMENT:", comments);
@@ -26,7 +28,8 @@ const CommentService = {
 			// data: comments, // remover
 		};
 	},
-	async getComments(body){
+
+	async getComments(body) {
 		const comments = await CommentModel.find();
 
 		console.log("SERVICE GET COMMENT:", comments);
@@ -35,8 +38,7 @@ const CommentService = {
 			message: "SERVICE GET COMMENT",
 			// data: comments, // remover
 		};
-
-	}
+	},
 };
 
 export default CommentService;

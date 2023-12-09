@@ -24,6 +24,7 @@ const CommentController = {
 			handleHttp(res, "ERROR_POST_COMMENT", e);
 		}
 	},
+
 	async getCommentsByRestaurantId(req, res) {
 		try {
 			const id = req.params.id;
@@ -34,7 +35,7 @@ const CommentController = {
 			}
 
 			const comment = await CommentService.getCommentsById(result.data);
-			if(comment.error) {
+			if (comment.error) {
 				handleHttp(res, "ERROR_GET_COMMENT", comment.error);
 			}
 
@@ -43,7 +44,8 @@ const CommentController = {
 			handleHttp(res, "ERROR_GET_COMMENT", e);
 		}
 	},
-	async getComments(req, res){
+
+	async getComments(req, res) {
 		try {
 			const comments = await CommentService.getComments();
 			if (comments.error) {
