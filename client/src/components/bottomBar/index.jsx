@@ -16,7 +16,6 @@ const BottomBar = () => {
 	// The function returns nothing.
 	const changeTab = tab => {
 		setCurrentTab(tab);
-		console.log(tab);
 	};
 
 	return (
