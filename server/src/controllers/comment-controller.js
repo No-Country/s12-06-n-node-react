@@ -1,7 +1,6 @@
 import { CommentService } from "../services/index.js";
 import { handleHttp } from "../utils/error-handle.js";
-import { commentValidator } from "../middlewares/index.js";
-import { commentPartialValidator } from "../middlewares/comment-middleware.js";
+import { commentValidator, commentPartialValidator } from "../middlewares/index.js";
 
 const CommentController = {
 	async create(req, res) {
