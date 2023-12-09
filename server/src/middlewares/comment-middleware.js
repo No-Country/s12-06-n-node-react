@@ -1,25 +1,65 @@
-import { z } from "zod";
+import { check, validationResult } from "express-validator";
 
-const commentSchema = z.object({
-	id: z.string().optional().readonly(),
-	comment: z
-		.string()
-		.refine(data => data.trim() !== "", { message: "El comentario no puede estar vacío" }), // ¿deberíamos de validar que el comentario no esté vacío?
-	user_id: z.string(),
-	restaurant_id: z.string(),
-	// ¿deberíamos de validar que el rating sea un número entero entre 1 y 5?
-	// o ¿deberíamos de validar que el rating sea un número entre 0 y 5?
-	rating: z.number().int().min(1).max(5),
-	createdAt: z.string().datetime().optional(),
-	like: z.number().int().min(0).max(1).optional(),
-	dislike: z.number().int().min(0).max(1).optional(),
-});
-
-const commentValidator = body => {
-	return commentSchema.safeParse(body);
-};
-const commentPartialValidator = body => {
-	return commentSchema.partial().safeParse(body);
+const validateResult = (req, res, next) => {
+	try {
+		validationResult(req).throw();
+		return next();
+	} catch (error) {
+		res.status(403);
+		res.send({ errors: error.array() });
+	}
 };
 
-export { commentValidator, commentPartialValidator };
+const commentValidation = {
+	getAll: [],
+	getOne: [],
+	create: [
+		check("userId")
+			.exists()
+			.notEmpty()
+			.withMessage("El id del usuario es requerido"),
+		check("restaurantId")
+			.exists()
+			.notEmpty()
+			.withMessage("El id del restaurante es requerido"),
+		check("comment")
+			.exists()
+			.notEmpty()
+			.withMessage("El comentario es requerido"),
+		check("score")
+			.exists()
+			.notEmpty()
+			.isNumeric()
+			.custom((value) => {
+				if (value < 0 || value > 5) {
+					throw new Error("El puntaje debe ser entre 0 y 5");
+				}
+				return true;
+			})
+			.withMessage("El puntaje es requerido y debe ser un número"),
+		(req, res, next) => validateResult(req, res, next),
+	],	
+	update: [
+		check("id")
+			.exists()
+			.notEmpty()
+			.withMessage("El id del comentario es requerido"),
+		check("comment")
+			.exists()
+			.notEmpty()
+			.withMessage("El comentario es requerido"),
+		check("score")
+			.exists()
+			.notEmpty()
+			.isNumeric()
+			.withMessage("El puntaje es requerido y debe ser un número"),
+	],
+	delete: [
+		check("id")
+			.exists()
+			.notEmpty()
+			.withMessage("El id del comentario es requerido"),
+	],
+};
+
+export default { commentValidation };
