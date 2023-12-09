@@ -2,22 +2,17 @@ import { Schema, model } from "mongoose";
 
 const commentSchema = new Schema(
 	{
-		id: {
+		userId: {
 			type: String,
 			required: true,
-			unique: true,
+		},
+		restaurantId: {
+			type: Schema.Types.ObjectId,
+			ref: "restaurants",
+			required: true,
 		},
 		comment: {
 			type: String,
-			required: true,
-		},
-		user_id: {
-			type: String,
-			required: true,
-		},
-		restaurant_id: {
-			type: Schema.Types.ObjectId,
-			ref: "restaurants",
 			required: true,
 		},
 		rating: {
@@ -27,15 +22,7 @@ const commentSchema = new Schema(
 		createdAt: {
 			type: Date,
 			required: true,
-		},
-		like: {
-			type: Number,
-			required: false,
-		},
-		dislike: {
-			type: Number,
-			required: false,
-		},
+		}
 	},
 	{ timestamps: true, versionKey: false }
 );
