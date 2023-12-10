@@ -13,7 +13,7 @@ const validateResult = (req, res, next) => {
 
 const commentValidation = {
 	getRestaurantComments: [ // obtiene los comentarios de un restaurante por id
-		param("RestaurantId")
+		param("restaurantId")
 			.exists().withMessage("El id del restaurante es requerido")
 			.notEmpty().withMessage("El id del restaurante no puede estar vacío")
 			.custom(async (value, { req }) => {
@@ -67,7 +67,7 @@ const commentValidation = {
 			.exists()
 			.notEmpty()
 			.withMessage("El id del usuario es requerido"),
-		param("CommentId")
+		param("commentId")
 			.exists()
 			.notEmpty().withMessage("El id del comentario es requerido")
 			.custom(async (value, { req }) => {
@@ -86,12 +86,27 @@ const commentValidation = {
 			.notEmpty().withMessage("El comentario es requerido"),		
 		(req, res, next) => validateResult(req, res, next),
 	],
-	// delete: [
-	// 	check("id")
-	// 		.exists()
-	// 		.notEmpty()
-	// 		.withMessage("El id del comentario es requerido"),
-	// ],
+	delete: [
+		param("userId")
+			.exists()
+			.notEmpty()
+			.withMessage("El id del usuario es requerido"),
+		param("commentId")
+			.exists()
+			.notEmpty().withMessage("El id del comentario es requerido")
+			.custom(async (value, { req }) => {
+				const comment = await CommentModel.findOne({ _id: value });
+				if (!comment) {
+					throw new Error("No existe el comentario");
+				};
+
+				if (comment.userId !== req.params.userId) {
+					throw new Error("No puedes eliminar un comentario que no te pertenece");
+				};
+				return true;
+			}),
+		(req, res, next) => validateResult(req, res, next),
+	],
 };
 
 export default commentValidation;
