@@ -1,43 +1,56 @@
 import { CommentModel } from "../models/index.js";
-import crypto from "crypto";
 
 const CommentService = {
-	async postComment(body) {
-		const id = crypto.randomUUID();
-		const comment = new CommentModel(body);
+	async createComment(body) {
+		const comment = await CommentModel.create(body);
 
-		comment.id = id;
-		const responseInsert = await comment.save();
-
-		console.log("SERVICE CREATE COMMENT:", responseInsert);
-		return {
-			error: false,
-			message: "SERVICE CREATE COMMENT",
-		};
+		console.log("SERVICE CREATE COMMENT:", comment);
+		return comment;
 	},
 
 	async getCommentsById(body) {
 		const { id } = body;
 		// Comentario de Victor: Marvin, se puede usar findById() acá?
-		const comments = await CommentModel.find({ restaurant_id: id });
+		// Comentario de Marvin: Victor, findById() solo se puede usar si el id es el _id de mongo, si es otro campo no se puede usar :D
+		const comment = await CommentModel.find({ restaurantId: id });
 
-		console.log("SERVICE GET COMMENT:", comments);
-		return {
-			error: false,
-			message: "SERVICE GET COMMENT",
-			// data: comments, // remover
-		};
+		console.log("SERVICE GET COMMENT:", comment);
+		return comment;
 	},
 
-	async getComments(body) {
+	async getComments() {
 		const comments = await CommentModel.find();
 
 		console.log("SERVICE GET COMMENT:", comments);
-		return {
-			error: false,
-			message: "SERVICE GET COMMENT",
-			// data: comments, // remover
-		};
+		return comments;
+	},
+	async updateComment(body) {
+		const { commentId, userId, comment } = body;
+		const text = comment;
+
+		const result = await CommentModel.findById(commentId);
+		if (result.userId !== userId) throw new Error("No puedes editar un comentario que no es tuyo");
+
+		const commentUpdated = await CommentModel.findOneAndUpdate(
+			{ _id: commentId },
+			{ comment: text },
+			{ new: true }
+		);
+
+		console.log("SERVICE UPDATE COMMENT:", commentUpdated);
+		return commentUpdated;
+	},
+	async deleteComment(body) {
+		const { commentId, userId } = body;
+
+		const result = await CommentModel.findById(commentId);
+		if (result.userId !== userId)
+			throw new Error("No puedes eliminar un comentario que no es tuyo");
+
+		const comment = await CommentModel.findByIdAndDelete(commentId);
+
+		console.log("SERVICE DELETE COMMENT:", comment);
+		return comment;
 	},
 };
 
