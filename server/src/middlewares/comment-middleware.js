@@ -1,4 +1,5 @@
 import { check, validationResult } from "express-validator";
+// import { CommentModel } from "../models/index.js";
 
 const validateResult = (req, res, next) => {
 	try {
@@ -14,11 +15,11 @@ const commentValidation = {
 	getAll: [],
 	getOne: [],
 	create: [
-		check("userId")
+		check("userId") // validar si el id existe en la bd
 			.exists()
 			.notEmpty()
 			.withMessage("El id del usuario es requerido"),
-		check("restaurantId")
+		check("restaurantId") // validar si existe id en bd
 			.exists()
 			.notEmpty()
 			.withMessage("El id del restaurante es requerido"),
@@ -26,7 +27,7 @@ const commentValidation = {
 			.exists()
 			.notEmpty()
 			.withMessage("El comentario es requerido"),
-		check("score")
+		check("rating")
 			.exists()
 			.notEmpty()
 			.isNumeric()
@@ -39,27 +40,27 @@ const commentValidation = {
 			.withMessage("El puntaje es requerido y debe ser un número"),
 		(req, res, next) => validateResult(req, res, next),
 	],	
-	update: [
-		check("id")
-			.exists()
-			.notEmpty()
-			.withMessage("El id del comentario es requerido"),
-		check("comment")
-			.exists()
-			.notEmpty()
-			.withMessage("El comentario es requerido"),
-		check("score")
-			.exists()
-			.notEmpty()
-			.isNumeric()
-			.withMessage("El puntaje es requerido y debe ser un número"),
-	],
-	delete: [
-		check("id")
-			.exists()
-			.notEmpty()
-			.withMessage("El id del comentario es requerido"),
-	],
+	// update: [
+	// 	check("id")
+	// 		.exists()
+	// 		.notEmpty()
+	// 		.withMessage("El id del comentario es requerido"),
+	// 	check("comment")
+	// 		.exists()
+	// 		.notEmpty()
+	// 		.withMessage("El comentario es requerido"),
+	// 	check("score")
+	// 		.exists()
+	// 		.notEmpty()
+	// 		.isNumeric()
+	// 		.withMessage("El puntaje es requerido y debe ser un número"),
+	// ],
+	// delete: [
+	// 	check("id")
+	// 		.exists()
+	// 		.notEmpty()
+	// 		.withMessage("El id del comentario es requerido"),
+	// ],
 };
 
-export default { commentValidation };
+export default commentValidation;
