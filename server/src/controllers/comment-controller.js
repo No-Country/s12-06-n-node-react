@@ -38,7 +38,7 @@ const CommentController = {
 		try {
 			const commentId = req.params.CommentId;
 			const userId = req.params.UserId;
-			const body = { commentId, userId, ...req.body};
+			const body = { commentId, userId, ...req.body };
 
 			const comment = await CommentService.updateComment(body);
 			return res.status(200).json(comment);
@@ -50,7 +50,7 @@ const CommentController = {
 		try {
 			const commentId = req.params.CommentId;
 			const userId = req.params.UserId;
-			
+
 			const body = { commentId, userId };
 
 			const comment = await CommentService.deleteComment(body);
@@ -58,7 +58,7 @@ const CommentController = {
 		} catch (e) {
 			handleHttp(res, "ERROR_DELETE_COMMENT", e);
 		}
-	}
+	},
 };
 
 export default CommentController;

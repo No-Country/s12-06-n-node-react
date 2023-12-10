@@ -18,7 +18,7 @@ const commentSchema = new Schema(
 		rating: {
 			type: Number,
 			required: true,
-		}
+		},
 	},
 	{ timestamps: true, versionKey: false }
 );
