@@ -18,15 +18,11 @@ const commentSchema = new Schema(
 		rating: {
 			type: Number,
 			required: true,
-		},
-		createdAt: {
-			type: Date,
-			required: true,
 		}
 	},
 	{ timestamps: true, versionKey: false }
 );
 
-const CommentModel = model("comments", commentSchema);
+const CommentModel = model("Comments", commentSchema);
 
 export default CommentModel;
