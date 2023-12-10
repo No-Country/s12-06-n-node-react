@@ -1,5 +1,5 @@
-import { check, validationResult } from "express-validator";
-// import { CommentModel } from "../models/index.js";
+import { check, validationResult, param } from "express-validator";
+import { CommentModel, RestaurantModel } from "../models/index.js";
 
 const validateResult = (req, res, next) => {
 	try {
@@ -12,8 +12,30 @@ const validateResult = (req, res, next) => {
 };
 
 const commentValidation = {
+	getRestaurantComments: [ // obtiene los comentarios de un restaurante por id
+		param("RestaurantId")
+			.exists().withMessage("El id del restaurante es requerido")
+			.notEmpty().withMessage("El id del restaurante no puede estar vacío")
+			.custom(async (value, { req }) => {
+				try {
+					const restaurant = await RestaurantModel.findOne({ _id: value });
+					if (!restaurant) {
+					  throw new Error("No existe el restaurante");
+					};
+
+					const comments = await CommentModel.find({ restaurantId: value });
+					if (comments.length === 0) {
+						throw new Error("No existen comentarios para este restaurante");
+					};
+
+					return true;
+				} catch (error) {
+					throw new Error(`Error al validar el id del restaurante: ${error.message}`);
+				}
+			}),
+		(req, res, next) => validateResult(req, res, next),
+	],
 	getAll: [],
-	getOne: [],
 	create: [
 		check("userId") // validar si el id existe en la bd
 			.exists()
@@ -40,21 +62,30 @@ const commentValidation = {
 			.withMessage("El puntaje es requerido y debe ser un número"),
 		(req, res, next) => validateResult(req, res, next),
 	],	
-	// update: [
-	// 	check("id")
-	// 		.exists()
-	// 		.notEmpty()
-	// 		.withMessage("El id del comentario es requerido"),
-	// 	check("comment")
-	// 		.exists()
-	// 		.notEmpty()
-	// 		.withMessage("El comentario es requerido"),
-	// 	check("score")
-	// 		.exists()
-	// 		.notEmpty()
-	// 		.isNumeric()
-	// 		.withMessage("El puntaje es requerido y debe ser un número"),
-	// ],
+	update: [
+		param("userId")
+			.exists()
+			.notEmpty()
+			.withMessage("El id del usuario es requerido"),
+		param("CommentId")
+			.exists()
+			.notEmpty().withMessage("El id del comentario es requerido")
+			.custom(async (value, { req }) => {
+				const comment = await CommentModel.findOne({ _id: value });
+				if (!comment) {
+					throw new Error("No existe el comentario");
+				};
+
+				if (comment.userId !== req.params.userId) {
+					throw new Error("No puedes actualizar un comentario que no te pertenece");
+				};
+				return true;
+			}),
+		check("comment")
+			.exists()
+			.notEmpty().withMessage("El comentario es requerido"),		
+		(req, res, next) => validateResult(req, res, next),
+	],
 	// delete: [
 	// 	check("id")
 	// 		.exists()
