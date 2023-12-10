@@ -16,11 +16,10 @@ const BottomBar = () => {
 	// The function returns nothing.
 	const changeTab = tab => {
 		setCurrentTab(tab);
-		console.log(tab);
 	};
 
 	return (
-		<div className="w-full h-14 fixed bottom-0 rounded-t-xl bg-yellow-400 desktop:hidden z-10">
+		<div className="w-screen h-14 rounded-t-xl bg-yellow-400 desktop:hidden z-10 sticky bottom-0">
 			<div className="flex flex-row  content-center h-full">
 				<div
 					className={
