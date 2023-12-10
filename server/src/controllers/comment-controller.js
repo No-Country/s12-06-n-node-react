@@ -37,12 +37,26 @@ const CommentController = {
 	async update(req, res) {
 		try {
 			const commentId = req.params.CommentId;
-			const body = { commentId, ...req.body};
+			const userId = req.params.UserId;
+			const body = { commentId, userId, ...req.body};
 
 			const comment = await CommentService.updateComment(body);
 			return res.status(200).json(comment);
 		} catch (e) {
 			handleHttp(res, "ERROR_UPDATE_COMMENT", e);
+		}
+	},
+	async delete(req, res) {
+		try {
+			const commentId = req.params.CommentId;
+			const userId = req.params.UserId;
+			
+			const body = { commentId, userId };
+
+			const comment = await CommentService.deleteComment(body);
+			return res.status(200).json(comment);
+		} catch (e) {
+			handleHttp(res, "ERROR_DELETE_COMMENT", e);
 		}
 	}
 };
