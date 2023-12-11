@@ -2,7 +2,7 @@ import Button from "../../components/button/Button";
 import qualifyIcon from "../../assets/icons/qualify.svg";
 import Comments from "../../components/comments";
 import BarProgress from "../../components/comments/components/BarProgress";
-import starIcon from "../../assets/icons/star.svg";
+import StarIcon from "../../icons/StarIcon";
 
 export default function Ratings() {
 	return (
@@ -10,8 +10,7 @@ export default function Ratings() {
 			<div className="flex gap-4 items-center">
 				<div>
 					<div className="flex justify-center">
-						<img src={starIcon} alt="star icon" />
-						<p className="text-xl ml-2">3</p>
+						<StarIcon className="fill-principal stroke-principal" /> <p className="text-xl ml-2">3</p>
 					</div>
 					<h2 className="text-xs">22 opiniones</h2>
 				</div>
