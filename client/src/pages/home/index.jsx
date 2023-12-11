@@ -151,8 +151,6 @@ export default function HomePage() {
 
 	const { data, loading, error } = useFetch(getAllRestaurants);
 
-	console.log(data);
-
 	return (
 		<main className="flex flex-col gap-8 overflow-hidden">
 			<Slider data={categoryData}>
