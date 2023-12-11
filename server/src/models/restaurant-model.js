@@ -95,6 +95,12 @@ const restaurantSchema = new Schema(
 				ref: "menus",
 			},
 		],
+		comments: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: "comments",
+			},
+		],
 	},
 	{ timestamps: true, versionKey: false }
 );

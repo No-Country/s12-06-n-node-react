@@ -37,15 +37,7 @@ const restaurantValidation = {
 			.notEmpty()
 			.isArray()
 			.withMessage("Las categorías son requeridas y deben ser un Array")
-			.custom(value => {
-				const isValid = value.every(categoryId =>
-					RestaurantModel.Types.ObjectId.isValid(categoryId)
-				);
-				if (!isValid) {
-					throw new Error("Las categorías deben contener ObjectIds válidos de MongoDB");
-				}
-				return true;
-			}),
+			.custom(value => value.every(categoryId => typeof categoryId === "string")),
 		check("description")
 			.exists()
 			.notEmpty()
