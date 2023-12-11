@@ -1,21 +1,11 @@
 import { CommentService } from "../services/index.js";
 import { handleHttp } from "../utils/error-handle.js";
-import { commentValidator } from "../middlewares/index.js";
-import { commentPartialValidator } from "../middlewares/comment-middleware.js";
 
 const CommentController = {
 	async create(req, res) {
 		try {
-			const result = commentValidator(req.body);
-			if (result.error) {
-				handleHttp(res, "ERROR_POST_COMMENT", result.error);
-			}
-
-			const comment = await CommentService.postComment(result.data);
-
-			if (comment.error) {
-				handleHttp(res, "ERROR_POST_COMMENT", comment.error);
-			}
+			const body = req.body;
+			const comment = await CommentService.createComment(body);
 
 			return res.status(200).json(comment);
 		} catch (e) {
@@ -25,17 +15,10 @@ const CommentController = {
 
 	async getCommentsByRestaurantId(req, res) {
 		try {
-			const id = req.params.id;
+			const restaurantId = req.params.RestaurantId;
+			const body = { id: restaurantId };
 
-			const result = commentPartialValidator({ id });
-			if (result.error) {
-				handleHttp(res, "ERROR_GET_COMMENT", result.error);
-			}
-
-			const comment = await CommentService.getCommentsById(result.data);
-			if (comment.error) {
-				handleHttp(res, "ERROR_GET_COMMENT", comment.error);
-			}
+			const comment = await CommentService.getCommentsById(body);
 
 			return res.status(200).json(comment);
 		} catch (e) {
@@ -46,13 +29,34 @@ const CommentController = {
 	async getComments(req, res) {
 		try {
 			const comments = await CommentService.getComments();
-			if (comments.error) {
-				handleHttp(res, "ERROR_GET_COMMENT", comments.error);
-			}
-
 			return res.status(200).json(comments);
 		} catch (e) {
 			handleHttp(res, "ERROR_GET_COMMENT", e);
+		}
+	},
+	async update(req, res) {
+		try {
+			const commentId = req.params.CommentId;
+			const userId = req.params.UserId;
+			const body = { commentId, userId, ...req.body };
+
+			const comment = await CommentService.updateComment(body);
+			return res.status(200).json(comment);
+		} catch (e) {
+			handleHttp(res, "ERROR_UPDATE_COMMENT", e);
+		}
+	},
+	async delete(req, res) {
+		try {
+			const commentId = req.params.CommentId;
+			const userId = req.params.UserId;
+
+			const body = { commentId, userId };
+
+			const comment = await CommentService.deleteComment(body);
+			return res.status(200).json(comment);
+		} catch (e) {
+			handleHttp(res, "ERROR_DELETE_COMMENT", e);
 		}
 	},
 };
