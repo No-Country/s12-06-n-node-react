@@ -45,8 +45,9 @@ const restaurantValidation = {
 			.withMessage("La descripción es requerida y debe ser un texto"),
 		check("phone")
 			.exists()
+			.isString()
 			.notEmpty()
-			.isMobilePhone()
+			.matches(/^(\+\d{1,3})?\d{6,}$/)
 			.withMessage(
 				"El número de teléfono es requerido y debe ser un número de teléfono móvil válido"
 			)
@@ -147,3 +148,13 @@ const restaurantValidation = {
 };
 
 export default restaurantValidation;
+
+// .matches(/^\+?\d+$/)
+// .custom(value => {
+// 	// Expresión regular para aceptar números de teléfono con diferentes formatos
+// 	const phoneRegex = /^(\+\d{1,3})?\d{6,}$/;
+// 	if (!phoneRegex.test(value)) {
+// 		throw new Error("El número de teléfono no es válido");
+// 	}
+// 	return true;
+// })

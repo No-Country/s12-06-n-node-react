@@ -20,13 +20,14 @@ const restaurantSchema = new Schema(
 		phone: {
 			type: String,
 			required: true,
-			match: /^\+(?:[0-9]*?){6,14}[0-9]$/,
+			unique: true,
+			// match: /^\+(?:[0-9]*?){6,14}[0-9]$/,
 		},
 		email: {
 			type: String,
 			required: true,
 			unique: true,
-			match: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
+			// match: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
 		},
 		address: {
 			street: {
@@ -79,6 +80,7 @@ const restaurantSchema = new Schema(
 					type: String,
 					required: true,
 				},
+				_id: false,
 			},
 		],
 		stars: {
