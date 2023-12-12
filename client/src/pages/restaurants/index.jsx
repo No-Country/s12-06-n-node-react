@@ -6,17 +6,12 @@ import HeaderImage from '../../assets/images/imageCard.png'
 import FoodTags from '../../components/foodTags'
 import RestaurantCategory from '../../components/restaurantCategory'
 import BottomSheet from '../../components/bottomSheet'
-import { useState } from 'react'
 import { useRestaurantStore } from '../../stores'
 
 export default function RestaurantPage() {
     const { restaurant_id } = useParams();
 
     const showBottomSheet = useRestaurantStore(state => state.showBottomSheet)
-
-    const handleCardClick = () => {
-        setShowBottomSheet(!showBottomSheet)
-    }
 
     return (
         <main>
