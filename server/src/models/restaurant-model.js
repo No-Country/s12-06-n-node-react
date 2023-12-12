@@ -21,7 +21,6 @@ const restaurantSchema = new Schema(
 			type: String,
 			required: true,
 			unique: true,
-			// match: /^\+(?:[0-9]*?){6,14}[0-9]$/,
 		},
 		email: {
 			type: String,
@@ -30,6 +29,10 @@ const restaurantSchema = new Schema(
 			// match: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
 		},
 		address: {
+			type: String,
+			required: true,
+		},
+		/* address: {
 			street: {
 				type: String,
 				required: true,
@@ -46,7 +49,7 @@ const restaurantSchema = new Schema(
 				type: String,
 				required: true,
 			},
-		},
+		}, */
 		imgBrand: {
 			type: String,
 			required: true,

@@ -3,6 +3,7 @@ import { RestaurantModel } from "../models/index.js";
 const RestaurantService = {
 	async getAllRestaurants() {
 		const responseGetAll = await RestaurantModel.find();
+		// lógica que traiga el categories.category
 		console.log("SERVICE GET RESTAURANTS:", responseGetAll);
 		return responseGetAll;
 	},

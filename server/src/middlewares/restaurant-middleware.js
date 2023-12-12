@@ -72,19 +72,22 @@ const restaurantValidation = {
 				}
 				return true;
 			}),
-		check("address").custom(async value => {
-			const { street, city, country } = value;
+		/* check("address").custom(async value => {
+			const { address } = value;
 			const restaurant = await RestaurantModel.findOne({
+				address,
+			});
+			 const restaurant = await RestaurantModel.findOne({
 				"address.street": street,
 				"address.city": city,
 				"address.country": country,
-			});
+			}); 
 			if (restaurant) {
 				throw new Error("Ya existe un restaurante con la misma dirección");
 			}
 			return true;
-		}),
-		check("address.street")
+		}), */
+		/* check("address.street")
 			.exists()
 			.notEmpty()
 			.isString()
@@ -103,7 +106,7 @@ const restaurantValidation = {
 			.exists()
 			.notEmpty()
 			.isString()
-			.withMessage("El país es requerido y debe ser un texto"),
+			.withMessage("El país es requerido y debe ser un texto"), */
 		check("imgBrand")
 			.exists()
 			.notEmpty()
