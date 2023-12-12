@@ -5,6 +5,7 @@ import { AuthRoutes } from "./auth/AuthRoutes";
 import Ratings from "../pages/ratings";
 import RestaurantPage from "../pages/restaurants";
 import LayoutRestaurants from "./LayoutRestaurants";
+import RegisterPage from "../pages/register";
 
 // export const AppRouter = () => {
 
@@ -41,6 +42,10 @@ export const appRouter = createBrowserRouter([
 			{
 				path: ":restaurant_id",
 				element: <RestaurantPage />
+			},
+			{
+				path: "registerProducts",
+				element: <RegisterPage />
 			},
 		]
 	},
