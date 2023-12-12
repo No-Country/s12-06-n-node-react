@@ -5,6 +5,9 @@ export const useRestaurantStore = create(
 
     (set) => ({
 
+        restaurantName: '',
+        setRestaurantName: (name) => set({ restaurantName: name }),
+
         showBottomSheet: false,
         setShowBottomSheet: (show) => set({ showBottomSheet: show }),
 

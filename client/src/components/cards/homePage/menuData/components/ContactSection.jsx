@@ -13,7 +13,7 @@ import Item from "./Item";
 import SocialItem from "./SocialItem";
 import { Link } from "react-router-dom";
 
-export default function ContactSection({ categories, phoneNumber, schedule, location }) {
+export default function ContactSection({ categories, phoneNumber, schedule, location, stars, totalRatings }) {
 	return (
 		<section className="w-full">
 			<div className="flex flex-row items-center justify-between w-full">
@@ -27,7 +27,7 @@ export default function ContactSection({ categories, phoneNumber, schedule, loca
 						<div className="flex flex-row items-center justify-between gap-1 shadow-3xl bg-principal px-0.5 py-1 rounded">
 							<img src={starIcon} alt="Star Icon" />
 							<p className="font-medium text-xs text-texts">
-								3 <span className="text-[10px]">(22)</span>
+								{stars} <span className="text-[10px]">({totalRatings})</span>
 							</p>
 							<img src={navArrowRightIcon} alt="Arrow right" className="h-4 w-4" />
 						</div>

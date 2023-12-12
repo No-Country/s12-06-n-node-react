@@ -40,7 +40,7 @@ export const appRouter = createBrowserRouter([
 		path: "restaurant", element: <LayoutRestaurants />,
 		children: [
 			{
-				path: ":restaurant_id",
+				path: ":restaurantId",
 				element: <RestaurantPage />
 			},
 			{
