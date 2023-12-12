@@ -161,6 +161,8 @@ export default function HomePage() {
 				<Slider data={data} title="Cerca de tí">
 					{item => (
 						<SectionCardHomePage
+							key={item._id}
+							id={item._id}
 							location={String(item.address)}
 							nameRestaurant={item.name}
 							imageRestaurant={item.url_img_restaurant}
