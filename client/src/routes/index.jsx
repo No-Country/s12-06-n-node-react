@@ -44,7 +44,7 @@ export const appRouter = createBrowserRouter([
 				element: <RestaurantPage />
 			},
 			{
-				path: "register",
+				path: "registerProducts",
 				element: <RegisterPage />
 			},
 		]
