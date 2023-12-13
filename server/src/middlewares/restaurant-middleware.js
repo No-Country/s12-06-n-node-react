@@ -1,4 +1,4 @@
-import { check, validationResult } from "express-validator";
+import { check, param, validationResult } from "express-validator";
 import { RestaurantModel } from "../models/index.js";
 
 const validateResult = (req, res, next) => {
@@ -12,11 +12,14 @@ const validateResult = (req, res, next) => {
 };
 
 const restaurantValidation = {
-	// Valida petición GET.
-	getAll: [],
-
 	// Valida petición GET BY ID.
-	getOne: [],
+	getById: [
+		check("id")
+			.exists()
+			.isMongoId()
+			.withMessage("Se requiere un ID válido para obtener el restaurante"),
+		(req, res, next) => validateResult(req, res, next),
+	],
 
 	// Valida petición POST
 	create: [
@@ -72,22 +75,19 @@ const restaurantValidation = {
 				}
 				return true;
 			}),
-		/* check("address").custom(async value => {
-			const { address } = value;
+		check("address").custom(async value => {
+			const { street, city, country } = value;
 			const restaurant = await RestaurantModel.findOne({
-				address,
-			});
-			 const restaurant = await RestaurantModel.findOne({
 				"address.street": street,
 				"address.city": city,
 				"address.country": country,
-			}); 
+			});
 			if (restaurant) {
 				throw new Error("Ya existe un restaurante con la misma dirección");
 			}
 			return true;
-		}), */
-		/* check("address.street")
+		}),
+		check("address.street")
 			.exists()
 			.notEmpty()
 			.isString()
@@ -106,7 +106,7 @@ const restaurantValidation = {
 			.exists()
 			.notEmpty()
 			.isString()
-			.withMessage("El país es requerido y debe ser un texto"), */
+			.withMessage("El país es requerido y debe ser un texto"),
 		check("imgBrand")
 			.exists()
 			.notEmpty()
@@ -144,20 +144,61 @@ const restaurantValidation = {
 	],
 
 	// Valida petición PUT
-	update: [],
+	update: [
+		check("name").optional().isString().withMessage("El nombre debe ser un texto"),
+		check("categories")
+			.optional()
+			.isArray()
+			.withMessage("Las categorías deben ser un Array")
+			.custom(value => value.every(categoryId => typeof categoryId === "string")),
+		check("description").optional().isString().withMessage("La descripción debe ser un texto"),
+		check("phone")
+			.optional()
+			.isString()
+			.matches(/^(\+\d{1,3})?\d{6,}$/)
+			.withMessage("El número de teléfono debe ser un número de teléfono móvil válido"),
+		check("email")
+			.optional()
+			.isEmail()
+			.withMessage("El correo electrónico debe ser una dirección de correo electrónico válida"),
+		check("address")
+			.optional()
+			.custom(async (value, { req }) => {
+				if (!value) return true;
+				const { street, city, country } = value;
+				const restaurant = await RestaurantModel.findOne({
+					"address.street": street,
+					"address.city": city,
+					"address.country": country,
+					_id: { $ne: req.params.id }, // Excluye el restaurante actual por su ID
+				});
+				if (restaurant) {
+					throw new Error("Ya existe otro restaurante con la misma dirección");
+				}
+				return true;
+			}),
+		(req, res, next) => validateResult(req, res, next),
+	],
 
 	// Valida petición DELETE
-	delete: [],
+	delete: [
+		param("id")
+			.exists()
+			.isMongoId()
+			.withMessage("Se requiere un ID válido para eliminar el restaurante")
+			.custom(async value => {
+				const restaurant = await RestaurantModel.findById(value);
+				if (!restaurant) {
+					throw new Error("El restaurante con el ID proporcionado no existe");
+				}
+				const deletionResult = await RestaurantModel.deleteOne({ _id: value });
+				if (deletionResult.deletedCount === 0) {
+					throw new Error("El restaurante no existe");
+				}
+				return true;
+			}),
+		(req, res, next) => validateResult(req, res, next),
+	],
 };
 
 export default restaurantValidation;
-
-// .matches(/^\+?\d+$/)
-// .custom(value => {
-// 	// Expresión regular para aceptar números de teléfono con diferentes formatos
-// 	const phoneRegex = /^(\+\d{1,3})?\d{6,}$/;
-// 	if (!phoneRegex.test(value)) {
-// 		throw new Error("El número de teléfono no es válido");
-// 	}
-// 	return true;
-// })

@@ -29,10 +29,6 @@ const restaurantSchema = new Schema(
 			// match: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
 		},
 		address: {
-			type: String,
-			required: true,
-		},
-		/* address: {
 			street: {
 				type: String,
 				required: true,
@@ -49,7 +45,7 @@ const restaurantSchema = new Schema(
 				type: String,
 				required: true,
 			},
-		}, */
+		},
 		imgBrand: {
 			type: String,
 			required: true,
