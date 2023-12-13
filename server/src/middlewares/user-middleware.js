@@ -12,7 +12,7 @@ const validationResult = (req, res, next) => {
 };
 
 const userValidation = {
-    registerUser: [
+    register: [
         check("name")
             .exists()
             .notEmpty().withMessage("El nombre es requerido")
@@ -73,6 +73,7 @@ const userValidation = {
         (req, res, next) => validationResult(req, res, next),
         
     ],
+    login:[]
 };
 
 export default userValidation;
