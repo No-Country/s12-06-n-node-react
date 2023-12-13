@@ -1,9 +1,9 @@
-import { check, validateResult } from "express-validator";
+import { check, validationResult } from "express-validator";
 import { UserModel } from "../models/index.js";
 
-const validationResult = (req, res, next) => {
+const validateResult = (req, res, next) => {
     try {
-        validateResult(req).throw();
+        validationResult(req).throw();
         return next();
     } catch (error) {
         res.status(403);
@@ -74,7 +74,7 @@ const userValidation = {
                 }
                 return true;
             }),
-        (req, res, next) => validationResult(req, res, next),
+        (req, res, next) => validateResult(req, res, next),
         
     ],
     login:[]
