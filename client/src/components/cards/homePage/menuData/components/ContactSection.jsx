@@ -5,15 +5,23 @@ import instagramIcon from "../../../../../assets/icons/instagram.svg";
 import phoneIcon from "../../../../../assets/icons/phone.svg";
 import locationIcon from "../../../../../assets/icons/location.svg";
 import clockIcon from "../../../../../assets/icons/clock.svg";
-import starIcon from "../../../../../assets/icons/star.svg";
 import pedidosYaIcon from "../../../../../assets/icons/pedidos-ya.svg";
-import navArrowRightIcon from "../../../../../assets/icons/nav-arrow-right.svg";
 import CategoryItem from "./CategoryItem";
 import Item from "./Item";
 import SocialItem from "./SocialItem";
 import { Link } from "react-router-dom";
+import ArrowRightIcon from "../../../../../icons/ArrowRightIcon";
+import StarIcon from "../../../../../icons/StarIcon";
 
-export default function ContactSection({ categories, phoneNumber, schedule, location, stars, totalRatings }) {
+export default function ContactSection({
+	id,
+	categories,
+	phoneNumber,
+	schedule,
+	location,
+	stars,
+	totalRatings,
+}) {
 	return (
 		<section className="w-full">
 			<div className="flex flex-row items-center justify-between w-full">
@@ -23,14 +31,15 @@ export default function ContactSection({ categories, phoneNumber, schedule, loca
 					<Item text={phoneNumber} icon={phoneIcon} />
 				</div>
 				<div className="flex flex-col items-end gap-4 justify-end">
-					<Link to="/restaurant/calificaciones" className="flex flex-row items-center justify-between gap-1">
-						<div className="flex flex-row items-center justify-between gap-1 shadow-3xl bg-principal px-0.5 py-1 rounded">
-							<img src={starIcon} alt="Star Icon" />
-							<p className="font-medium text-xs text-texts">
-								{stars} <span className="text-[10px]">({totalRatings})</span>
-							</p>
-							<img src={navArrowRightIcon} alt="Arrow right" className="h-4 w-4" />
-						</div>
+					<Link
+						to={`/restaurant/${id}/ratings`}
+						className="flex flex-row items-center justify-between gap-1 px-1 py-0.5 bg-principal shadow-3xl rounded stroke-secundario"
+					>
+						<StarIcon />
+						<p className="font-medium text-xs text-texts">
+							{stars} <span className="text-[10px]">({totalRatings})</span>
+						</p>
+						<ArrowRightIcon className="w-4 h-4" />
 					</Link>
 					<div className="flex flex-row gap-2">
 						{categories.map(category => (
