@@ -2,10 +2,10 @@ import { Navigate, Route, Routes, createBrowserRouter } from "react-router-dom";
 import { Layout } from "./Layout";
 import HomePage from "../pages/home";
 import { AuthRoutes } from "./auth/AuthRoutes";
-import Ratings from "../pages/ratings";
 import RestaurantPage from "../pages/restaurants";
 import LayoutRestaurants from "./LayoutRestaurants";
 import RegisterPage from "../pages/register";
+import RatingsPage from "../pages/ratings";
 
 // export const AppRouter = () => {
 
@@ -42,6 +42,10 @@ export const appRouter = createBrowserRouter([
 			{
 				path: ":restaurantId",
 				element: <RestaurantPage />
+			},
+			{
+				path: ":restaurantId/ratings",
+				element: <RatingsPage />
 			},
 			{
 				path: "registerProducts",
