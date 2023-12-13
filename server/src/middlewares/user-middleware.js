@@ -61,6 +61,10 @@ const userValidation = {
                 }
                 return true;
             }),
+        check("role")
+            .exists()
+            .notEmpty().withMessage("El rol es requerido")
+            .isIn(["user", "admin"]).withMessage("El rol debe ser user o admin"),
         check("restaurant")
             .optional()
             .isArray().withMessage("Los restaurantes deben ser un array")
