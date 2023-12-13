@@ -1,5 +1,5 @@
-import { check, validationResult } from "express-validator";
-import { UserModel } from "../models/index.js";
+import { check, validationResult, param } from "express-validator";
+import { UserModel, RestaurantModel } from "../models/index.js";
 
 const validateResult = (req, res, next) => {
     try {
@@ -68,7 +68,7 @@ const userValidation = {
                 }
                 return true;
             }),
-        check("restaurant")
+        check("restaurants")
             .optional()
             .isArray().withMessage("Los restaurantes deben ser un array")
             .custom(value => {
@@ -79,6 +79,64 @@ const userValidation = {
             }),
         (req, res, next) => validateResult(req, res, next),
         
+    ],
+    addRestaurant: [
+        param("id")
+            .exists()
+            .notEmpty().withMessage("El user id es requerido")
+            .isLength({ min: 24, max: 24 }).withMessage("El id no es valido")
+            .custom(async value => {
+                try {
+                    const user = await UserModel.findById(value);
+                    if (!user) {
+                        throw new Error("El usuario no existe");
+                    }
+                    return true;
+                } catch (error) {
+                    throw new Error(`Error al validar el usuario: ${error.message}`);
+                }
+            }),
+        check("restaurants")
+            .optional()
+            .isArray().withMessage("Los restaurantes deben ser un array")
+            .custom(value => {
+                if (value.length === 0) {
+                    throw new Error("Debe haber al menos un restaurante");
+                }
+                return true;
+            }),
+        check("restaurants.*")
+            .exists()
+            .notEmpty().withMessage("El id del restaurante es requerido")
+            .isLength({ min: 24, max: 24 }).withMessage("El id no es valido")
+            .custom(async (value, { req })=> {
+                try {
+                    const success = await RestaurantModel.findById(value);
+                    if (!success) {
+                        throw new Error("restaurante no existe");
+                    }
+                    const id = req.params.id;
+                    const user = await UserModel.findById(id);
+
+                    if(!user){
+                        throw new Error("El usuario no existe");
+                    }
+
+                    const restaurants = user.restaurants;
+                    for (let i = 0; i < restaurants.length; i++) {
+                        const restaurantId = restaurants[i];
+                  
+                        if (restaurantId === value) {
+                          throw new Error("El restaurante ya está agregado");
+                        }
+                    }
+
+                    return true;
+                } catch (error) {
+                    throw new Error(`Error al validar el restaurante: ${error.message}`);
+                }
+            }),
+        (req, res, next) => validateResult(req, res, next),
     ],
     login:[]
 };

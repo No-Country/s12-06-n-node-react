@@ -48,7 +48,7 @@ const userSchema = new Schema(
             type: Array,
             required: false,
         },
-        restaurant:{
+        restaurants:{
             type: Array,
             required: false,
         },

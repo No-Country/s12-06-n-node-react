@@ -5,6 +5,10 @@ import { userValidation } from "../middlewares/index.js";
 const router = Router();
 
 router.post("/register", userValidation.register, UserController.create);
+// agregar restaurante
+router.post("/:id", userValidation.addRestaurant, UserController.createRestaurant);
+// agregar favorito
+
 // router.post("/login", userValidation.login, UserController.login);
 
 export default router;
