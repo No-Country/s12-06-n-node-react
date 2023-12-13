@@ -1,5 +1,5 @@
 import { check, validationResult, param } from "express-validator";
-import { CommentModel, RestaurantModel } from "../models/index.js";
+import { CommentModel, RestaurantModel, UserModel } from "../models/index.js";
 
 const validateResult = (req, res, next) => {
 	try {
@@ -40,14 +40,38 @@ const commentValidation = {
 	],
 	getAll: [],
 	create: [
-		check("userId") // validar si el id existe en la bd
+		check("userId")
 			.exists()
 			.notEmpty()
-			.withMessage("El id del usuario es requerido"),
-		check("restaurantId") // validar si existe id en bd
+			.withMessage("El id del usuario es requerido")
+			.custom(async (value) => {
+				try {
+					const user = await UserModel.findById(value);
+					if (!user) {
+						throw new Error("No existe el usuario");
+					}
+
+					return true;
+				} catch (error) {
+					throw new Error(`Error al validar el id del usuario: ${error.message}`);
+				}
+			}),
+		check("restaurantId")
 			.exists()
 			.notEmpty()
-			.withMessage("El id del restaurante es requerido"),
+			.withMessage("El id del restaurante es requerido")
+			.custom(async (value) => {
+				try {
+					const restaurant = await RestaurantModel.findById(value);
+					if (!restaurant) {
+						throw new Error("No existe el restaurante");
+					}
+
+					return true;
+				} catch (error) {
+					throw new Error(`Error al validar el id del restaurante: ${error.message}`);
+				}
+			}),
 		check("comment").exists().notEmpty().withMessage("El comentario es requerido"),
 		check("rating")
 			.exists()
