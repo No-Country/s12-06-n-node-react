@@ -4,4 +4,10 @@ import MenuController from "./menu-controller.js";
 import CommentController from "./comment-controller.js";
 import UserController from "./user-controller.js";
 
-export { RestaurantController, UserController, CategoryController, MenuController, CommentController };
+export {
+	RestaurantController,
+	UserController,
+	CategoryController,
+	MenuController,
+	CommentController,
+};

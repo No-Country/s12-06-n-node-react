@@ -3,7 +3,13 @@ import express from "express";
 import cors from "cors";
 import { dbConnect } from "./src/config/index.js";
 import { logs } from "./src/middlewares/index.js";
-import { restaurantRoutes, categoryRoutes, menuRoutes, commentRoutes, userRoutes } from "./src/routes/index.js";
+import {
+	restaurantRoutes,
+	categoryRoutes,
+	menuRoutes,
+	commentRoutes,
+	userRoutes,
+} from "./src/routes/index.js";
 
 const app = express();
 
