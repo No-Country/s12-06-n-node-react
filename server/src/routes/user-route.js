@@ -7,5 +7,5 @@ const router = Router();
 router.post("/register", userValidation.register, UserController.register);
 router.post("/login", userValidation.login, UserController.login);
 
-
+export default router;
 // create & edit user
