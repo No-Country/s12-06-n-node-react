@@ -36,13 +36,21 @@ const userSchema = new Schema(
             type: String,
             required: true,
         },
+        img: {
+            type: String,
+            required: false,
+        },
+        admin:{
+            type: Boolean,
+            required: true,
+        },
         favorites:{
             type: Array,
-            required: true,
+            required: false,
         },
         restaurant:{
             type: Array,
-            required: true,
+            required: false,
         },
     },
     { timestamps: true, versionKey: false }

@@ -4,8 +4,8 @@ import { userValidation } from "../middlewares/index.js";
 
 const router = Router();
 
-router.post("/register", userValidation.register, UserController.register);
-router.post("/login", userValidation.login, UserController.login);
+router.post("/register", userValidation.register, UserController.create);
+// router.post("/login", userValidation.login, UserController.login);
 
 export default router;
 // create & edit user

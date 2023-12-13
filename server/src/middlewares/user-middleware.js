@@ -52,6 +52,13 @@ const userValidation = {
         check("phone")
             .exists()
             .notEmpty().withMessage("El teléfono es requerido"),
+        check("img")
+            .optional()
+            .notEmpty().withMessage("La imagen es requerida"),
+        check("admin")
+            .exists()
+            .notEmpty().withMessage("El rol es requerido")
+            .isBoolean().withMessage("El rol debe ser un booleano"),
         check("favorites")
             .optional()
             .isArray().withMessage("Los favoritos deben ser un array")
@@ -61,10 +68,6 @@ const userValidation = {
                 }
                 return true;
             }),
-        check("role")
-            .exists()
-            .notEmpty().withMessage("El rol es requerido")
-            .isIn(["user", "admin"]).withMessage("El rol debe ser user o admin"),
         check("restaurant")
             .optional()
             .isArray().withMessage("Los restaurantes deben ser un array")
