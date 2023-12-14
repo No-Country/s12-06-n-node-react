@@ -5,7 +5,7 @@ const commentSchema = new Schema(
 		userId: {
 			type: Schema.Types.ObjectId,
 			ref: "users",
-			required: true,
+			required: false,
 		},
 		restaurantId: {
 			type: Schema.Types.ObjectId,
