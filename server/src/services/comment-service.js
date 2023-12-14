@@ -19,10 +19,10 @@ const CommentService = {
 	},
 
 	async getComments() {
-		const comments = await CommentModel.find();
+		const comment = await CommentModel.find();
 
-		console.log("SERVICE GET COMMENT:", comments);
-		return comments;
+		console.log("SERVICE GET COMMENT:", comment);
+		return comment;
 	},
 	async updateComment(body) {
 		const { commentId, userId, comment } = body;
@@ -40,6 +40,26 @@ const CommentService = {
 		console.log("SERVICE UPDATE COMMENT:", commentUpdated);
 		return commentUpdated;
 	},
+
+	async getAverageRating(restaurantId) {
+		const comment = await CommentModel.find({ restaurantId });
+
+		console.log("Comments for restaurantId:", restaurantId);
+		console.log(comment);
+
+		if (comment.length === 0) {
+			return 0;
+		}
+
+		const totalRating = comment.reduce((sum, comment) => sum + comment.rating, 0);
+		const averageRating = totalRating / comment.length;
+
+		console.log("Total Rating:", totalRating);
+		console.log("Average Rating:", averageRating);
+
+		return averageRating;
+	},
+
 	async deleteComment(body) {
 		const { commentId, userId } = body;
 

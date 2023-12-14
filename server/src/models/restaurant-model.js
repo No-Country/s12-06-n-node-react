@@ -26,7 +26,6 @@ const restaurantSchema = new Schema(
 			type: String,
 			required: true,
 			unique: true,
-			// match: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
 		},
 		address: {
 			street: {
@@ -87,6 +86,10 @@ const restaurantSchema = new Schema(
 			default: 0,
 		},
 		totalRatings: {
+			type: Number,
+			default: 0,
+		},
+		averageRating: {
 			type: Number,
 			default: 0,
 		},
