@@ -6,6 +6,7 @@ const router = Router();
 
 router.get("/", RestaurantController.getRestaurants);
 router.get("/:id", RestaurantController.getRestaurant);
+router.get("/:id", RestaurantController.getRestaurantById);
 router.post("/", restaurantValidation.create, RestaurantController.postRestaurant);
 router.put("/:id", RestaurantController.putRestaurant);
 router.delete("/:id", RestaurantController.deleteRestaurant);
