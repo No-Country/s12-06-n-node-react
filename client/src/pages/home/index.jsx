@@ -3,7 +3,7 @@ import Slider from "../../components/sliders/section-slider";
 import CategoryCard from "../../components/cards/homePage/categoryCard";
 import SectionCardHomePage from "../../components/cards/homePage/sectionCard";
 
-import { getAllRestaurants } from "../../api/yumiverse_api";
+import { getAllCategories, getAllRestaurants } from "../../api/yumiverse_api";
 import { useFetch } from "../../hooks/useFetch";
 
 export default function HomePage() {
@@ -150,6 +150,9 @@ export default function HomePage() {
 	];
 
 	const { data, loading, error } = useFetch(getAllRestaurants);
+	const categorieData = useFetch(getAllCategories);
+
+	console.log(categorieData.data);
 
 	return (
 		<main className="flex flex-col gap-8 overflow-hidden">

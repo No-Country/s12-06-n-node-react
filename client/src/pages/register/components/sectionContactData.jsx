@@ -1,10 +1,10 @@
-import ArrowDownIcon from "../assets/arrowDownIcon";
 import DropDownBtn from "./buttons/dropDownBtn";
 import Input from "./buttons/input";
 import SectionTitle from "./titles/sectionTitle";
 
 
 export default function ContactData() {
+
     return (
         <SectionTitle title='Contacto'>
             <div className="flex flex-col gap-2 -mt-2">
