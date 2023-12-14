@@ -22,11 +22,11 @@ const categoryValidation = {
 		check("category")
 			.exists()
 			.notEmpty()
-			.withMessage("El nombre de la categoria es requerido y debe ser texto")
+			.withMessage("El nombre de la categoría es requerido y debe ser texto")
 			.custom(async value => {
 				const category = await CategoryModel.findOne({ category: value });
 				if (category) {
-					throw new Error("El nombre de la categoria ya existe");
+					throw new Error("El nombre de la categoría ya existe");
 				}
 				return true;
 			}),
@@ -39,9 +39,9 @@ const categoryValidation = {
 		(req, res, next) => validateResult(req, res, next),
 	],
 
-	// Valida peticion PUT
+	// Valida petición PUT
 	update: [],
-	// Valida peticion DELETE
+	// Valida petición DELETE
 	delete: [],
 };
 
