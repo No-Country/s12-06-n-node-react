@@ -31,7 +31,7 @@ export default function RestaurantPage() {
             <div className='w-full h-44 flex items-center justify-center overflow-hidden'>
                 <img src={HeaderImage} alt="Header image" className='w-full h-auto' />
             </div>
-            <MenuData phoneNumber={phone} categories={["Pizza", "Grill"]} openRestaurant={isOpen} stars={stars} totalRatings={totalRatings} />
+            <MenuData id={restaurantId} phoneNumber={phone} categories={["Pizza", "Grill"]} openRestaurant={isOpen} stars={stars} totalRatings={totalRatings} />
             <FoodTags />
             <RestaurantCategory showBottomSheet={showBottomSheet} />
             <BottomSheet showBottomSheet={showBottomSheet} />
