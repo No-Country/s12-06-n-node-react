@@ -1,15 +1,16 @@
-export default function Button({ onClick, text, icon, alt, rounded, yellow, white, brown }) {
+export default function Button({ onClick, text, icon, alt, rounded, yellow, white, brown, type }) {
 	return (
 		<button
+			type={type}
 			className={`${rounded ? "rounded-2xl" : " rounded-lg"} ${
 				white
-					? "bg-secundario  text-texts"
+					? "bg-secundario text-texts"
 					: yellow
-					  ? "bg-principal  text-texts"
+					  ? "bg-principal text-texts hover:bg-texts hover:text-principal"
 					  : brown
-					    ? "bg-texts text-principal"
+					    ? "bg-texts text-principal hover:bg-principal hover:text-texts"
 					    : ""
-			} flex flex-row items-center shadow-3xl gap-1 py-1 px-2 text-md`}
+			} flex flex-row items-center justify-center shadow-3xl gap-1 py-1 px-2 text-md`}
 			onClick={onClick}
 		>
 			{text}

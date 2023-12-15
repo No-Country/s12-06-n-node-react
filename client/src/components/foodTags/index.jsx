@@ -1,3 +1,4 @@
+import Slider from "../sliders/section-slider"
 import FoodTag from "./component/foodTag"
 
 export default function FoodTags() {
@@ -22,12 +23,12 @@ export default function FoodTags() {
     ]
 
     return (
-        <div className="flex gap-2 p-4 bg-secundario">
-            {
-                tags.map(tag => (
-                    <FoodTag key={tag.id} categorie={tag.categorie} />
-                ))
-            }
-        </div>
+        // <div className="flex gap-2 bg-secundario">
+            <Slider data={tags}>
+                {item => (
+                    <FoodTag categorie={item.categorie} />
+                )}
+            </Slider>
+        // </div>
     )
 }
