@@ -5,7 +5,9 @@ import { userValidation } from "../middlewares/index.js";
 const router = Router();
 
 router.post("/register", userValidation.register, UserController.create);
-// agregar restaurante
+// actualizar usuario por id de usuario
+router.patch("/update/:id", userValidation.update, UserController.update);
+// agregar restaurante por id de usuario
 router.post("/:id", userValidation.addRestaurant, UserController.createRestaurant);
 // agregar favorito
 

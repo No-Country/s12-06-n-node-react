@@ -4,7 +4,7 @@ import HomePage from "../pages/home";
 import { AuthRoutes } from "./auth/AuthRoutes";
 import RestaurantPage from "../pages/restaurants";
 import LayoutRestaurants from "./LayoutRestaurants";
-import LayoutMyShops from "./LayoutMyShops";
+import LayoutPages from "./LayoutPages";
 import MyShopsPage from "../pages/myShops";
 import RegisterPage from "../pages/register";
 import RatingsPage from "../pages/ratings";
@@ -71,7 +71,7 @@ export const appRouter = createBrowserRouter([
 	},
 	{
 		path: "myShops",
-		element: <LayoutMyShops />,
+		element: <LayoutPages pageTitle="Mis Tiendas" />,
 		children: [
 			{
 				index: true,
