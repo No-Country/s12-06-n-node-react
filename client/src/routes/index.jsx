@@ -4,6 +4,8 @@ import HomePage from "../pages/home";
 import { AuthRoutes } from "./auth/AuthRoutes";
 import RestaurantPage from "../pages/restaurants";
 import LayoutRestaurants from "./LayoutRestaurants";
+import LayoutMyShops from "./LayoutMyShops";
+import MyShopsPage from "../pages/myShops";
 import RegisterPage from "../pages/register";
 import RatingsPage from "../pages/ratings";
 import LoginPage from "../pages/login";
@@ -66,6 +68,16 @@ export const appRouter = createBrowserRouter([
 		path: "register",
 		element: <UserRegisterPage />,
 		children: [],
+	},
+	{
+		path: "myShops",
+		element: <LayoutMyShops />,
+		children: [
+			{
+				index: true,
+				element: <MyShopsPage />
+			}
+		],
 	},
 	{ path: "*", element: <Navigate to={"/"} /> },
 ]);
