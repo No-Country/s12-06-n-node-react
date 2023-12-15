@@ -27,7 +27,7 @@ export default function RestaurantPage() {
     }, [setRestaurantName, name])
 
     return (
-        <main>
+        <main className='flex flex-col'>
             <div className='w-full h-44 flex items-center justify-center overflow-hidden'>
                 <img src={HeaderImage} alt="Header image" className='w-full h-auto' />
             </div>

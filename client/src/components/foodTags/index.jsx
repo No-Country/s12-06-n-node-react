@@ -23,12 +23,12 @@ export default function FoodTags() {
     ]
 
     return (
-        // <div className="flex gap-2 bg-secundario">
+        <div className="h-auto w-full bg-secundario">
             <Slider data={tags}>
                 {item => (
                     <FoodTag categorie={item.categorie} />
                 )}
             </Slider>
-        // </div>
+        </div>
     )
 }
