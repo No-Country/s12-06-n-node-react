@@ -5,6 +5,6 @@ import { authValidation, tokenValidation } from "../middlewares/index.js";
 const router = Router();
 
 router.post("/", authValidation.login, AuthController.login);
-// router.get("/token", tokenValidation, AuthController.token);
+router.get("/token", tokenValidation, AuthController.token);
 
 export default router;
