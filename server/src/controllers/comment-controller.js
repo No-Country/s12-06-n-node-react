@@ -1,6 +1,5 @@
 import { CommentService } from "../services/index.js";
 import { handleHttp } from "../utils/error-handle.js";
-import { CommentModel, RestaurantModel } from "../models/index.js";
 
 const CommentController = {
 	async create(req, res) {
