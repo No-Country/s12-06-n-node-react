@@ -1,7 +1,7 @@
-import { Navigate, Route, Routes, createBrowserRouter } from "react-router-dom";
+import { Navigate, createBrowserRouter } from "react-router-dom";
 import { Layout } from "./Layout";
 import HomePage from "../pages/home";
-import { AuthRoutes } from "./auth/AuthRoutes";
+// import { AuthRoutes } from "./auth/AuthRoutes";
 import RestaurantPage from "../pages/restaurants";
 import LayoutRestaurants from "./LayoutRestaurants";
 import RegisterPage from "../pages/register";
