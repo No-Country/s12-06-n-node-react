@@ -4,11 +4,13 @@ import restaurantValidation from "./restaurant-middleware.js";
 import categoryValidation from "./category-middleware.js";
 import userValidation from "./user-middleware.js";
 import menuValidation from "./menu-middleware.js";
+import authValidation from "./user-auth-middleware.js";
 
 export {
 	logs,
 	commentValidation,
 	userValidation,
+	authValidation,
 	restaurantValidation,
 	menuValidation,
 	categoryValidation,
