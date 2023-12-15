@@ -1,3 +1,4 @@
+import e from 'express';
 import jwt from 'jsonwebtoken';
 
 const tokenValidation = (req, res, next) => {
@@ -17,6 +18,7 @@ const tokenValidation = (req, res, next) => {
         }
         return res.status(401).json({ message: "Unauthorized" });
     }
+    next();
 };
 
 export default tokenValidation;
