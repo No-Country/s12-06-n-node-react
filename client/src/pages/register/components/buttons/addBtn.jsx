@@ -1,16 +1,19 @@
 import { useState } from 'react'
 import AddIcon from '../../assets/addIcon'
 import StoreIcon from '../../assets/storeIcon';
-export default function AddBtn({ title, storeIcon }) {
+export default function AddBtn({ title, storeIcon, type, handleFormSubmit }) {
 
     const [onClick, setOnClick] = useState(false);
 
-    const handleClick = () => {
+    const handleClick = (e) => {
+        e.preventDefault();
         setOnClick(!onClick);
+        handleFormSubmit(e)
     }
 
     return (
         <button
+            type={type}
             onClick={handleClick}
             className="inline-flex items-center gap-2 h-8 px-2 py-1 rounded-2xl text-texts bg-principal active:bg-texts active:text-principal"
         >

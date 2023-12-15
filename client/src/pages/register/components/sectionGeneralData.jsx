@@ -1,9 +1,12 @@
+import { useFormStore } from "../../../stores/restaurants/useForm.store";
 import AddIcon from "../assets/addIcon";
 import AddBtn from "./buttons/addBtn";
 import DropDownBtn from "./buttons/dropDownBtn";
 import Input from "./buttons/input";
 
 export default function GeneralData() {
+
+
     return (
         <section className="flex flex-col gap-6">
             {/* Fotos de portada */}
