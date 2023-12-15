@@ -9,7 +9,7 @@ export default function RegisterBottomSheet({ showBottomSheet }) {
     const handleAddProduct = () => {
         setShowBottomSheet(!showBottomSheet)
     }
-    console.log(showBottomSheet);
+
     return (
         <div className={`fixed bottom-0 left-0 w-full h-screen ${showBottomSheet ? 'z-10' : '-z-10'} bg-transparent`}>
             <div
