@@ -3,11 +3,11 @@ import { CommentModel, RestaurantModel } from "../models/index.js";
 const CommentService = {
 	async createComment(body) {
 		const { restaurantId } = body;
-		const comment = await CommentModel.create(body); 
+		const comment = await CommentModel.create(body);
 		// validar solo numeros enteros en rating
 		// redondear a entero el rating
 		// arreglo de cuantas estrellas del 1 al 5
-		
+
 		const comments = await CommentModel.find({ restaurantId });
 
 		if (comments.length === 0) {
@@ -18,7 +18,11 @@ const CommentService = {
 		const newAverageRating = totalRating / comments.length;
 		const roundedAverageRating = Math.round(newAverageRating * 10) / 10;
 
-		await RestaurantModel.findOneAndUpdate({_id: restaurantId},{ averageRating: roundedAverageRating },{new: true});
+		await RestaurantModel.findOneAndUpdate(
+			{ _id: restaurantId },
+			{ averageRating: roundedAverageRating },
+			{ new: true }
+		);
 
 		console.log("SERVICE CREATE COMMENT:", comment);
 		return comment;
@@ -57,7 +61,7 @@ const CommentService = {
 		return commentUpdated;
 	},
 
-	async getAverageRating(restaurantId) {		
+	async getAverageRating(restaurantId) {
 		const comment = await CommentModel.find({ restaurantId });
 
 		if (comment.length === 0) {
@@ -68,7 +72,11 @@ const CommentService = {
 		const newAverageRating = totalRating / comment.length;
 		const roundedAverageRating = Math.round(newAverageRating * 10) / 10;
 
-		const restaurant = await RestaurantModel.findOneAndUpdate({_id: restaurantId},{ averageRating: roundedAverageRating },{new: true});
+		const restaurant = await RestaurantModel.findOneAndUpdate(
+			{ _id: restaurantId },
+			{ averageRating: roundedAverageRating },
+			{ new: true }
+		);
 
 		console.log("Total Rating:", totalRating);
 		console.log("Average Rating:", restaurant.averageRating);

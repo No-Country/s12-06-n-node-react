@@ -15,16 +15,22 @@ const userValidation = {
 	register: [
 		check("name")
 			.exists()
-			.notEmpty().withMessage("El nombre es requerido")
-			.isLength({ min: 3 }).withMessage("El nombre debe tener al menos 3 caracteres"),
+			.notEmpty()
+			.withMessage("El nombre es requerido")
+			.isLength({ min: 3 })
+			.withMessage("El nombre debe tener al menos 3 caracteres"),
 		check("surname")
 			.exists()
-			.notEmpty().withMessage("El apellido es requerido")
-			.isLength({ min: 3 }).withMessage("El apellido debe tener al menos 3 caracteres"),
+			.notEmpty()
+			.withMessage("El apellido es requerido")
+			.isLength({ min: 3 })
+			.withMessage("El apellido debe tener al menos 3 caracteres"),
 		check("email")
 			.exists()
-			.notEmpty().withMessage("El email es requerido")
-			.isEmail().withMessage("El email debe ser válido")
+			.notEmpty()
+			.withMessage("El email es requerido")
+			.isEmail()
+			.withMessage("El email debe ser válido")
 			.custom(async value => {
 				try {
 					const user = await UserModel.findOne({ email: value });
@@ -140,9 +146,12 @@ const userValidation = {
 	],
 	update: [
 		param("id")
-			.exists().withMessage("El id es requerido")
-			.notEmpty().withMessage("El id no puede estar vacío")
-			.isLength({ min: 24, max: 24 }).withMessage("El id no es válido")
+			.exists()
+			.withMessage("El id es requerido")
+			.notEmpty()
+			.withMessage("El id no puede estar vacío")
+			.isLength({ min: 24, max: 24 })
+			.withMessage("El id no es válido")
 			.custom(async value => {
 				try {
 					const user = await UserModel.findById(value);
@@ -156,19 +165,28 @@ const userValidation = {
 			}),
 		check("name")
 			.optional()
-			.exists().withMessage("El nombre es requerido")
-			.notEmpty().withMessage("El nombre no puede estar vacío")
-			.isLength({ min: 3 }).withMessage("El nombre debe tener al menos 3 caracteres"),
+			.exists()
+			.withMessage("El nombre es requerido")
+			.notEmpty()
+			.withMessage("El nombre no puede estar vacío")
+			.isLength({ min: 3 })
+			.withMessage("El nombre debe tener al menos 3 caracteres"),
 		check("surname")
 			.optional()
-			.exists().withMessage("El apellido es requerido")
-			.notEmpty().withMessage("El apellido no puede estar vacío")
-			.isLength({ min: 3 }).withMessage("El apellido debe tener al menos 3 caracteres"),
+			.exists()
+			.withMessage("El apellido es requerido")
+			.notEmpty()
+			.withMessage("El apellido no puede estar vacío")
+			.isLength({ min: 3 })
+			.withMessage("El apellido debe tener al menos 3 caracteres"),
 		check("email")
 			.optional()
-			.exists().withMessage("El email es requerido")
-			.notEmpty().withMessage("El email no puede estar vacío")
-			.isEmail().withMessage("El email debe ser válido")
+			.exists()
+			.withMessage("El email es requerido")
+			.notEmpty()
+			.withMessage("El email no puede estar vacío")
+			.isEmail()
+			.withMessage("El email debe ser válido")
 			.custom(async value => {
 				try {
 					const user = await UserModel.findOne({ email: value });
@@ -182,13 +200,34 @@ const userValidation = {
 			}),
 		check("address.street")
 			.optional()
-			.exists().withMessage("La calle es requerida")
-			.notEmpty().withMessage("La calle no puede estar vacía"),
-		check("address.city").optional().exists().withMessage("La ciudad es requerida").notEmpty().withMessage("La ciudad es no puede estar vacia"),
-		check("address.state").optional().exists().withMessage("La provincia es requerida").notEmpty().withMessage("La provincia no puede estar vacia"),
-		check("phone").optional().exists().withMessage("El teléfono es requerido").notEmpty().withMessage("El teléfono no puede estar vacio"),
-		check("img").optional().exists().withMessage("La imagen es requerida").notEmpty().withMessage("La imagen no puede estar vacia"),
-
+			.exists()
+			.withMessage("La calle es requerida")
+			.notEmpty()
+			.withMessage("La calle no puede estar vacía"),
+		check("address.city")
+			.optional()
+			.exists()
+			.withMessage("La ciudad es requerida")
+			.notEmpty()
+			.withMessage("La ciudad es no puede estar vacia"),
+		check("address.state")
+			.optional()
+			.exists()
+			.withMessage("La provincia es requerida")
+			.notEmpty()
+			.withMessage("La provincia no puede estar vacia"),
+		check("phone")
+			.optional()
+			.exists()
+			.withMessage("El teléfono es requerido")
+			.notEmpty()
+			.withMessage("El teléfono no puede estar vacio"),
+		check("img")
+			.optional()
+			.exists()
+			.withMessage("La imagen es requerida")
+			.notEmpty()
+			.withMessage("La imagen no puede estar vacia"),
 	],
 };
 

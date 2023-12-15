@@ -38,7 +38,6 @@ const CommentController = {
 	async getAverageRating(req, res) {
 		const { id } = req.params;
 		try {
-			
 			const comment = await CommentService.getAverageRating(id);
 			return res.status(200).json(comment);
 		} catch (error) {
