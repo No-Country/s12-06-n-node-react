@@ -25,7 +25,22 @@ const userValidation = {
 			.withMessage("El apellido es requerido")
 			.isLength({ min: 3 })
 			.withMessage("El apellido debe tener al menos 3 caracteres"),
+		check("username")
+			.exists()
+			.notEmpty().withMessage("El nombre de usuario es requerido")
+			.custom(async value => {
+				try {
+					const user = await UserModel.findOne({ username: value });
+					if (user) {
+						throw new Error("El nombre de usuario ya está registrado");
+					}
+					return true;
+				} catch (error) {
+					throw new Error(`Error al validar el nombre de usuario: ${error.message}`);
+				}
+			}),
 		check("email")
+			.optional()
 			.exists()
 			.notEmpty()
 			.withMessage("El email es requerido")
@@ -179,6 +194,20 @@ const userValidation = {
 			.withMessage("El apellido no puede estar vacío")
 			.isLength({ min: 3 })
 			.withMessage("El apellido debe tener al menos 3 caracteres"),
+			check("username")
+			.exists()
+			.notEmpty().withMessage("El nombre de usuario es requerido")
+			.custom(async value => {
+				try {
+					const user = await UserModel.findOne({ username: value });
+					if (user) {
+						throw new Error("El nombre de usuario ya está registrado");
+					}
+					return true;
+				} catch (error) {
+					throw new Error(`Error al validar el nombre de usuario: ${error.message}`);
+				}
+			}),
 		check("email")
 			.optional()
 			.exists()
