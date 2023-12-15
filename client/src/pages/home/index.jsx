@@ -1,13 +1,15 @@
-import React, { useEffect } from "react";
 import Slider from "../../components/sliders/section-slider";
 import CategoryCard from "../../components/cards/homePage/categoryCard";
 import SectionCardHomePage from "../../components/cards/homePage/sectionCard";
 
-import { getAllRestaurants } from "../../api/yumiverse_api";
+import { getAllCategories, getAllRestaurants } from "../../api/yumiverse_api";
 import { useFetch } from "../../hooks/useFetch";
+import categoryIcons from "../../helpers/categoryIcons";
+import categoryTitles from "../../helpers/categoryTitles";
+import { useEffect, useState } from "react";
 
 export default function HomePage() {
-	const restaurantData = [
+	const restaurantDataMock = [
 		{
 			id: 1,
 			location: "Av. Saenz Peña 146, Junín",
@@ -98,99 +100,233 @@ export default function HomePage() {
 		},
 	];
 
-	const categoryData = [
-		{
-			id: 1,
-			title: "Parrilla",
-			href: "/",
-			imgSrc: "grill",
-		},
-		{
-			id: 2,
-			title: "Pizzería",
-			href: "/",
-			imgSrc: "pizza",
-		},
-		{
-			id: 3,
-			title: "Pizzería",
-			href: "/",
-			imgSrc: "pizza",
-		},
-		{
-			id: 4,
-			title: "Pizzería",
-			href: "/",
-			imgSrc: "pizza",
-		},
-		{
-			id: 5,
-			title: "Pizzería",
-			href: "/",
-			imgSrc: "pizza",
-		},
-		{
-			id: 6,
-			title: "Pizzería",
-			href: "/",
-			imgSrc: "pizza",
-		},
-		{
-			id: 7,
-			title: "Pizzería",
-			href: "/",
-			imgSrc: "pizza",
-		},
-		{
-			id: 8,
-			title: "Pizzería",
-			href: "/",
-			imgSrc: "pizza",
-		},
-	];
+	// const categoryData = [
+	// 	{
+	// 		id: 1,
+	// 		title: "Parrilla",
+	// 		href: "/",
+	// 		imgSrc: "grill",
+	// 	},
+	// 	{
+	// 		id: 2,
+	// 		title: "Pizzería",
+	// 		href: "/",
+	// 		imgSrc: "pizza",
+	// 	},
+	// 	{
+	// 		id: 3,
+	// 		title: "Pizzería",
+	// 		href: "/",
+	// 		imgSrc: "pizza",
+	// 	},
+	// 	{
+	// 		id: 4,
+	// 		title: "Pizzería",
+	// 		href: "/",
+	// 		imgSrc: "pizza",
+	// 	},
+	// 	{
+	// 		id: 5,
+	// 		title: "Pizzería",
+	// 		href: "/",
+	// 		imgSrc: "pizza",
+	// 	},
+	// 	{
+	// 		id: 6,
+	// 		title: "Pizzería",
+	// 		href: "/",
+	// 		imgSrc: "pizza",
+	// 	},
+	// 	{
+	// 		id: 7,
+	// 		title: "Pizzería",
+	// 		href: "/",
+	// 		imgSrc: "pizza",
+	// 	},
+	// 	{
+	// 		id: 8,
+	// 		title: "Pizzería",
+	// 		href: "/",
+	// 		imgSrc: "pizza",
+	// 	},
+	// ];
 
-	const { data, loading, error } = useFetch(getAllRestaurants);
+	const { data: restaurantData, loading: restaurantLoading, error: restaurantError } = useFetch(getAllRestaurants);
+	const { data: categoryData, loading: categoryLoading, error: categoryError } = useFetch(getAllCategories);
+	const [filteredSections, setFilteredSections] = useState([]);
+	const [sections, setSections] = useState([]);
 
-	console.log(data);
+	// useEffect(() => {
+	// 	if (categoryData && restaurantData) {
+	// 		const sections = Object.entries(categoryTitles).map(([id, title]) => {
+	// 			const restaurantsFilters = restaurantData.map((restaurant) => {
+	// 				const categoriesArray = restaurant.categories || [];
+	// 				return categoriesArray.some(cat => cat._id === id);
+	// 			});
+	// 			return { id, title, restaurants: restaurantsFilters };
+	// 		});
+
+	// 		setFilteredSections(sections);
+	// 	}
+	// }, [categoryData, restaurantData]);
+
+	// useEffect(() => {
+	// 	if (categoryData && restaurantData) {
+	// 		const sections = Object.entries(categoryTitles).map(([id, title]) => {
+	// 			const restaurantIdFilters = restaurantData.map((restaurant) => {
+	// 				const categoriesArray = restaurant.categories || [];
+	// 				const matchingCategory = categoriesArray.find(cat => cat._id === id);
+	// 				return matchingCategory ? matchingCategory._id : null;
+	// 			});
+	// 			return { id, title, restaurants: restaurantIdFilters };
+	// 		});
+
+	// 		setFilteredSections(sections);
+	// 	}
+	// }, [categoryData, restaurantData]);
+
+	// useEffect(() => {
+	// 	if (categoryData && restaurantData) {
+	// 		const sections = Object.entries(categoryTitles).map(([id, title]) => {
+	// 			const restaurantIdFilters = restaurantData
+	// 				.filter(restaurant => {
+	// 					// Filtrar los restaurantes que tienen la categoría con el id actual
+	// 					const categoriesArray = restaurant.categories || [];
+	// 					return categoriesArray.some(cat => cat._id === id);
+	// 				})
+	// 				.map(restaurant => restaurant.id); // Mapear solo los _id de los restaurantes
+
+	// 			return { id, title, restaurants: restaurantIdFilters };
+	// 		});
+
+	// 		setFilteredSections(sections);
+	// 		console.log(filteredSections);
+	// 	}
+	// }, [categoryData, restaurantData]);
+
+	// useEffect(() => {
+
+	// 	if (categoryData && restaurantData) {
+	// 		const sections = categoryData.map(({ _id, category }) => ({
+	// 			_id,
+	// 			category,
+	// 			restaurants: restaurantData
+	// 				.filter(restaurant => restaurant.categories.some(cat => cat._id === _id))
+	// 				.map(({ categoryData, ...restoRestaurant }) => ({
+	// 					categoryData: categoryData.filter(cat => cat._id === _id),
+	// 					...restoRestaurant,
+	// 				}))
+	// 		}))
+	// 		console.log(JSON.stringify(sections));
+	// 	}
+
+	// }, [categoryData, restaurantData])
+
+	useEffect(() => {
+		if (categoryData && restaurantData) {
+			const sections = categoryData.map(category => {
+				const restaurants = restaurantData.filter(restaurant =>
+					restaurant.categories.some(cat => cat._id === category._id)
+				);
+
+				return {
+					...category,
+					restaurants: restaurants.map(({ categories, ...restoRestaurant }) => ({
+						...restoRestaurant,
+						categories: categories.filter(cat => cat._id === category._id),
+					})),
+				};
+			});
+
+			setFilteredSections(sections);
+		}
+	}, [categoryData, restaurantData]);
+
+	// console.log(categoryData);
+	// console.log(restaurantData);
+	// console.log('Desde Filtered Sections', filteredSections);
+
+	const handleMapCategoryIcon = (categoryId) => {
+		return categoryIcons[categoryId];
+	};
+
+	const getRestaurantDataById = (restaurantId) => {
+		const restaurant = restaurantData.find(restaurant => restaurant.id === restaurantId);
+		return restaurant || {};
+	}
 
 	return (
 		<main className="flex flex-col gap-8 overflow-hidden">
-			<Slider data={categoryData}>
-				{item => <CategoryCard title={item.title} href={item.href} imgSrc={item.imgSrc} />}
-			</Slider>
+
 			{
-				(data && data?.length > 0) &&
-				<Slider data={data} title="Cerca de tí">
-					{item => (
-						<SectionCardHomePage
-							location={String(item.address)}
-							nameRestaurant={item.name}
-							imageRestaurant={item.url_img_restaurant}
-							categories={item.categories}
-							openRestaurant={item.isOpen}
-							numberOfScores={item.stars}
-							scores={item.totalRating}
-						/>
-					)}
+				(categoryData && categoryData?.length > 0) &&
+				<Slider data={categoryData}>
+					{item => handleMapCategoryIcon(item._id) && <CategoryCard title={item.category} href={item.id} Icon={handleMapCategoryIcon(item._id)} />}
 				</Slider>
 			}
+
 			{
-				(data && data?.length > 0) &&
-				<Slider data={data} title="Los Mejores Puntuados">
-					{item => (
-						<SectionCardHomePage
-							location={String(item.address)}
-							nameRestaurant={item.name}
-							imageRestaurant={item.url_img_restaurant}
-							categories={item.categories}
-							openRestaurant={item.isOpen}
-							numberOfScores={item.stars}
-							scores={item.totalRating}
-						/>
-					)}
-				</Slider>
+				filteredSections.map(section => (
+					<Slider data={section.restaurants} title={section.category}>
+						{item => (
+							<SectionCardHomePage
+								id={item._id}
+								location={String(item.address)}
+								nameRestaurant={item.name}
+								imageRestaurant={item.url_img_restaurant}
+								categories={item.categories}
+								openRestaurant={item.isOpen}
+								numberOfScores={item.stars}
+								scores={item.totalRating}
+							/>
+						)}
+					</Slider>
+				))
 			}
-			{
+
+			{/* {
+				(filteredSections && filteredSections?.length > 0) &&
+				filteredSections.map(section => {
+					<Slider data={'data'} title={section.title}>
+						{item => (
+							<SectionCardHomePage
+								id={item.id}
+								location={String(item.address)}
+								nameRestaurant={item.name}
+								imageRestaurant={item.url_img_restaurant}
+								categories={item.categories}
+								openRestaurant={item.isOpen}
+								numberOfScores={item.stars}
+								scores={item.totalRating}
+							/>
+						)}
+					</Slider>
+				})
+			} */}
+
+			{/* {(categoryData && categoryData?.length > 0) &&
+				categoryData.map(section => {
+					<Slider data={data} title={handleMapCategoryIcon(section.category)}>
+						{item => (
+							(data && data?.length > 0) &&
+							<SectionCardHomePage
+								key={item._id}
+								id={item._id}
+								location={String(item.address)}
+								nameRestaurant={item.name}
+								imageRestaurant={item.url_img_restaurant}
+								categories={item.categories}
+								openRestaurant={item.isOpen}
+								numberOfScores={item.stars}
+								scores={item.totalRating}
+							/>
+						)}
+					</Slider>
+				})
+			} */}
+
+
+			{/* {
 				(data && data?.length > 0) &&
 				<Slider data={data} title="Pizzas">
 					{item => (
@@ -205,7 +341,7 @@ export default function HomePage() {
 						/>
 					)}
 				</Slider>
-			}
+			} */}
 		</main>
 	);
 }
