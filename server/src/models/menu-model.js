@@ -19,15 +19,14 @@ const menuSchema = new Schema(
 			required: true,
 		},
 		// Imágenes asociadas al menú
-		image: {
+		imgMenus: {
 			type: [String],
 			required: true,
 		},
 		// Información dietética, puede incluir valores como "Vegan", "Vegetarian", etc.
-		dietaryInfo: {
+		menuCategory: {
 			type: [String],
 			required: true,
-			enum: ["Vegan", "Vegetarian", "Other Dietary Preferences"],
 		},
 	},
 	{ timestamps: true, versionKey: false }

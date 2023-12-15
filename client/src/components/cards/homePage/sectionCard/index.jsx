@@ -10,6 +10,18 @@ export default function SectionCardHomePage({
 	numberOfScores,
 	scores,
 }) {
+	console.log({
+		location,
+		nameRestaurant,
+		imageRestaurant,
+		openRestaurant,
+		categories,
+		numberOfScores,
+		scores
+	});
+
+	const addressFormat = `${String(location).substring(0, 25)}...`;
+
 	return (
 		<div className="w-[208px] flex flex-col justify-between gap-4">
 			<div className="relative h-[158px] drop-shadow-md">
@@ -21,12 +33,12 @@ export default function SectionCardHomePage({
 				<Inferior
 					nameRestaurant={nameRestaurant}
 					openRestaurant={openRestaurant}
-					categories={categories}
+					categories={categories || []}
 					numberOfScores={numberOfScores}
 					scores={scores}
 				/>
 			</div>
-			<Location location={location} />
+			<Location location={addressFormat} />
 		</div>
 	);
 }
