@@ -3,7 +3,13 @@ import express from "express";
 import cors from "cors";
 import { dbConnect } from "./src/config/index.js";
 import { logs } from "./src/middlewares/index.js";
-import { restaurantRoutes, categoryRoutes, menuRoutes, commentRoutes } from "./src/routes/index.js";
+import {
+	restaurantRoutes,
+	categoryRoutes,
+	menuRoutes,
+	commentRoutes,
+	userRoutes,
+} from "./src/routes/index.js";
 
 const app = express();
 
@@ -18,6 +24,7 @@ app.use("/api/v1/restaurant", restaurantRoutes);
 app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/menu", menuRoutes);
 app.use("/api/v1/comment", commentRoutes);
+app.use("/api/v1/user", userRoutes);
 
 // Connect DB
 dbConnect();
