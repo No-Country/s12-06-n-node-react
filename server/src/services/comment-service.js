@@ -1,8 +1,28 @@
-import { CommentModel } from "../models/index.js";
+import { CommentModel, RestaurantModel } from "../models/index.js";
 
 const CommentService = {
 	async createComment(body) {
+		const { restaurantId } = body;
 		const comment = await CommentModel.create(body);
+		// validar solo numeros enteros en rating
+		// redondear a entero el rating
+		// arreglo de cuantas estrellas del 1 al 5
+
+		const comments = await CommentModel.find({ restaurantId });
+
+		if (comments.length === 0) {
+			return 0;
+		}
+
+		const totalRating = comments.reduce((sum, comment) => sum + comment.rating, 0);
+		const newAverageRating = totalRating / comments.length;
+		const roundedAverageRating = Math.round(newAverageRating * 10) / 10;
+
+		await RestaurantModel.findOneAndUpdate(
+			{ _id: restaurantId },
+			{ averageRating: roundedAverageRating },
+			{ new: true }
+		);
 
 		console.log("SERVICE CREATE COMMENT:", comment);
 		return comment;
@@ -19,10 +39,10 @@ const CommentService = {
 	},
 
 	async getComments() {
-		const comments = await CommentModel.find();
+		const comment = await CommentModel.find();
 
-		console.log("SERVICE GET COMMENT:", comments);
-		return comments;
+		console.log("SERVICE GET COMMENT:", comment);
+		return comment;
 	},
 	async updateComment(body) {
 		const { commentId, userId, comment } = body;
@@ -40,6 +60,7 @@ const CommentService = {
 		console.log("SERVICE UPDATE COMMENT:", commentUpdated);
 		return commentUpdated;
 	},
+
 	async deleteComment(body) {
 		const { commentId, userId } = body;
 

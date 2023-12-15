@@ -3,7 +3,8 @@ import { Schema, model } from "mongoose";
 const commentSchema = new Schema(
 	{
 		userId: {
-			type: String,
+			type: Schema.Types.ObjectId,
+			ref: "users",
 			required: true,
 		},
 		restaurantId: {
@@ -17,6 +18,7 @@ const commentSchema = new Schema(
 		},
 		rating: {
 			type: Number,
+			enum: [1, 2, 3, 4, 5],
 			required: true,
 		},
 	},
