@@ -6,6 +6,8 @@ import RestaurantPage from "../pages/restaurants";
 import LayoutRestaurants from "./LayoutRestaurants";
 import RegisterPage from "../pages/register";
 import RatingsPage from "../pages/ratings";
+import LoginPage from "../pages/login";
+import UserRegisterPage from "../pages/userRegister";
 
 // export const AppRouter = () => {
 
@@ -28,30 +30,42 @@ import RatingsPage from "../pages/ratings";
 
 export const appRouter = createBrowserRouter([
 	{
-		path: "/", element: <Layout />,
+		path: "/",
+		element: <Layout />,
 		children: [
 			{
 				index: true,
-				element: <HomePage />
+				element: <HomePage />,
 			},
-		]
+		],
 	},
 	{
-		path: "restaurant", element: <LayoutRestaurants />,
+		path: "restaurant",
+		element: <LayoutRestaurants />,
 		children: [
 			{
 				path: ":restaurantId",
-				element: <RestaurantPage />
+				element: <RestaurantPage />,
 			},
 			{
 				path: ":restaurantId/ratings",
-				element: <RatingsPage />
+				element: <RatingsPage />,
 			},
 			{
 				path: "registerProducts",
-				element: <RegisterPage />
+				element: <RegisterPage />,
 			},
-		]
+		],
+	},
+	{
+		path: "login",
+		element: <LoginPage />,
+		children: [],
+	},
+	{
+		path: "register",
+		element: <UserRegisterPage />,
+		children: [],
 	},
 	{ path: "*", element: <Navigate to={"/"} /> },
-])
+]);

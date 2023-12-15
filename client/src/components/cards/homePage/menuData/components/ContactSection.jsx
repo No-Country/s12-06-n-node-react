@@ -43,7 +43,7 @@ export default function ContactSection({
 					</Link>
 					<div className="flex flex-row gap-2">
 						{categories.map(category => (
-							<CategoryItem text={category} />
+							<CategoryItem key={category} text={category} />
 						))}
 					</div>
 				</div>
