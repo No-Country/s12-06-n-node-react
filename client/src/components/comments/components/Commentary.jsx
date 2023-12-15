@@ -1,6 +1,6 @@
 import Dropdown from "../../dropdown";
 import Ratings from "./Ratings";
-import DropdownItem from "../../dropdown/components/dropdownItem";
+import DropdownItem from "../../dropdown/components/DropdownItem";
 import DeleteIcon from "../../../icons/DeleteIcon";
 import EditIcon from "../../../icons/EditIcon";
 import DotMenuIcon from "../../../icons/DotMenuIcon";
