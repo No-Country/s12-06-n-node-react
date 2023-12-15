@@ -3,12 +3,12 @@ import generateToken from "../utils/jwt.js";
 
 const AuthService = {
     async login(body){
-        const { email } = body;
+        const userEmail = body.email;
 
         const token = await generateToken(body);
-        const user = await UserModel.find({ email })
+        const user = await UserModel.findOne({ email: userEmail })
 
-        return { name: user.name, surname: user.surname, token };
+        return { name: user.name, surname: user.surname, bearer_token: token };
     },
 };
 
