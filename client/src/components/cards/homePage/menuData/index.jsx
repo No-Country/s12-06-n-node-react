@@ -3,7 +3,16 @@ import { useState } from "react";
 import ContactSection from "./components/ContactSection";
 import PaymentsDeliverySection from "./components/PaymentsDeliverySection";
 
-export default function MenuData({ categories, phoneNumber, schedule, openRestaurant, location }) {
+export default function MenuData({
+	id,
+	categories,
+	phoneNumber,
+	schedule,
+	openRestaurant,
+	location,
+	stars,
+	totalRatings,
+}) {
 	const [showContact, setShowContact] = useState(true);
 
 	const changeSection = isContact => {
@@ -27,10 +36,13 @@ export default function MenuData({ categories, phoneNumber, schedule, openRestau
 			</div>
 			{showContact ? (
 				<ContactSection
+					id={id}
 					categories={categories}
 					phoneNumber={phoneNumber}
 					schedule={schedule}
 					location={location}
+					stars={stars}
+					totalRatings={totalRatings}
 				/>
 			) : (
 				<PaymentsDeliverySection />
