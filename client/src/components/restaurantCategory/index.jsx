@@ -1,6 +1,13 @@
+import { useRestaurantStore } from "../../stores"
 import MenuItem from "../menuItem"
 
-export default function RestaurantCategory() {
+export default function RestaurantCategory({ showBottomSheet }) {
+
+    const setShowBottomSheet = useRestaurantStore(state => state.setShowBottomSheet);
+
+    const handlerCardClick = () => {
+        setShowBottomSheet(!showBottomSheet)
+    }
 
     const restaurantMenu = [
         {
@@ -69,7 +76,7 @@ export default function RestaurantCategory() {
                 <div key={item.category} className="flex flex-col gap-4">
                     <h2 className="font-bold">{item.category}</h2>
                     {item.items.map(item => (
-                        <MenuItem key={item.id} description={item.description} title={item.itemName} price={item.price} />
+                        <MenuItem handlerCardClick={handlerCardClick} key={item.id} description={item.description} title={item.itemName} price={item.price} />
                     ))}
                 </div>
             ))}

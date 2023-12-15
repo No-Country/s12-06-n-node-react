@@ -2,9 +2,12 @@ import { Navigate, Route, Routes, createBrowserRouter } from "react-router-dom";
 import { Layout } from "./Layout";
 import HomePage from "../pages/home";
 import { AuthRoutes } from "./auth/AuthRoutes";
-import Ratings from "../pages/ratings";
 import RestaurantPage from "../pages/restaurants";
 import LayoutRestaurants from "./LayoutRestaurants";
+import RegisterPage from "../pages/register";
+import RatingsPage from "../pages/ratings";
+import LoginPage from "../pages/login";
+import UserRegisterPage from "../pages/userRegister";
 
 // export const AppRouter = () => {
 
@@ -27,22 +30,42 @@ import LayoutRestaurants from "./LayoutRestaurants";
 
 export const appRouter = createBrowserRouter([
 	{
-		path: "/", element: <Layout />,
+		path: "/",
+		element: <Layout />,
 		children: [
 			{
 				index: true,
-				element: <HomePage />
+				element: <HomePage />,
 			},
-		]
+		],
 	},
 	{
-		path: "restaurant", element: <LayoutRestaurants />,
+		path: "restaurant",
+		element: <LayoutRestaurants />,
 		children: [
 			{
-				path: ":restaurant_id",
-				element: <RestaurantPage />
+				path: ":restaurantId",
+				element: <RestaurantPage />,
 			},
-		]
+			{
+				path: ":restaurantId/ratings",
+				element: <RatingsPage />,
+			},
+			{
+				path: "registerProducts",
+				element: <RegisterPage />,
+			},
+		],
+	},
+	{
+		path: "login",
+		element: <LoginPage />,
+		children: [],
+	},
+	{
+		path: "register",
+		element: <UserRegisterPage />,
+		children: [],
 	},
 	{ path: "*", element: <Navigate to={"/"} /> },
-])
+]);

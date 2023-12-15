@@ -3,7 +3,7 @@ import "swiper/css";
 import cardToRender from "../../../utils/cardToRender";
 
 function Slider({ data, children, title }) {
-	console.log('Desde slider', data);
+	// console.log('Desde slider', data);
 	if (!data) {
 		return <p className="text-center text-xl font-bold">No data to show</p>;
 	}

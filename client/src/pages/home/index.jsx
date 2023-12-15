@@ -151,8 +151,6 @@ export default function HomePage() {
 
 	const { data, loading, error } = useFetch(getAllRestaurants);
 
-	console.log(data);
-
 	return (
 		<main className="flex flex-col gap-8 overflow-hidden">
 			<Slider data={categoryData}>
@@ -163,6 +161,8 @@ export default function HomePage() {
 				<Slider data={data} title="Cerca de tí">
 					{item => (
 						<SectionCardHomePage
+							key={item._id}
+							id={item._id}
 							location={String(item.address)}
 							nameRestaurant={item.name}
 							imageRestaurant={item.url_img_restaurant}
