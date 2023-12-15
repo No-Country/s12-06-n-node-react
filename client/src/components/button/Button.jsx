@@ -10,7 +10,7 @@ export default function Button({ onClick, text, icon, alt, rounded, yellow, whit
 					  : brown
 					    ? "bg-texts text-principal hover:bg-principal hover:text-texts"
 					    : ""
-			} flex flex-row items-center shadow-3xl gap-1 py-1 px-2 text-md`}
+			} flex flex-row items-center justify-center shadow-3xl gap-1 py-1 px-2 text-md`}
 			onClick={onClick}
 		>
 			{text}
