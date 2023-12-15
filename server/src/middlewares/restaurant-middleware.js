@@ -117,16 +117,11 @@ const restaurantValidation = {
 			.notEmpty()
 			.isBoolean()
 			.withMessage("IsOpen debe ser un valor booleano"),
-		check("stars")
+		check("averageRating")
 			.exists()
 			.notEmpty()
 			.isNumeric()
-			.withMessage("Las estrellas deben ser un valor numérico"),
-		check("totalRatings")
-			.exists()
-			.notEmpty()
-			.isNumeric()
-			.withMessage("TotalRatings debe ser un valor numérico"),
+			.withMessage("averageRating debe ser un valor numérico"),
 		check("hours.*.day")
 			.exists()
 			.notEmpty()

@@ -45,7 +45,6 @@ const MenuController = {
 
 			// Validaciones
 			await menuValidation.checkNameExists(req, res, () => {});
-			await menuValidation.checkMenuExists(req, res, () => {});
 
 			const response = await MenuService.updateMenu(id, body);
 			return res.status(200).json(response);

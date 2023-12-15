@@ -14,6 +14,21 @@ const UserService = {
 		console.log("SERVICE CREATE USER:", user);
 		return user;
 	},
+	async updateUser(body) {
+		// const {	id } = body;
+		return body;
+
+		// const user = await UserModel.findById(id);
+		// return user;
+		// if(!user) {
+		// 	throw new Error("El usuario no existe");
+		// }
+
+		// const response = await UserModel.findByIdAndUpdate(user._id, {$set: {name: body.name}}, { new: true });
+
+		// console.log("SERVICE UPDATE USER:", response);
+		// return response;
+	},
 	async createRestaurant(body) {
 		const { userId, restaurants } = body;
 
