@@ -6,7 +6,8 @@ const tokenValidation = (req, res, next) => {
     
     try {        
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.userId = decoded.id;
+        req.id = decoded.id;
+        req.name = decoded.name;
 
     } catch (error) {
         if(error instanceof jwt.TokenExpiredError) {
