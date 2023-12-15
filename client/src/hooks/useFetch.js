@@ -22,7 +22,6 @@ export const useFetch = (fetcher) => {
                 setLoading(false);
 
                 console.error("Error fetching restaurant data:", error);
-
             }
         }
 
