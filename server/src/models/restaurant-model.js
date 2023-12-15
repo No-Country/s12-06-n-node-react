@@ -81,14 +81,6 @@ const restaurantSchema = new Schema(
 				_id: false,
 			},
 		],
-		stars: {
-			type: Number,
-			default: 0,
-		},
-		totalRatings: {
-			type: Number,
-			default: 0,
-		},
 		averageRating: {
 			type: Number,
 			default: 0,

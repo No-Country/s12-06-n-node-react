@@ -1,5 +1,6 @@
 import { CommentService } from "../services/index.js";
 import { handleHttp } from "../utils/error-handle.js";
+import { CommentModel, RestaurantModel } from "../models/index.js";
 
 const CommentController = {
 	async create(req, res) {
@@ -38,19 +39,9 @@ const CommentController = {
 	async getAverageRating(req, res) {
 		const { id } = req.params;
 		try {
-			// Fetch comments for the restaurant with the given ID
-			const comments = await CommentService.getCommentsById({ id });
-
-			if (comments.length > 0) {
-				// Calculate average rating
-				const totalRatings = comments.length;
-				const totalStars = comments.reduce((acc, comment) => acc + comment.rating, 0);
-				const averageRating = totalStars / totalRatings;
-
-				return res.status(200).json({ averageRating });
-			} else {
-				return res.status(200).json({ averageRating: 0 }); // No ratings yet
-			}
+			
+			const comment = await CommentService.getAverageRating(id);
+			return res.status(200).json(comment);
 		} catch (error) {
 			// Handle errors
 			res.status(500).json({ error: "Internal Server Error" });
