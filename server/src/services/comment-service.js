@@ -61,29 +61,6 @@ const CommentService = {
 		return commentUpdated;
 	},
 
-	async getAverageRating(restaurantId) {
-		const comment = await CommentModel.find({ restaurantId });
-
-		if (comment.length === 0) {
-			return 0;
-		}
-
-		const totalRating = comment.reduce((sum, comment) => sum + comment.rating, 0);
-		const newAverageRating = totalRating / comment.length;
-		const roundedAverageRating = Math.round(newAverageRating * 10) / 10;
-
-		const restaurant = await RestaurantModel.findOneAndUpdate(
-			{ _id: restaurantId },
-			{ averageRating: roundedAverageRating },
-			{ new: true }
-		);
-
-		console.log("Total Rating:", totalRating);
-		console.log("Average Rating:", restaurant.averageRating);
-
-		return restaurant.averageRating;
-	},
-
 	async deleteComment(body) {
 		const { commentId, userId } = body;
 

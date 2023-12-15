@@ -34,18 +34,6 @@ const CommentController = {
 			handleHttp(res, "ERROR_GET_COMMENT", e);
 		}
 	},
-
-	async getAverageRating(req, res) {
-		const { id } = req.params;
-		try {
-			const comment = await CommentService.getAverageRating(id);
-			return res.status(200).json(comment);
-		} catch (error) {
-			// Handle errors
-			res.status(500).json({ error: "Internal Server Error" });
-		}
-	},
-
 	async update(req, res) {
 		try {
 			const commentId = req.params.CommentId;
