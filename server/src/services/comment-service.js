@@ -4,9 +4,6 @@ const CommentService = {
 	async createComment(body) {
 		const { restaurantId } = body;
 		const comment = await CommentModel.create(body);
-		// validar solo numeros enteros en rating
-		// redondear a entero el rating
-		// arreglo de cuantas estrellas del 1 al 5
 
 		const comments = await CommentModel.find({ restaurantId });
 
@@ -30,8 +27,7 @@ const CommentService = {
 
 	async getCommentsById(body) {
 		const { id } = body;
-		// Comentario de Victor: Marvin, se puede usar findById() acá?
-		// Comentario de Marvin: Victor, findById() solo se puede usar si el id es el _id de mongo, si es otro campo no se puede usar :D
+
 		const comment = await CommentModel.find({ restaurantId: id });
 
 		console.log("SERVICE GET COMMENT:", comment);
