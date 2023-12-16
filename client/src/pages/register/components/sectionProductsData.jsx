@@ -3,11 +3,13 @@ import RegisterBottomSheet from "./bottomSheet";
 import AddBtn from "./buttons/addBtn";
 import SectionTitle from "./titles/sectionTitle";
 
-export default function SectionProductsData({ showBottomSheet }) {
+export default function SectionProductsData({ showBottomSheet, handleFormSubmit }) {
     const setShowBottomSheet = useRestaurantStore(state => state.setShowBottomSheet)
+
     const handleAddProduct = () => {
         setShowBottomSheet(!showBottomSheet)
     }
+
     return (
         <SectionTitle title="Productos">
             <div className="flex flex-col gap-[76px] pb-[76px]">
@@ -18,7 +20,7 @@ export default function SectionProductsData({ showBottomSheet }) {
                     <AddBtn title="Añadir" />
                 </div>
                 <div className="h-auto w-full flex justify-center">
-                    <AddBtn title="Publicar Tienda" storeIcon />
+                    <AddBtn handleFormSubmit={handleFormSubmit} type='submit' title="Publicar Tienda" storeIcon />
                 </div>
             </div>
             <RegisterBottomSheet showBottomSheet={showBottomSheet} />

@@ -11,7 +11,6 @@ router.get(
 	CommentController.getCommentsByRestaurantId
 );
 router.get("/", commentValidation.getAll, CommentController.getComments);
-router.get("/averageRating/:id", CommentController.getAverageRating);
 router.patch("/:CommentId/:UserId", commentValidation.update, CommentController.update);
 router.delete("/:CommentId/:UserId", commentValidation.delete, CommentController.delete);
 

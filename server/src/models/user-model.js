@@ -10,9 +10,15 @@ const userSchema = new Schema(
 			type: String,
 			required: true,
 		},
-		email: {
+		username: {
 			type: String,
 			required: true,
+			unique: true,
+		},
+		email: {
+			type: String,
+			required: false,
+			default: "",
 		},
 		password: {
 			type: String,
@@ -21,15 +27,18 @@ const userSchema = new Schema(
 		address: {
 			street: {
 				type: String,
-				required: true,
+				required: false,
+				default: "",
 			},
 			city: {
 				type: String,
-				required: true,
+				required: false,
+				default: "",
 			},
 			state: {
 				type: String,
-				required: true,
+				required: false,
+				default: "",
 			},
 		},
 		phone: {
@@ -39,10 +48,12 @@ const userSchema = new Schema(
 		img: {
 			type: String,
 			required: false,
+			default: "",
 		},
 		admin: {
 			type: Boolean,
-			required: true,
+			required: false,
+			default: false,
 		},
 		favorites: {
 			type: Array,

@@ -44,7 +44,7 @@ const commentValidation = {
 			.exists()
 			.notEmpty()
 			.withMessage("El id del usuario es requerido")
-			.custom(async (value) => {
+			.custom(async value => {
 				try {
 					const user = await UserModel.findById(value);
 					if (!user) {
@@ -60,7 +60,7 @@ const commentValidation = {
 			.exists()
 			.notEmpty()
 			.withMessage("El id del restaurante es requerido")
-			.custom(async (value) => {
+			.custom(async value => {
 				try {
 					const restaurant = await RestaurantModel.findById(value);
 					if (!restaurant) {

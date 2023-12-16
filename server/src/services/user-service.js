@@ -14,6 +14,14 @@ const UserService = {
 		console.log("SERVICE CREATE USER:", user);
 		return user;
 	},
+	async updateUser(body) {
+		const { id } = body;
+
+		const user = await UserModel.findOneAndUpdate({ _id: id }, { $set: body }, { new: true });
+
+		console.log("SERVICE UPDATE USER:", user);
+		return user;
+	},
 	async createRestaurant(body) {
 		const { userId, restaurants } = body;
 

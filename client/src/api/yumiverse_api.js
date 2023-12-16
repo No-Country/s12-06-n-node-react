@@ -5,9 +5,17 @@ export const getAllRestaurants = async () => {
 };
 
 export const getAllCategories = async () => {
-	return await axios.post("https://yumi-verse.onrender.com/api/v1/restaurant");
+	return await axios.get("https://yumi-verse.onrender.com/api/v1/category");
 };
 
 export const getRestaurantById = async (id) => {
 	return await axios.get(`https://yumi-verse.onrender.com/api/v1/restaurant/${id}`);
+};
+
+export const postRestaurant = async (data) => {
+	return await axios.post("https://yumi-verse.onrender.com/api/v1/restaurant", data);
+};
+
+export const postUser = async (data) => {
+   return await axios.post("http://localhost:3000/api/v1/user/register", data);
 };
