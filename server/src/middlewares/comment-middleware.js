@@ -40,22 +40,22 @@ const commentValidation = {
 	],
 	getAll: [],
 	create: [
-		check("userId")
-			.exists()
-			.notEmpty()
-			.withMessage("El id del usuario es requerido")
-			.custom(async value => {
-				try {
-					const user = await UserModel.findById(value);
-					if (!user) {
-						throw new Error("No existe el usuario");
-					}
+		// check("userId")
+		// 	.optional()
+		// 	.notEmpty()
+		// 	.withMessage("El id del usuario es requerido")
+		// 	.custom(async value => {
+		// 		try {
+		// 			const user = await UserModel.findById(value);
+		// 			if (!user) {
+		// 				throw new Error("No existe el usuario");
+		// 			}
 
-					return true;
-				} catch (error) {
-					throw new Error(`Error al validar el id del usuario: ${error.message}`);
-				}
-			}),
+		// 			return true;
+		// 		} catch (error) {
+		// 			throw new Error(`Error al validar el id del usuario: ${error.message}`);
+		// 		}
+		// 	}),
 		check("restaurantId")
 			.exists()
 			.notEmpty()
