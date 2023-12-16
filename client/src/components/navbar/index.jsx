@@ -55,31 +55,55 @@ export default function Navbar() {
 						Publicar tienda
 					</button>
 				</div> */}
-				<div className={`w-full h-20 flex ${isExpanded ? '' : 'justify-between'} items-center overflow-x-hidden`}>
+				<div
+					className={`w-full h-20 flex ${
+						isExpanded ? "" : "justify-between"
+					} items-center overflow-x-hidden`}
+				>
 					<div className="w-full h-full flex items-center gap-4 overflow-x-hidden">
 						<div
 							onClick={handleSearchIconClick}
 							className="w-6
 							 h-6 flex justify-center items-center relative cursor-pointer"
 						>
-							<div className={`w-6 h-6 flex justify-center items-center rounded-full absolute ${isExpanded ? '-translate-x-full' : ''} transition-transform ease-in-out duration-300`}>
+							<div
+								className={`w-6 h-6 flex justify-center items-center rounded-full absolute ${
+									isExpanded ? "-translate-x-full" : ""
+								} transition-transform ease-in-out duration-300`}
+							>
 								<img src={SearchIcon} alt="Search Icon" />
 							</div>
-							<div className={`w-6 h-6 flex justify-center items-center rounded-full absolute ${isExpanded ? '' : '-translate-x-full'} transition-transform ease-in-out duration-300`}>
+							<div
+								className={`w-6 h-6 flex justify-center items-center rounded-full absolute ${
+									isExpanded ? "" : "-translate-x-full"
+								} transition-transform ease-in-out duration-300`}
+							>
 								<img src={ArrowLeft} alt="Search Icon" />
 							</div>
 						</div>
-						<div className={`${isExpanded ? 'w-full' : 'w-0 -translate-x-full'} overflow-hidden transition-all ease-in-out duration-300 flex items-center`}>
+						<div
+							className={`${
+								isExpanded ? "w-full" : "w-0 -translate-x-full"
+							} overflow-hidden transition-all ease-in-out duration-300 flex items-center`}
+						>
 							<input
-								className={`${isExpanded ? 'w-full' : 'w-0 -translate-x-full'} h-auto px-1 bg-transparent border-b-[1px] border-texts outline-none transition-all ease-in-out duration-300 placeholder:text-xs placeholder:text-texts`}
+								className={`${
+									isExpanded ? "w-full" : "w-0 -translate-x-full"
+								} h-auto px-1 bg-transparent border-b-[1px] border-texts outline-none transition-all ease-in-out duration-300 placeholder:text-xs placeholder:text-texts`}
 								type="text"
 								placeholder="Búsqueda ingresada"
 							/>
 						</div>
 					</div>
-					<div className={`${isExpanded ? 'translate-x-full' : 'translate-x-0'} transition-transform ease-in-out duration-300`}>
+					<div
+						className={`${
+							isExpanded ? "translate-x-full" : "translate-x-0"
+						} transition-transform ease-in-out duration-300`}
+					>
 						<button
-							className={`${isExpanded ? 'translate-x-full w-0' : 'translate-x-0'} bg-principal px-2 py-1 rounded-lg max-h-8 transition-transform ease-in-out duration-300`}
+							className={`${
+								isExpanded ? "translate-x-full w-0" : "translate-x-0"
+							} bg-principal px-2 py-1 rounded-lg max-h-8 transition-transform ease-in-out duration-300`}
 						>
 							Publicar
 						</button>
