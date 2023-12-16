@@ -14,21 +14,20 @@ const validateResult = (req, res, next) => {
 
 const authValidation = {
     login: [
-        check("email")
-            .exists().withMessage("El email es requerido")
-            .notEmpty().withMessage("El email no puede estar vacío")
-            .isEmail().withMessage("El email debe ser válido")
+        check("username")
+            .exists().withMessage("El username es requerido")
+            .notEmpty().withMessage("El username no puede estar vacío")
             .custom(async value => {
                 try {
-                    const user = await UserModel.findOne({ email: value });
+                    const user = await UserModel.findOne({ username: value });
 
                     if (!user) {
-                        throw new Error("Email o contraseña incorrecto");
+                        throw new Error("username o contraseña incorrecto");
                     }
 
                     return true;
                 } catch (error) {
-                    throw new Error(`Error al validar el email: ${error.message}`);
+                    throw new Error(`Error al validar el username: ${error.message}`);
                 }
             }),
         check("password")
@@ -37,15 +36,15 @@ const authValidation = {
             .withMessage("La contraseña es requerida")
             .custom(async (value, { req }) => {
                 try{
-                    const userEmail = req.body.email;
+                    const username = req.body.username;
                     const password = value;
 
-                    const user = await UserModel.findOne({ email: userEmail });
+                    const user = await UserModel.findOne({ username });
                     
                     const result = bcrypt.compareSync(password, user.password);
 
                     if(!result){
-                        throw new Error("Email o contraseña incorrecto");
+                        throw new Error("username o contraseña incorrecto");
                     }
 
                     return true;
