@@ -1,15 +1,24 @@
-import { UserModel } from "../models/index.js";
 import generateToken from "../utils/jwt.js";
 
 const AuthService = {
-	async login(body) {
-		const username = body.username;
+    async login(body){
+		/**
+		 * body = {
+		 * 	username: "username",
+		 * 	password: "password",
+		 * 	id: "id",
+		 * 	admin: "admin",
+		 * 	name: "name",
+		 * 	surname: "surname"
+		 * }
+		 */
+        const name = body.name;
+		const surname = body.surname;
+		
+        const token = await generateToken(body);
 
-		const token = await generateToken(body);
-		const user = await UserModel.findOne({ username });
-
-		return { name: user.name, surname: user.surname, bearer_token: token };
-	},
+        return { name, surname, bearer_token: token };
+    },
 };
 
 export default AuthService;

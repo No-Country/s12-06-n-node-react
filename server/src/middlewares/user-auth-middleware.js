@@ -19,13 +19,18 @@ const authValidation = {
 			.withMessage("El username es requerido")
 			.notEmpty()
 			.withMessage("El username no puede estar vacío")
-			.custom(async value => {
+			.custom(async (value, { req }) => {
 				try {
 					const user = await UserModel.findOne({ username: value });
 
 					if (!user) {
 						throw new Error("username o contraseña incorrecto");
 					}
+
+					req.body.id = user._id;
+					req.body.admin = user.admin;
+					req.body.name = user.name;
+					req.body.surname = user.surname;
 
 					return true;
 				} catch (error) {
