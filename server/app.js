@@ -9,7 +9,7 @@ import {
 	menuRoutes,
 	commentRoutes,
 	userRoutes,
-	authRoutes
+	authRoutes,
 } from "./src/routes/index.js";
 
 const app = express();
