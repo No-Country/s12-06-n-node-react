@@ -4,20 +4,28 @@ const restaurantSchema = new Schema(
 	{
 		name: {
 			type: String,
+			unique: true,
 			required: true,
-		},
-		categories: {
-			type: String,
-			required: true,
-			enum: ["Española", "Italiana", "Japonesa", "Americana", "Mexicana", "Pizza", "Fast food"],
 		},
 		description: {
 			type: String,
 			required: true,
 		},
+		categories: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: "categories",
+			},
+		],
 		phone: {
 			type: String,
 			required: true,
+			unique: true,
+		},
+		email: {
+			type: String,
+			required: true,
+			unique: true,
 		},
 		address: {
 			street: {
@@ -46,14 +54,49 @@ const restaurantSchema = new Schema(
 			default: true,
 			required: true,
 		},
-		stars: {
+		hours: [
+			{
+				day: {
+					type: String,
+					enum: [
+						"Monday",
+						"Tuesday",
+						"Wednesday",
+						"Thursday",
+						"Friday",
+						"Saturday",
+						"Sunday",
+						"Holidays",
+					],
+					required: true,
+				},
+				openingTime: {
+					type: String,
+					required: true,
+				},
+				closingTime: {
+					type: String,
+					required: true,
+				},
+				_id: false,
+			},
+		],
+		averageRating: {
 			type: Number,
 			default: 0,
 		},
-		totalRatings: {
-			type: Number,
-			default: 0,
-		},
+		menus: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: "menus",
+			},
+		],
+		comments: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: "comments",
+			},
+		],
 	},
 	{ timestamps: true, versionKey: false }
 );

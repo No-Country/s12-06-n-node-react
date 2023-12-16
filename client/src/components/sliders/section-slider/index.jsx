@@ -3,9 +3,11 @@ import "swiper/css";
 import cardToRender from "../../../utils/cardToRender";
 
 function Slider({ data, children, title }) {
+	// console.log('Desde slider', data);
 	if (!data) {
 		return <p className="text-center text-xl font-bold">No data to show</p>;
 	}
+
 	return (
 		<section className="h-auto flex justify-center flex-col gap-4 px-4">
 			{title && <h2 className="font-bold">{title}</h2>}
@@ -14,7 +16,7 @@ function Slider({ data, children, title }) {
 				spaceBetween={16}
 				loop={true}
 				freemodesticky={"true"}
-				className="mySwiper w-full overflow-visible"
+				className="mySwiper w-full"
 			>
 				{data.map(item => (
 					<SwiperSlide key={item.id} className="w-auto">

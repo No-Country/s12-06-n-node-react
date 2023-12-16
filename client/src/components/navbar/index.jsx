@@ -2,15 +2,15 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import yumiverseLogo from "../../assets/YumiverseLogo.svg";
-import profile from "../../assets/icons/profile-circle.svg";
-import search from "../../assets/icons/search.svg";
-import arrowLeft from "../../assets/icons/arrow-left.svg";
+import ProfileIcon from "../../assets/icons/profile-circle.svg";
+import SearchIcon from "../../assets/icons/search.svg";
+import ArrowLeft from "../../assets/icons/arrow-left.svg";
 
 export default function Navbar() {
-	const [searchExpanded, setSearchExpanded] = useState(false);
+	const [isExpanded, setIsExpanded] = useState(false);
 
-	const handleOpen = () => {
-		setSearchExpanded(!searchExpanded);
+	const handleSearchIconClick = () => {
+		setIsExpanded(!isExpanded);
 	};
 
 	return (
@@ -21,10 +21,10 @@ export default function Navbar() {
 						<img src={yumiverseLogo} alt="Yumiverse logo image" className="w-[87] h-auto" />
 					</Link>
 					<Link>
-						<img src={profile} alt="Yumiverse logo image" className="max-h-6" />
+						<img src={ProfileIcon} alt="Yumiverse logo image" className="max-h-6" />
 					</Link>
 				</div>
-				<div className="flex justify-between items-center">
+				{/* <div className="flex justify-between items-center">
 					<div
 						className={`flex gap-2 items-center h-full ${
 							searchExpanded ? "w-full" : ""
@@ -54,6 +54,66 @@ export default function Navbar() {
 					>
 						Publicar tienda
 					</button>
+				</div> */}
+				<div
+					className={`w-full h-20 flex ${
+						isExpanded ? "" : "justify-between"
+					} items-center overflow-x-hidden`}
+				>
+					<div className="w-full h-full flex items-center gap-4 overflow-x-hidden">
+						<div
+							onClick={handleSearchIconClick}
+							className="w-6
+							 h-6 flex justify-center items-center relative cursor-pointer"
+						>
+							<div
+								className={`w-6 h-6 flex justify-center items-center rounded-full absolute ${
+									isExpanded ? "-translate-x-full" : ""
+								} transition-transform ease-in-out duration-300`}
+							>
+								<img src={SearchIcon} alt="Search Icon" />
+							</div>
+							<div
+								className={`w-6 h-6 flex justify-center items-center rounded-full absolute ${
+									isExpanded ? "" : "-translate-x-full"
+								} transition-transform ease-in-out duration-300`}
+							>
+								<img src={ArrowLeft} alt="Search Icon" />
+							</div>
+						</div>
+						<div
+							className={`${
+								isExpanded ? "w-full" : "w-0 -translate-x-full"
+							} overflow-hidden transition-all ease-in-out duration-300 flex items-center`}
+						>
+							<input
+								className={`${
+									isExpanded ? "w-full" : "w-0 -translate-x-full"
+								} h-auto px-1 bg-transparent border-b-[1px] border-texts outline-none transition-all ease-in-out duration-300 placeholder:text-xs placeholder:text-texts`}
+								type="text"
+								placeholder="Búsqueda ingresada"
+							/>
+						</div>
+					</div>
+					<div
+						className={`${
+							isExpanded ? "translate-x-full" : "translate-x-0"
+						} transition-transform ease-in-out duration-300`}
+					>
+						<button
+							className={`${
+								isExpanded ? "translate-x-full w-0" : "translate-x-0"
+							} bg-principal px-2 py-1 rounded-lg max-h-8 transition-transform ease-in-out duration-300`}
+						>
+							Publicar
+						</button>
+						{/* <button
+							className={`${searchExpanded ? "hidden" : ""
+								} max-h-8 text-texts bg-principal px-2 py-1 rounded-lg`}
+						>
+							Publicar tienda
+						</button> */}
+					</div>
 				</div>
 			</div>
 		</nav>

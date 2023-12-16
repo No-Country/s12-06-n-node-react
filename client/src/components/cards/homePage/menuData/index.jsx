@@ -3,7 +3,16 @@ import { useState } from "react";
 import ContactSection from "./components/ContactSection";
 import PaymentsDeliverySection from "./components/PaymentsDeliverySection";
 
-export default function MenuData({ categories, phoneNumber, schedule, openRestaurant, location }) {
+export default function MenuData({
+	id,
+	categories,
+	phoneNumber,
+	schedule,
+	openRestaurant,
+	location,
+	stars,
+	totalRatings,
+}) {
 	const [showContact, setShowContact] = useState(true);
 
 	const changeSection = isContact => {
@@ -11,7 +20,7 @@ export default function MenuData({ categories, phoneNumber, schedule, openRestau
 	};
 
 	return (
-		<div className="flex flex-col items-start justify-start p-4 w-[375px] bg-secundario">
+		<div className="flex flex-col items-start justify-start p-4 bg-secundario">
 			<div className="flex flex-row items-start justify-start gap-4 mb-5 w-full">
 				<button onClick={() => changeSection(true)} className="text-sm/5 font-medium">
 					Contacto{showContact && <div className="bg-principal h-1 rounded-lg mt-2"></div>}
@@ -27,10 +36,13 @@ export default function MenuData({ categories, phoneNumber, schedule, openRestau
 			</div>
 			{showContact ? (
 				<ContactSection
+					id={id}
 					categories={categories}
 					phoneNumber={phoneNumber}
 					schedule={schedule}
 					location={location}
+					stars={stars}
+					totalRatings={totalRatings}
 				/>
 			) : (
 				<PaymentsDeliverySection />
