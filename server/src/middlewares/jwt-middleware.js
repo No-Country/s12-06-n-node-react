@@ -2,26 +2,27 @@ import jwt from "jsonwebtoken";
 import { UserModel } from "../models/index.js";
 
 const authValidation = async (req, res, next) => {
-    const authorization = req.headers.authorization;
-    
-    if (!authorization) {
+    const authorizationHeader = req.headers.authorization;
+
+    if (!authorizationHeader) {
         return res.status(401).json({ message: "No se ha enviado el token" });
     }
 
-    if (!authorization.startsWith("Bearer")) {
-        return res.status(401).json({ message: "El token no es válido" });
+    const [bearer, token] = authorizationHeader.split(" ");
+
+    if (bearer !== "Bearer" || !token) {
+        return res.status(401).json({ message: "El formato del token no es válido" });
     }
-    
+
     try {
-        const token = authorization.split(" ")[1];
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-        const user = await UserModel.findById(decoded.id);
+        const user = await UserModel.findById(decoded.sub);
         if (!user) {
-            return res.status(401).json({ message: "El usuario no valido" });
+            return res.status(401).json({ message: `Usuario inválido` });
         }
-           
-        req.sub = decoded.id;
+
+        req.userId = decoded.sub;
         req.admin = decoded.admin;
 
         next();
