@@ -2,24 +2,25 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Input from "../../components/input";
 import Button from "../../components/button/Button";
-import { registeruser } from "../../api/yumiverse_api";
+import { postUser  } from "../../api/yumiverse_api";
 
 function UserRegisterPage() {
 
-const [state, setState] = useState({
-	name: "",
-	surname: "",
-	phone: "",
-	username: "",
-	password: ""
-
-})
+const [name, setName] = useState("")
+const [surname, setSurname] = useState("")
+const [phone, setPhone] = useState("")
+const [username, setUsername] = useState("")
+const [password, setPassword] = useState("")
 
 
 
-const registerUser = (data) => {
- console.log(data)
+const registerUser = async(e,data) => {
+ e.preventDefault()
+ const response = await postUser(data)
+ console.log(response)
 }
+
+
 
 	return (
 		<form onSubmit={registerUser}>
@@ -29,37 +30,38 @@ const registerUser = (data) => {
 					<Input 
 					  type="text" 
 					  labelName="Nombre/s" 
-					  name="name" 
-                      onChange={registerUser}
+					  htmlFor="name" 
+                      onChange={(e)=> setName(e.target.value)}
 					/>
 					<Input 
 					type="text" 
 					labelName="Apellido/s" 
-					name="surname" 
-                    onChange={registerUser}
+					htmlFor="surname" 
+                    onChange={(e)=> setSurname(e.target.value)}
 					/>
 					<Input 
 					type="number" 
 					labelName="N° de teléfono" 
-					name="phone" 
+					htmlFor="phone" 
 					min="1"
-                    onChange={registerUser}
+                    onChange={(e)=> setPhone(e.target.value)}
 					/>
 					<Input 
 					type="text" 
 					labelName="Nombre de usuario" 
-					name="username" 
-                     onChange={registerUser}
+					htmlFor="username" 
+                     onChange={(e)=> setUsername(e.target.value)}
 					/>
 					<Input type="password" labelName="Contraseña" name="password" 
-                     onChange={registerUser}
+                     onChange={(e)=> setPassword(e.target.value)}
 					/>
 					<Input type="password" labelName="Repetir contraseña" htmlFor="repeatPassword" />
 				</div>
-				<Button type="submit" yellow text="Continuar" />
+				<Button type="submit" wFull yellow text="Continuar" />
+
 				<p className="text-black text-base/6 text-center">
 					¿Ya tienes cuenta?
-					<Link to="/login" className="text-link">
+					<Link to="/auth/login" className="text-link">
 						{" "}
 						Ingresa
 					</Link>

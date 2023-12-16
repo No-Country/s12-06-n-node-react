@@ -16,6 +16,6 @@ export const postRestaurant = async (data) => {
 	return await axios.post("https://yumi-verse.onrender.com/api/v1/restaurant", data);
 };
 
-export const registeruser = async (data) => {
-   return await axios.post("https://yumi-verse.onrender.com/api/v1/register", data);
+export const postUser = async (data) => {
+   return await axios.post("http://localhost:3000/api/v1/user/register", data);
 };
