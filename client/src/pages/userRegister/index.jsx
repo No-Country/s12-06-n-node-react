@@ -14,7 +14,7 @@ function UserRegisterPage() {
 	const [password, setPassword] = useState("");
 	const [repeatpassword, setrepeatPassword] = useState("");
 
-	const registerUser = async (e, data) => {
+	const registerUser = async (e) => {
 		e.preventDefault();
 		const MySwal = withReactContent(Swal);
 		if (password !== repeatpassword) {
@@ -28,7 +28,7 @@ function UserRegisterPage() {
 				surname: surname,
 				phone: phone,
 				username: username,
-				password: password,
+				password: password
 			});
 			MySwal.fire({
 				title: <p>Usuario Creado Exitosamente</p>,
