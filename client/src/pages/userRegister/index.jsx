@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Input from "../../components/input";
 import Button from "../../components/button/Button";
-import { postUser  } from "../../api/yumiverse_api";
+import axios from 'axios';
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 function UserRegisterPage() {
 
@@ -16,8 +18,12 @@ const [password, setPassword] = useState("")
 
 const registerUser = async(e,data) => {
  e.preventDefault()
- const response = await postUser(data)
- console.log(response)
+ const response = await axios.post("http://localhost:3000/api/v1/user/register", { name:name, surname:surname, phone:phone, username:username, password:password})
+ const MySwal = withReactContent(Swal);
+    MySwal.fire({
+      title: <p>Usuario Creado Exitosamente</p>,
+      icon: "success",
+  });
 }
 
 
