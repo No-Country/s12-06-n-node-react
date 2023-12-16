@@ -15,3 +15,7 @@ export const getRestaurantById = async (id) => {
 export const postRestaurant = async (data) => {
 	return await axios.post("https://yumi-verse.onrender.com/api/v1/restaurant", data);
 };
+
+export const registeruser = async (data) => {
+   return await axios.post("https://yumi-verse.onrender.com/api/v1/register", data);
+};
