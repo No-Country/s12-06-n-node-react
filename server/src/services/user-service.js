@@ -15,19 +15,12 @@ const UserService = {
 		return user;
 	},
 	async updateUser(body) {
-		// const {	id } = body;
-		return body;
+		const {	id } = body;
 
-		// const user = await UserModel.findById(id);
-		// return user;
-		// if(!user) {
-		// 	throw new Error("El usuario no existe");
-		// }
+		const user = await UserModel.findOneAndUpdate({ _id: id }, { $set: body }, { new: true });
 
-		// const response = await UserModel.findByIdAndUpdate(user._id, {$set: {name: body.name}}, { new: true });
-
-		// console.log("SERVICE UPDATE USER:", response);
-		// return response;
+		console.log("SERVICE UPDATE USER:", user);
+		return user;
 	},
 	async createRestaurant(body) {
 		const { userId, restaurants } = body;

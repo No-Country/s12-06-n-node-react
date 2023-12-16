@@ -14,10 +14,8 @@ const UserController = {
 	},
 	async update(req, res) {
 		try {
-			const userId = req.params.id;
-
-			// req.body.name = "pepe";
-			const body = { userId, ...req.body };
+			const id = req.params.id;
+			const body = { id, ...req.body };
 
 			const user = await UserService.updateUser(body);
 
