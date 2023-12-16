@@ -5,6 +5,7 @@ import Button from "../../components/button/Button";
 import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { postUser } from "../../api/yumiverse_api";
 
 function UserRegisterPage() {
 	const [name, setName] = useState("");
@@ -23,12 +24,12 @@ function UserRegisterPage() {
 				icon: "warning",
 			});
 		} else {
-			const response = await axios.post("http://localhost:3000/api/v1/user/register", {
-				name: name,
-				surname: surname,
-				phone: phone,
-				username: username,
-				password: password
+			const response = await postUser({
+				name,
+				surname,
+				phone,
+				username,
+				password
 			});
 			MySwal.fire({
 				title: <p>Usuario Creado Exitosamente</p>,
