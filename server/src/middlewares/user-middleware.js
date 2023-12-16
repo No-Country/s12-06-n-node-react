@@ -82,7 +82,7 @@ const userValidation = {
 		check("phone").exists().notEmpty().withMessage("El teléfono es requerido"),
 		check("img").optional().notEmpty().withMessage("La imagen es requerida"),
 		check("admin")
-			.exists()
+			.optional()
 			.notEmpty()
 			.withMessage("El rol es requerido")
 			.isBoolean()
@@ -193,22 +193,18 @@ const userValidation = {
 			}),
 		check("name")
 			.optional()
-			.exists()
-			.withMessage("El nombre es requerido")
 			.notEmpty()
 			.withMessage("El nombre no puede estar vacío")
 			.isLength({ min: 3 })
 			.withMessage("El nombre debe tener al menos 3 caracteres"),
 		check("surname")
 			.optional()
-			.exists()
-			.withMessage("El apellido es requerido")
 			.notEmpty()
 			.withMessage("El apellido no puede estar vacío")
 			.isLength({ min: 3 })
 			.withMessage("El apellido debe tener al menos 3 caracteres"),
-			check("username")
-			.exists()
+		check("username")
+			.optional()
 			.notEmpty().withMessage("El nombre de usuario es requerido")
 			.custom(async value => {
 				try {
@@ -223,8 +219,6 @@ const userValidation = {
 			}),
 		check("email")
 			.optional()
-			.exists()
-			.withMessage("El email es requerido")
 			.notEmpty()
 			.withMessage("El email no puede estar vacío")
 			.isEmail()
@@ -242,32 +236,22 @@ const userValidation = {
 			}),
 		check("address.street")
 			.optional()
-			.exists()
-			.withMessage("La calle es requerida")
 			.notEmpty()
 			.withMessage("La calle no puede estar vacía"),
 		check("address.city")
 			.optional()
-			.exists()
-			.withMessage("La ciudad es requerida")
 			.notEmpty()
 			.withMessage("La ciudad es no puede estar vacia"),
 		check("address.state")
 			.optional()
-			.exists()
-			.withMessage("La provincia es requerida")
 			.notEmpty()
 			.withMessage("La provincia no puede estar vacia"),
 		check("phone")
 			.optional()
-			.exists()
-			.withMessage("El teléfono es requerido")
 			.notEmpty()
 			.withMessage("El teléfono no puede estar vacio"),
 		check("img")
 			.optional()
-			.exists()
-			.withMessage("La imagen es requerida")
 			.notEmpty()
 			.withMessage("La imagen no puede estar vacia"),
 	],
