@@ -12,12 +12,20 @@ const UserController = {
 			handleHttp(res, "ERROR_POST_USER", e);
 		}
 	},
+	async login(req, res) {
+		try {
+			const body = req.body;
+			const user = await UserService.login(body);
+
+			return res.status(200).json(user);
+		} catch (e) {
+			handleHttp(res, "ERROR_LOGIN", e);
+		}
+	},
 	async update(req, res) {
 		try {
-			const userId = req.params.id;
-
-			// req.body.name = "pepe";
-			const body = { userId, ...req.body };
+			const id = req.params.id;
+			const body = { id, ...req.body };
 
 			const user = await UserService.updateUser(body);
 
@@ -26,6 +34,16 @@ const UserController = {
 			handleHttp(res, "ERROR_PATCH_USER", e);
 		}
 	},
+	// async token(req, res) {
+	//     try{
+	//         const body = req.body;
+	//         const token = await AuthService.token(body);
+
+	//         return res.status(200).json(token);
+	//     }catch(e){
+	//         handleHttp(res, "ERROR_AUTH", e);
+	//     }
+	// },
 	async createRestaurant(req, res) {
 		try {
 			const userId = req.params.id;

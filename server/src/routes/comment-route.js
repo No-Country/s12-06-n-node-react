@@ -1,10 +1,10 @@
 import { Router } from "express";
 import { CommentController } from "../controllers/index.js";
-import { commentValidation } from "../middlewares/index.js";
+import { commentValidation, authValidation } from "../middlewares/index.js";
 
 const router = Router();
 
-router.post("/create", commentValidation.create, CommentController.create);
+router.post("/create", authValidation, commentValidation.create, CommentController.create);
 router.get(
 	"/:RestaurantId",
 	commentValidation.getRestaurantComments,

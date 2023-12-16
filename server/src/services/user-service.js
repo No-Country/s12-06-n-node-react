@@ -1,4 +1,5 @@
 import { UserModel } from "../models/index.js";
+import generateToken from "../utils/jwt.js";
 import bcrypt from "bcryptjs";
 
 const UserService = {
@@ -14,20 +15,31 @@ const UserService = {
 		console.log("SERVICE CREATE USER:", user);
 		return user;
 	},
+	async login(body){
+		/**
+		 * body = {
+		 * 	username: "username",
+		 * 	password: "password",
+		 * 	id: "id",
+		 * 	admin: "admin",
+		 * 	name: "name",
+		 * 	surname: "surname"
+		 * }
+		 */
+        const name = body.name;
+		const surname = body.surname;
+		
+        const token = await generateToken(body);
+
+        return { name, surname, bearer_token: token };
+    },
 	async updateUser(body) {
-		// const {	id } = body;
-		return body;
+		const { id } = body;
 
-		// const user = await UserModel.findById(id);
-		// return user;
-		// if(!user) {
-		// 	throw new Error("El usuario no existe");
-		// }
+		const user = await UserModel.findOneAndUpdate({ _id: id }, { $set: body }, { new: true });
 
-		// const response = await UserModel.findByIdAndUpdate(user._id, {$set: {name: body.name}}, { new: true });
-
-		// console.log("SERVICE UPDATE USER:", response);
-		// return response;
+		console.log("SERVICE UPDATE USER:", user);
+		return user;
 	},
 	async createRestaurant(body) {
 		const { userId, restaurants } = body;

@@ -1,4 +1,4 @@
-export default function DropdownItem({ onClick, type, title, icon, alt }) {
+export default function DropdownItem({ onClick, type, title, icon }) {
 	return (
 		<button
 			onClick={onClick}
