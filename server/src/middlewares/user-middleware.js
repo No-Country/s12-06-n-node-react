@@ -27,7 +27,8 @@ const userValidation = {
 			.withMessage("El apellido debe tener al menos 3 caracteres"),
 		check("username")
 			.exists()
-			.notEmpty().withMessage("El nombre de usuario es requerido")
+			.notEmpty()
+			.withMessage("El nombre de usuario es requerido")
 			.custom(async value => {
 				try {
 					const user = await UserModel.findOne({ username: value });
@@ -66,15 +67,17 @@ const userValidation = {
 			.custom(async value => {
 				try {
 					const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$/;
-				  
+
 					if (!regex.test(value)) {
-					  throw new Error("La contraseña debe tener al menos una mayúscula, una minúscula, un número y un caracter especial, y ser de al menos 8 caracteres de longitud.");
+						throw new Error(
+							"La contraseña debe tener al menos una mayúscula, una minúscula, un número y un caracter especial, y ser de al menos 8 caracteres de longitud."
+						);
 					}
-				  
+
 					return true;
-				  } catch (error) {
+				} catch (error) {
 					throw new Error(`Error al validar la contraseña: ${error.message}`);
-				  }				  
+				}
 			}),
 		check("address.street").optional().exists().notEmpty().withMessage("La calle es requerida"),
 		check("address.city").optional().exists().notEmpty().withMessage("La ciudad es requerida"),
@@ -205,7 +208,8 @@ const userValidation = {
 			.withMessage("El apellido debe tener al menos 3 caracteres"),
 		check("username")
 			.optional()
-			.notEmpty().withMessage("El nombre de usuario es requerido")
+			.notEmpty()
+			.withMessage("El nombre de usuario es requerido")
 			.custom(async value => {
 				try {
 					const user = await UserModel.findOne({ username: value });
@@ -234,26 +238,11 @@ const userValidation = {
 					throw new Error(`Error al validar el email: ${error.message}`);
 				}
 			}),
-		check("address.street")
-			.optional()
-			.notEmpty()
-			.withMessage("La calle no puede estar vacía"),
-		check("address.city")
-			.optional()
-			.notEmpty()
-			.withMessage("La ciudad es no puede estar vacia"),
-		check("address.state")
-			.optional()
-			.notEmpty()
-			.withMessage("La provincia no puede estar vacia"),
-		check("phone")
-			.optional()
-			.notEmpty()
-			.withMessage("El teléfono no puede estar vacio"),
-		check("img")
-			.optional()
-			.notEmpty()
-			.withMessage("La imagen no puede estar vacia"),
+		check("address.street").optional().notEmpty().withMessage("La calle no puede estar vacía"),
+		check("address.city").optional().notEmpty().withMessage("La ciudad es no puede estar vacia"),
+		check("address.state").optional().notEmpty().withMessage("La provincia no puede estar vacia"),
+		check("phone").optional().notEmpty().withMessage("El teléfono no puede estar vacio"),
+		check("img").optional().notEmpty().withMessage("La imagen no puede estar vacia"),
 	],
 };
 

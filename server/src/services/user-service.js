@@ -15,7 +15,7 @@ const UserService = {
 		return user;
 	},
 	async updateUser(body) {
-		const {	id } = body;
+		const { id } = body;
 
 		const user = await UserModel.findOneAndUpdate({ _id: id }, { $set: body }, { new: true });
 
