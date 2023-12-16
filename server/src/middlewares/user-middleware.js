@@ -25,7 +25,22 @@ const userValidation = {
 			.withMessage("El apellido es requerido")
 			.isLength({ min: 3 })
 			.withMessage("El apellido debe tener al menos 3 caracteres"),
+		check("username")
+			.exists()
+			.notEmpty().withMessage("El nombre de usuario es requerido")
+			.custom(async value => {
+				try {
+					const user = await UserModel.findOne({ username: value });
+					if (user) {
+						throw new Error("El nombre de usuario ya está registrado");
+					}
+					return true;
+				} catch (error) {
+					throw new Error(`Error al validar el nombre de usuario: ${error.message}`);
+				}
+			}),
 		check("email")
+			.optional()
 			.exists()
 			.notEmpty()
 			.withMessage("El email es requerido")
@@ -47,10 +62,23 @@ const userValidation = {
 			.notEmpty()
 			.withMessage("La contraseña es requerida")
 			.isLength({ min: 8 })
-			.withMessage("La contraseña debe tener al menos 8 caracteres"),
-		check("address.street").exists().notEmpty().withMessage("La calle es requerida"),
-		check("address.city").exists().notEmpty().withMessage("La ciudad es requerida"),
-		check("address.state").exists().notEmpty().withMessage("La provincia es requerida"),
+			.withMessage("La contraseña debe tener al menos 8 caracteres")
+			.custom(async value => {
+				try {
+					const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$/;
+				  
+					if (!regex.test(value)) {
+					  throw new Error("La contraseña debe tener al menos una mayúscula, una minúscula, un número y un caracter especial, y ser de al menos 8 caracteres de longitud.");
+					}
+				  
+					return true;
+				  } catch (error) {
+					throw new Error(`Error al validar la contraseña: ${error.message}`);
+				  }				  
+			}),
+		check("address.street").optional().exists().notEmpty().withMessage("La calle es requerida"),
+		check("address.city").optional().exists().notEmpty().withMessage("La ciudad es requerida"),
+		check("address.state").optional().exists().notEmpty().withMessage("La provincia es requerida"),
 		check("phone").exists().notEmpty().withMessage("El teléfono es requerido"),
 		check("img").optional().notEmpty().withMessage("La imagen es requerida"),
 		check("admin")
@@ -179,6 +207,20 @@ const userValidation = {
 			.withMessage("El apellido no puede estar vacío")
 			.isLength({ min: 3 })
 			.withMessage("El apellido debe tener al menos 3 caracteres"),
+			check("username")
+			.exists()
+			.notEmpty().withMessage("El nombre de usuario es requerido")
+			.custom(async value => {
+				try {
+					const user = await UserModel.findOne({ username: value });
+					if (user) {
+						throw new Error("El nombre de usuario ya está registrado");
+					}
+					return true;
+				} catch (error) {
+					throw new Error(`Error al validar el nombre de usuario: ${error.message}`);
+				}
+			}),
 		check("email")
 			.optional()
 			.exists()

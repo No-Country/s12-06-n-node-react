@@ -10,9 +10,14 @@ const userSchema = new Schema(
 			type: String,
 			required: true,
 		},
-		email: {
+		username: {
 			type: String,
 			required: true,
+			unique: true,
+		},
+		email: {
+			type: String,
+			required: false,
 		},
 		password: {
 			type: String,
@@ -21,15 +26,15 @@ const userSchema = new Schema(
 		address: {
 			street: {
 				type: String,
-				required: true,
+				required: false,
 			},
 			city: {
 				type: String,
-				required: true,
+				required: false,
 			},
 			state: {
 				type: String,
-				required: true,
+				required: false,
 			},
 		},
 		phone: {
