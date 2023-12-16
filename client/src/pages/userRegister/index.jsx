@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Input from "../../components/input";
 import Button from "../../components/button/Button";
-import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { postUser } from "../../api/yumiverse_api";
@@ -15,7 +14,7 @@ function UserRegisterPage() {
 	const [password, setPassword] = useState("");
 	const [repeatpassword, setrepeatPassword] = useState("");
 
-	const registerUser = async (e) => {
+	const registerUser = async e => {
 		e.preventDefault();
 		const MySwal = withReactContent(Swal);
 		if (password !== repeatpassword) {
@@ -29,7 +28,7 @@ function UserRegisterPage() {
 				surname,
 				phone,
 				username,
-				password
+				password,
 			});
 			MySwal.fire({
 				title: <p>Usuario Creado Exitosamente</p>,
