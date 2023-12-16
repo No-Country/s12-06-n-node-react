@@ -18,6 +18,7 @@ const userSchema = new Schema(
 		email: {
 			type: String,
 			required: false,
+			default: "",
 		},
 		password: {
 			type: String,
@@ -27,14 +28,17 @@ const userSchema = new Schema(
 			street: {
 				type: String,
 				required: false,
+				default: "",
 			},
 			city: {
 				type: String,
 				required: false,
+				default: "",
 			},
 			state: {
 				type: String,
 				required: false,
+				default: "",
 			},
 		},
 		phone: {
@@ -44,10 +48,12 @@ const userSchema = new Schema(
 		img: {
 			type: String,
 			required: false,
+			default: "",
 		},
 		admin: {
 			type: Boolean,
-			required: true,
+			required: false,
+			default: false,
 		},
 		favorites: {
 			type: Array,
