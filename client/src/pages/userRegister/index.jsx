@@ -14,10 +14,10 @@ function UserRegisterPage() {
 					<Input type="password" labelName="Contraseña" htmlFor="password" />
 					<Input type="password" labelName="Repetir contraseña" htmlFor="repeatPassword" />
 				</div>
-				<Button yellow text="Continuar" />
+				<Button wFull yellow text="Continuar" />
 				<p className="text-black text-base/6 text-center">
 					¿Ya tienes cuenta?
-					<Link to="/login" className="text-link">
+					<Link to="/auth/login" className="text-link">
 						{" "}
 						Ingresa
 					</Link>
