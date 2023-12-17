@@ -4,7 +4,7 @@ import { handleHttp } from "../utils/error-handle.js";
 const CommentController = {
 	async create(req, res) {
 		try {
-			const userId = req.userId;
+			const userId = req.body.userId;
 			const body = { userId, ...req.body };
 			const comment = await CommentService.createComment(body);
 
@@ -38,8 +38,7 @@ const CommentController = {
 	async update(req, res) {
 		try {
 			const commentId = req.params.CommentId;
-			const userId = req.params.UserId;
-			const body = { commentId, userId, ...req.body };
+			const body = { commentId, ...req.body };
 
 			const comment = await CommentService.updateComment(body);
 			return res.status(200).json(comment);

@@ -41,11 +41,8 @@ const CommentService = {
 		return comment;
 	},
 	async updateComment(body) {
-		const { commentId, userId, comment } = body;
+		const { commentId,  comment } = body;
 		const text = comment;
-
-		const result = await CommentModel.findById(commentId);
-		if (result.userId !== userId) throw new Error("No puedes editar un comentario que no es tuyo");
 
 		const commentUpdated = await CommentModel.findOneAndUpdate(
 			{ _id: commentId },

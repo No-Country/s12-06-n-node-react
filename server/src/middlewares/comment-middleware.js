@@ -40,22 +40,6 @@ const commentValidation = {
 	],
 	getAll: [],
 	create: [
-		// check("userId")
-		// 	.optional()
-		// 	.notEmpty()
-		// 	.withMessage("El id del usuario es requerido")
-		// 	.custom(async value => {
-		// 		try {
-		// 			const user = await UserModel.findById(value);
-		// 			if (!user) {
-		// 				throw new Error("No existe el usuario");
-		// 			}
-
-		// 			return true;
-		// 		} catch (error) {
-		// 			throw new Error(`Error al validar el id del usuario: ${error.message}`);
-		// 		}
-		// 	}),
 		check("restaurantId")
 			.exists()
 			.notEmpty()
@@ -87,18 +71,35 @@ const commentValidation = {
 		(req, res, next) => validateResult(req, res, next),
 	],
 	update: [
-		param("UserId").exists().notEmpty().withMessage("El id del usuario es requerido"),
 		param("CommentId")
 			.exists()
 			.notEmpty()
 			.withMessage("El id del comentario es requerido")
 			.custom(async (value, { req }) => {
-				const comment = await CommentModel.findOne({ _id: value });
-				if (!comment) {
-					throw new Error("No existe el comentario");
-				}
+				try{
+					const comment = await CommentModel.findOne({ _id: value });
+					if (!comment) {
+						throw new Error("No existe el comentario");
+					}
 
-				return true;
+					return true;
+				}catch(error){
+					throw new Error(`Error al validar el id del comentario: ${error.message}`);
+				}
+			}),
+		check("userId").notEmpty().withMessage("El id del usuario es requerido")
+			.custom(async (value, { req }) => {
+				try{
+					const comment = await CommentModel.findOne({ _id: req.params.CommentId });
+			
+					if (String(comment.userId) !== value) {
+						throw new Error("No puedes editar un comentario que no es tuyo");
+					}
+
+					return true;
+				}catch(error){
+					throw new Error(`Error al validar el id del usuario: ${error.message}`);
+				}
 			}),
 		check("comment").exists().notEmpty().withMessage("El comentario es requerido"),
 		(req, res, next) => validateResult(req, res, next),
