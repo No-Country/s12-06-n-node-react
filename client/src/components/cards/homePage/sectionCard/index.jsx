@@ -12,15 +12,6 @@ export default function SectionCardHomePage({
 	numberOfScores,
 	scores,
 }) {
-	// console.log({
-	// 	location,
-	// 	nameRestaurant,
-	// 	imageRestaurant,
-	// 	openRestaurant,
-	// 	categories,
-	// 	numberOfScores,
-	// 	scores
-	// });
 
 	const addressFormat = `${String(location).substring(0, 25)}...`;
 

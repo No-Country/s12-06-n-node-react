@@ -1,9 +1,16 @@
 import { create } from 'zustand'
-import { persist } from 'zustand/middleware';
 
 export const useRestaurantStore = create(
 
     (set) => ({
+
+        restaurandDataStore: [],
+        setRestaurantDataStore: (restaurandDataStore) => set({ restaurandDataStore: restaurandDataStore }),
+
+        categoryDataStore: [],
+        setCategoryDataStore: (categoryDataStore) => set({ categoryDataStore: categoryDataStore }),
+        // toggleCoverageRunRedLight: false,
+        // onToggleCoverageRunRedLight: () => set((state) => ({ toggleCoverageRunRedLight: !state.toggleCoverageRunRedLight })),
 
         restaurantName: '',
         setRestaurantName: (name) => set({ restaurantName: name }),
@@ -14,6 +21,7 @@ export const useRestaurantStore = create(
         hideRegisterSection: false,
         setHideRegisterSection: (hide) => set({ hideRegisterSection: hide }),
     }),
-    { name: 'restaurant-store' }
+    // (prev, current) => prev.categoryDataStore === current.categoryDataStore
+    // { name: 'restaurant-store' }
 
 )

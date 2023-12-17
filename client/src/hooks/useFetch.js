@@ -17,17 +17,17 @@ export const useFetch = (fetcher) => {
                     setLoading(false);
                 }
 
-            } catch (error) {
-                setError(error);
+            } catch (e) {
+                setError(e);
                 setLoading(false);
 
-                console.error("Error fetching restaurant data:", error);
+                console.error("Error fetching restaurant data:", e);
             }
         }
 
         fetchData();
 
-    }, [setData, setLoading, setError]);
+    }, []);
 
     return { data, loading, error }
 }
