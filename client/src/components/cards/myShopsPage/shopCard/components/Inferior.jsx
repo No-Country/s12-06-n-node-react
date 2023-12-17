@@ -2,8 +2,6 @@ import classicIcon from "../../../../../assets/icons/classic.svg";
 import grillIcon from "../../../../../assets/icons/grill.svg";
 import hamburgerIcon from "../../../../../assets/icons/hamburger.svg";
 import pizzaIcon from "../../../../../assets/icons/pizza.svg";
-import starIcon from "../../../../../assets/icons/star.svg";
-import ButtonOpenOrClose from "../../../../button/ButtonOpenOrClose";
 
 const categoryIcons = {
 	classic: classicIcon,
@@ -12,13 +10,7 @@ const categoryIcons = {
 	pizza: pizzaIcon,
 };
 
-export default function Inferior({
-	nameRestaurant,
-	openRestaurant,
-	categories,
-	numberOfScores,
-	scores,
-}) {
+export default function Inferior({ nameRestaurant, categories }) {
 	return (
 		<div className="bg-texts/90 rounded-b-lg py-2 px-1 z-20 absolute w-full inset-x-0 bottom-0">
 			<div className="flex flex-row items-center justify-between mb-2">

@@ -9,7 +9,6 @@ import {
 	menuRoutes,
 	commentRoutes,
 	userRoutes,
-	authRoutes,
 } from "./src/routes/index.js";
 
 const app = express();
@@ -26,7 +25,6 @@ app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/menu", menuRoutes);
 app.use("/api/v1/comment", commentRoutes);
 app.use("/api/v1/user", userRoutes);
-app.use("/api/v2/auth", authRoutes);
 
 // Connect DB
 dbConnect();
