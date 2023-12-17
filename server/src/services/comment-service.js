@@ -55,12 +55,7 @@ const CommentService = {
 	},
 
 	async deleteComment(body) {
-		const { commentId, userId } = body;
-
-		const result = await CommentModel.findById(commentId);
-		if (result.userId !== userId)
-			throw new Error("No puedes eliminar un comentario que no es tuyo");
-
+		const { commentId } = body;
 		const comment = await CommentModel.findByIdAndDelete(commentId);
 
 		console.log("SERVICE DELETE COMMENT:", comment);

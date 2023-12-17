@@ -108,7 +108,6 @@ const commentValidation = {
 		(req, res, next) => validateResult(req, res, next),
 	],
 	delete: [
-		param("UserId").exists().notEmpty().withMessage("El id del usuario es requerido"),
 		param("CommentId")
 			.exists()
 			.notEmpty()
@@ -123,6 +122,20 @@ const commentValidation = {
 					return true;
 				}catch(error){
 					throw new Error(`Error al validar el id del comentario: ${error.message}`);
+				}
+			}),
+		check("userId").notEmpty().withMessage("El id del usuario es requerido")
+			.custom(async (value, { req }) => {
+				try{
+					const comment = await CommentModel.findOne({ _id: req.params.CommentId });
+			
+					if (String(comment.userId) !== value) {
+						throw new Error("No puedes eliminar un comentario que no es tuyo");
+					}
+
+					return true;
+				}catch(error){
+					throw new Error(`Error al validar el id del usuario: ${error.message}`);
 				}
 			}),
 		(req, res, next) => validateResult(req, res, next),

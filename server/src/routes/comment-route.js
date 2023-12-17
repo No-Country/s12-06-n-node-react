@@ -12,7 +12,7 @@ router.get(
 );
 router.get("/", commentValidation.getAll, CommentController.getComments);
 router.patch("/:CommentId", authValidation, commentValidation.update, CommentController.update);
-router.delete("/:CommentId/:UserId", commentValidation.delete, CommentController.delete);
+router.delete("/:CommentId", authValidation, commentValidation.delete, CommentController.delete);
 
 export default router;
 /**
