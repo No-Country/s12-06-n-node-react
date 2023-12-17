@@ -1,19 +1,16 @@
-import { create } from 'zustand'
-import { persist } from 'zustand/middleware';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 export const useRestaurantStore = create(
+	set => ({
+		restaurantName: "",
+		setRestaurantName: name => set({ restaurantName: name }),
 
-    (set) => ({
+		showBottomSheet: false,
+		setShowBottomSheet: show => set({ showBottomSheet: show }),
 
-        restaurantName: '',
-        setRestaurantName: (name) => set({ restaurantName: name }),
-
-        showBottomSheet: false,
-        setShowBottomSheet: (show) => set({ showBottomSheet: show }),
-
-        hideRegisterSection: false,
-        setHideRegisterSection: (hide) => set({ hideRegisterSection: hide }),
-    }),
-    { name: 'restaurant-store' }
-
-)
+		hideRegisterSection: false,
+		setHideRegisterSection: hide => set({ hideRegisterSection: hide }),
+	}),
+	{ name: "restaurant-store" }
+);

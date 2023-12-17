@@ -1,33 +1,28 @@
 import { useState, useEffect } from "react";
 
-export const useFetch = (fetcher) => {
+export const useFetch = fetcher => {
+	const [data, setData] = useState();
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(false);
 
-    const [data, setData] = useState();
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const response = await fetcher();
+				if (response) {
+					setData(response.data);
+					setLoading(false);
+				}
+			} catch (error) {
+				setError(error);
+				setLoading(false);
 
-    useEffect(() => {
+				console.error("Error fetching restaurant data:", error);
+			}
+		};
 
-        const fetchData = async () => {
-            try {
+		fetchData();
+	}, [setData, setLoading, setError]);
 
-                const response = await fetcher();
-                if (response) {
-                    setData(response.data);
-                    setLoading(false);
-                }
-
-            } catch (error) {
-                setError(error);
-                setLoading(false);
-
-                console.error("Error fetching restaurant data:", error);
-            }
-        }
-
-        fetchData();
-
-    }, [setData, setLoading, setError]);
-
-    return { data, loading, error }
-}
+	return { data, loading, error };
+};

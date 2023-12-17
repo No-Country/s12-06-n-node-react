@@ -1,4 +1,15 @@
-export default function Button({ onClick, text, icon, alt, rounded, yellow, white, brown, type, wFull }) {
+export default function Button({
+	onClick,
+	text,
+	icon,
+	alt,
+	rounded,
+	yellow,
+	white,
+	brown,
+	type,
+	wFull,
+}) {
 	return (
 		<button
 			type={type}

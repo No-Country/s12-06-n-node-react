@@ -1,1 +1,1 @@
-export * from "./componentsIcons"
+export * from "./componentsIcons";
