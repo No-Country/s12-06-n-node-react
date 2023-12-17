@@ -22,5 +22,5 @@ export const postUser = async (name, surname, phone, username, password) => {
 }
 
 export const loginUser = async(username, password) => {
-	return await axios.post("http://localhost:3000/api/v2/auth/", username, password)
+	return await axios.post("http://localhost:3000/API/v1/user/login", username, password)
 }
