@@ -22,8 +22,8 @@ const authValidation = async (req, res, next) => {
             return res.status(401).json({ message: `Usuario inválido` });
         }
 
-        req.userId = decoded.sub;
-        req.admin = decoded.admin;
+        req.body.userId = decoded.sub;
+        req.body.admin = decoded.admin;
 
         next();
 
