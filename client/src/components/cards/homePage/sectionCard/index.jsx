@@ -1,3 +1,4 @@
+import { useSearch } from "../../../../stores/search/useSearch.store";
 import Inferior from "./components/Inferior";
 import Location from "./components/Location";
 import { Link } from "react-router-dom";
@@ -13,10 +14,12 @@ export default function SectionCardHomePage({
 	scores,
 }) {
 
+	const isExpanded = useSearch(state => state.isExpanded);
+
 	const addressFormat = `${String(location).substring(0, 25)}...`;
 
 	return (
-		<Link to={`/restaurant/${id}`} className="w-[208px] flex flex-col justify-between gap-4">
+		<Link to={`/restaurant/${id}`} className={`${isExpanded ? 'w-full' : 'w-[208px]'}  flex flex-col justify-between gap-4`}>
 			<div className="relative h-[158px] drop-shadow-md">
 				<img
 					src={imageRestaurant}

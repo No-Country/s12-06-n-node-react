@@ -12,5 +12,11 @@ export const useRestaurantStore = create(
 
         hideRegisterSection: false,
         setHideRegisterSection: (hide) => set({ hideRegisterSection: hide }),
+
+        categoryDataStore: [],
+        setCategoryDataStore: (data) => set({ categoryDataStore: data }),
+
+        restaurantDataStore: [],
+        setRestaurantDataStore: (data) => set({ restaurantDataStore: data }),
     })
 )
