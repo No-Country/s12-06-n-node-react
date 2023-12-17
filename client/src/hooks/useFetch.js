@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 
-export const useFetch = (fetcher) => {
-
-    const [data, setData] = useState();
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
+export const useFetch = fetcher => {
+	const [data, setData] = useState();
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(false);
 
     useEffect(() => {
 
@@ -29,5 +28,5 @@ export const useFetch = (fetcher) => {
 
     }, []);
 
-    return { data, loading, error }
-}
+	return { data, loading, error };
+};

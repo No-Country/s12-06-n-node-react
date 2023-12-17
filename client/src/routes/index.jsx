@@ -1,34 +1,13 @@
-import { Navigate, Route, Routes, createBrowserRouter } from "react-router-dom";
+import { Navigate, createBrowserRouter } from "react-router-dom";
 import { Layout } from "./Layout";
 import HomePage from "../pages/home";
 import { AuthRoutes } from "./auth/AuthRoutes";
 import RestaurantPage from "../pages/restaurants";
 import LayoutRestaurants from "./LayoutRestaurants";
-import LayoutMyShops from "./LayoutMyShops";
+import LayoutPages from "./LayoutPages";
 import MyShopsPage from "../pages/myShops";
 import RegisterPage from "../pages/register";
 import RatingsPage from "../pages/ratings";
-import LoginPage from "../pages/login";
-import UserRegisterPage from "../pages/userRegister";
-
-// export const AppRouter = () => {
-
-// 	return (
-// 		<Routes>
-// 			<Route path="/*" element={<Layout />}>
-// 				<Route path="*" element={<Navigate to={"/"} />} />
-// 				<Route index element={<HomePage />} />
-// 				<Route path="auth/*" element={<AuthRoutes />} />
-// 			</Route>
-// 			<Route path="/restaurant/*" element={<LayoutRestaurants />}>
-// 				<Route index element={<RestaurantPage />} />
-// 				<Route path="calificaciones" element={<Ratings />} />
-// 			</Route>
-// 			<Route path="/restaurant" element={<Navigate to="/restaurant/" />} />
-// 		</Routes>
-
-// 	);
-// };
 
 export const appRouter = createBrowserRouter([
 	{
@@ -60,23 +39,17 @@ export const appRouter = createBrowserRouter([
 		],
 	},
 	{
-		path: "login",
-		element: <LoginPage />,
-		children: [],
-	},
-	{
-		path: "register",
-		element: <UserRegisterPage />,
-		children: [],
+		path: "auth/*",
+		element: <AuthRoutes />,
 	},
 	{
 		path: "myShops",
-		element: <LayoutMyShops />,
+		element: <LayoutPages pageTitle="Mis Tiendas" />,
 		children: [
 			{
 				index: true,
-				element: <MyShopsPage />
-			}
+				element: <MyShopsPage />,
+			},
 		],
 	},
 	{ path: "*", element: <Navigate to={"/"} /> },

@@ -1,10 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useNavigate } from "react-router-dom";
-import ArrowLeftIcon from "../../assets/icons/arrow-left.svg";
-import MapIcon from "../../assets/icons/map.svg";
-import ShareIcon from "../../assets/icons/share.svg";
+import NavArrowLeftIcon from "../../icons/NavArrowLeftIcon";
 
-const NavbarMyShops = () => {
+const NavbarPages = ({ pageTitle }) => {
 	function handleGoBack() {
 		navigate(-1);
 	}
@@ -14,9 +12,9 @@ const NavbarMyShops = () => {
 	return (
 		<nav className="w-full h-10 flex justify-between items-center opacity-90 bg-secundario top-0 left-0 p-4 sticky">
 			<button onClick={handleGoBack}>
-				<img src={ArrowLeftIcon} alt="Left arrow icon" className="w-6 h-6" />
+				<NavArrowLeftIcon className="w-6 h-6 stroke-texts" />
 			</button>
-			<span className="text-texts font-medium pr-3">Mis Tiendas</span>
+			<span className="text-texts text-center font-medium pr-3">{pageTitle}</span>
 			<div className="flex gap-3">
 				<span></span>
 			</div>
@@ -24,4 +22,4 @@ const NavbarMyShops = () => {
 	);
 };
 
-export default NavbarMyShops;
+export default NavbarPages;
