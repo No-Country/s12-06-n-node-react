@@ -1,5 +1,5 @@
 import { check, validationResult, param } from "express-validator";
-import { CommentModel, RestaurantModel, UserModel } from "../models/index.js";
+import { CommentModel, RestaurantModel } from "../models/index.js";
 
 const validateResult = (req, res, next) => {
 	try {
@@ -13,7 +13,6 @@ const validateResult = (req, res, next) => {
 
 const commentValidation = {
 	getRestaurantComments: [
-		// obtiene los comentarios de un restaurante por id
 		param("RestaurantId")
 			.exists()
 			.withMessage("El id del restaurante es requerido")
@@ -62,10 +61,14 @@ const commentValidation = {
 			.notEmpty()
 			.isNumeric()
 			.custom(value => {
-				if (value < 0 || value > 5) {
-					throw new Error("El puntaje debe ser entre 0 y 5");
+				try {
+					if (value < 1 || value > 5) {
+						throw new Error("El puntaje debe ser entre 1 y 5");
+					}
+					return true;
+				}catch(error){
+					throw new Error(`Error al validar el puntaje: ${error.message}`);
 				}
-				return true;
 			})
 			.withMessage("El puntaje es requerido y debe ser un número"),
 		(req, res, next) => validateResult(req, res, next),
@@ -111,12 +114,16 @@ const commentValidation = {
 			.notEmpty()
 			.withMessage("El id del comentario es requerido")
 			.custom(async (value, { req }) => {
-				const comment = await CommentModel.findById(value);
-				if (!comment) {
-					throw new Error("No existe el comentario");
-				}
+				try{
+					const comment = await CommentModel.findById(value);
+					if (!comment) {
+						throw new Error("No existe el comentario");
+					}
 
-				return true;
+					return true;
+				}catch(error){
+					throw new Error(`Error al validar el id del comentario: ${error.message}`);
+				}
 			}),
 		(req, res, next) => validateResult(req, res, next),
 	],
