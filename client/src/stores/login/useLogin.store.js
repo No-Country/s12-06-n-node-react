@@ -12,6 +12,7 @@ export const useLoginStore = create(
     	   const {name, surname, bearer_token} = response.data
            set({name, surname, bearer_token})
     	}
+    
     },
   })
 )
