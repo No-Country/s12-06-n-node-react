@@ -1,12 +1,13 @@
+import { useEffect, useState } from "react";
+import { useRestaurantStore } from "../../stores/restaurants/useRestaurant.store";
 import { useSearch } from "../../stores/search/useSearch.store";
 import GeneralHome from "./components/generalHome";
 import SearchModal from "./components/searchModal";
 
 
 export default function HomePage() {
-	const isExpanded = useSearch(state => state.isExpanded);
 
-	console.log('Hola desde HomePage');
+	const isExpanded = useSearch(state => state.isExpanded);
 
 	return (
 

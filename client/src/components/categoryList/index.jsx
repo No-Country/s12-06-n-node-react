@@ -32,11 +32,6 @@ export default function CategoryList() {
         setCategoryDataStore(categoryData);
     }
 
-    // console.log({ setCategoryDataStore });
-
-    console.log('Hola desde category');
-    console.log({ categoryDataStore });
-
     return (
         <>
             {
