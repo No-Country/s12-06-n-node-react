@@ -12,25 +12,15 @@ export default function Dropdown({ icon, dropdownTitle, children, circularButton
 			<button
 				onClick={handleToggle}
 				className={`flex justify-center gap-2 items-center shadow-3xl 
-				${circularButton ? "rounded-full w-6 h-6" : "rounded p-2"}
-				${
-					white
-						? `${
-								isOpen
-									? "bg-texts text-secundario fill-secundario"
-									: "bg-secundario text-texts fill-texts"
-						  }`
-						: ""
-				}
-				${
-					yellow
-						? `${
-								isOpen
-									? "text-principal stroke-principal bg-texts"
-									: "text-texts stroke-texts bg-principal hover:bg-texts hover:text-principal hover:stroke-principal"
-						  }`
-						: ""
-				}
+				${circularButton ? "rounded-full w-auto h-6" : "rounded px-2 py-1"}
+				${white ? `${isOpen
+						? "bg-texts text-secundario fill-secundario"
+						: "bg-secundario text-texts fill-texts"
+						}` : ""}
+				${yellow ? `${isOpen
+						? "text-principal stroke-principal bg-texts"
+						: "text-texts stroke-texts bg-principal hover:bg-texts hover:text-principal hover:stroke-principal"
+						}` : ""}
 				`}
 			>
 				{dropdownTitle}
