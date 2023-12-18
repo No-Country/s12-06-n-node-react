@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { getAllCategories, getAllRestaurants } from "../../api/yumiverse_api";
-import { useSearch } from "../../stores/search/useSearch.store";
+import { getAllRestaurants } from "../../api/yumiverse_api";
 import { useFetch } from "../../hooks/useFetch";
 import Slider from "../sliders/section-slider";
 import SectionCardHomePage from "../cards/homePage/sectionCard";
 import { useRestaurantStore } from "../../stores/restaurants/useRestaurant.store";
+import { formatAddress } from "../../helpers/formatAddress";
 
 
 export default function CategorySection() {
@@ -46,7 +46,7 @@ export default function CategorySection() {
                             {item => (
                                 <SectionCardHomePage
                                     id={item._id}
-                                    location={String(item.address)}
+                                    location={formatAddress(item.address)}
                                     nameRestaurant={item.name}
                                     imageRestaurant={item.url_img_restaurant}
                                     categories={item.categories}

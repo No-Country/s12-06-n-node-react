@@ -32,6 +32,11 @@ export default function SearchModal({ className }) {
         setSearchResults(searchResults);
     }, [search, restaurantDataStore])
 
+    const formatAddress = (address) => {
+        const { street, city, state, country } = address;
+        return `${street}, ${city}, ${state}, ${country}`;
+    }
+
     return (
         <div className={`min-h-screen flex flex-col gap-4 ${className} px-4 sticky w-full`}>
             <div className='h-auto w-full flex justify-between items-center pb-4 text-texts'>
@@ -42,7 +47,7 @@ export default function SearchModal({ className }) {
                 <SectionCardHomePage
                     key={result.id}
                     id={result._id}
-                    location={String(result.address)}
+                    location={formatAddress(result.address)}
                     nameRestaurant={result.name}
                     imageRestaurant={result.url_img_restaurant}
                     categories={result.categories}
