@@ -81,9 +81,19 @@ const restaurantSchema = new Schema(
 				_id: false,
 			},
 		],
-		averageRating: {
-			type: Number,
-			default: 0,
+		rating: {
+			average: {
+				type: Number,
+				default: 0,
+			},
+			total: {
+				type: Number,
+				default: 0,
+			},
+			total_per_starts: {
+				type: [Number],
+				default: [0, 0, 0, 0, 0],
+			},
 		},
 		menus: [
 			{

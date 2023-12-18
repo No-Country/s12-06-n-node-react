@@ -4,9 +4,8 @@ const MenuItem = ({ title, price, description, img, handlerCardClick }) => {
 	// Add a placeholder image for when the image is not available.
 	// receive title, price, description, img
 	// return a div with the following structure:
-	const showBottomSheet = useRestaurantStore(state => state.showBottomSheet)
-	const setShowBottomSheet = useRestaurantStore(state => state.setShowBottomSheet)
-
+	const showBottomSheet = useRestaurantStore(state => state.showBottomSheet);
+	const setShowBottomSheet = useRestaurantStore(state => state.setShowBottomSheet);
 
 	return (
 		<div
@@ -31,9 +30,7 @@ const MenuItem = ({ title, price, description, img, handlerCardClick }) => {
 					</div>
 					<div className="self-stretch justify-center items-center gap-2.5 inline-flex">
 						<div className="grow shrink basis-0 text-stone-950 text-xs font-normal font-['DM Sans'] leading-[18px]">
-							<span>
-								{description}
-							</span>
+							<span>{description}</span>
 						</div>
 					</div>
 				</div>

@@ -23,7 +23,6 @@ export default function RatingsPage() {
 		setRestaurantName(name);
 	}, [setRestaurantName, name]);
 
-	
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const openModal = () => {

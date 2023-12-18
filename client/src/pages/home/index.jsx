@@ -151,8 +151,16 @@ export default function HomePage() {
 	// 	},
 	// ];
 
-	const { data: restaurantData, loading: restaurantLoading, error: restaurantError } = useFetch(getAllRestaurants);
-	const { data: categoryData, loading: categoryLoading, error: categoryError } = useFetch(getAllCategories);
+	const {
+		data: restaurantData,
+		loading: restaurantLoading,
+		error: restaurantError,
+	} = useFetch(getAllRestaurants);
+	const {
+		data: categoryData,
+		loading: categoryLoading,
+		error: categoryError,
+	} = useFetch(getAllCategories);
 	const [filteredSections, setFilteredSections] = useState([]);
 	const [sections, setSections] = useState([]);
 
@@ -246,43 +254,47 @@ export default function HomePage() {
 	// console.log(restaurantData);
 	// console.log('Desde Filtered Sections', filteredSections);
 
-	const handleMapCategoryIcon = (categoryId) => {
+	const handleMapCategoryIcon = categoryId => {
 		return categoryIcons[categoryId];
 	};
 
-	const getRestaurantDataById = (restaurantId) => {
+	const getRestaurantDataById = restaurantId => {
 		const restaurant = restaurantData.find(restaurant => restaurant.id === restaurantId);
 		return restaurant || {};
-	}
+	};
 
 	return (
 		<main className="flex flex-col gap-8 overflow-hidden">
-
-			{
-				(categoryData && categoryData?.length > 0) &&
+			{categoryData && categoryData?.length > 0 && (
 				<Slider data={categoryData}>
-					{item => handleMapCategoryIcon(item._id) && <CategoryCard title={item.category} href={item.id} Icon={handleMapCategoryIcon(item._id)} />}
-				</Slider>
-			}
-
-			{
-				filteredSections.map(section => (
-					<Slider data={section.restaurants} title={section.category}>
-						{item => (
-							<SectionCardHomePage
-								id={item._id}
-								location={String(item.address)}
-								nameRestaurant={item.name}
-								imageRestaurant={item.url_img_restaurant}
-								categories={item.categories}
-								openRestaurant={item.isOpen}
-								numberOfScores={item.stars}
-								scores={item.totalRating}
+					{item =>
+						handleMapCategoryIcon(item._id) && (
+							<CategoryCard
+								title={item.category}
+								href={item.id}
+								Icon={handleMapCategoryIcon(item._id)}
 							/>
-						)}
-					</Slider>
-				))
-			}
+						)
+					}
+				</Slider>
+			)}
+
+			{filteredSections.map(section => (
+				<Slider data={section.restaurants} title={section.category}>
+					{item => (
+						<SectionCardHomePage
+							id={item._id}
+							location={String(item.address)}
+							nameRestaurant={item.name}
+							imageRestaurant={item.url_img_restaurant}
+							categories={item.categories}
+							openRestaurant={item.isOpen}
+							numberOfScores={item.stars}
+							scores={item.totalRating}
+						/>
+					)}
+				</Slider>
+			))}
 
 			{/* {
 				(filteredSections && filteredSections?.length > 0) &&
@@ -324,7 +336,6 @@ export default function HomePage() {
 					</Slider>
 				})
 			} */}
-
 
 			{/* {
 				(data && data?.length > 0) &&

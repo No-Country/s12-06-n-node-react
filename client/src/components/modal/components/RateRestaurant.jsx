@@ -2,8 +2,8 @@ import { useState } from "react";
 import Button from "../../../components/button/Button";
 import StarRating from "../../starRating";
 
-function RateRestaurant({closeModal}) {
-  const [rating, setRating] = useState(1);
+function RateRestaurant({ closeModal }) {
+	const [rating, setRating] = useState(1);
 	const [opinion, setOpinion] = useState("");
 
 	const handleRatingChange = newRating => {
