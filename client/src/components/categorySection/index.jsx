@@ -15,10 +15,6 @@ export default function CategorySection() {
     const [restaurantDataStore, setRestaurantDataStore] = useRestaurantStore(state => [state.restaurantDataStore, state.setRestaurantDataStore]);
     const categoryDataStore = useRestaurantStore(state => state.categoryDataStore);
 
-    // useEffect(() => {
-    //     setRestaurantDataStore(restaurantData);
-    // }, [restaurantData])
-
     useEffect(() => {
         if (categoryDataStore && restaurantData) {
             const sections = categoryDataStore.map(category => {

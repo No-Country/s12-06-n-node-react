@@ -7,7 +7,6 @@ export default function SectionTitle({ title, children }) {
 
 	const handleHideRegisterSection = () => {
 		setHideRegisterSection(!hideRegisterSection);
-		console.log(hideRegisterSection);
 	};
 
 	return (
