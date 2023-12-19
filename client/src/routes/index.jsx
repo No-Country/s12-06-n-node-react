@@ -1,4 +1,4 @@
-import { Navigate, createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import { Layout } from "./Layout";
 import HomePage from "../pages/home";
 import { AuthRoutes } from "./auth/AuthRoutes";
@@ -8,6 +8,7 @@ import LayoutPages from "./LayoutPages";
 import MyShopsPage from "../pages/myShops";
 import RegisterPage from "../pages/register";
 import RatingsPage from "../pages/ratings";
+import NotFoundPage from "../pages/404";
 
 export const appRouter = createBrowserRouter([
 	{
@@ -52,5 +53,5 @@ export const appRouter = createBrowserRouter([
 			},
 		],
 	},
-	{ path: "*", element: <Navigate to={"/"} /> },
+	{ path: "*", element: <NotFoundPage /> },
 ]);
