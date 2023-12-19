@@ -68,7 +68,7 @@ export default function BottomSheet({ showBottomSheet }) {
 			></div>
 
 			<div
-				className={`absolute bottom-0 z-10 left-[50vw] -translate-x-[50%] h-auto max-h-[416px] pt-2 pb-4 px-4 w-full max-w-[375px] rounded-t-xl bg-white ${
+				className={`absolute bottom-0 z-10 left-[50vw] -translate-x-[50%] h-auto max-h-[416px] pt-2 pb-4 px-4 w-full max-w-[375px] rounded-t-xl bg-secundario ${
 					showBottomSheet ? "translate-y-0" : "translate-y-full"
 				} transition-transform duration-300`}
 			>

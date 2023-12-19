@@ -8,10 +8,10 @@ export default function Dropdown({ icon, dropdownTitle, children, circularButton
 	};
 
 	return (
-		<div className="relative">
+		<div className="relative transition-all">
 			<button
 				onClick={handleToggle}
-				className={`flex justify-center gap-2 items-center shadow-3xl 
+				className={`flex justify-center transition-all gap-2 items-center shadow-3xl 
 				${circularButton ? "rounded-full w-6 h-6" : "rounded p-2"}
 				${
 					white
@@ -37,7 +37,7 @@ export default function Dropdown({ icon, dropdownTitle, children, circularButton
 				{icon}
 			</button>
 			{isOpen && (
-				<div class="absolute end-0 p-2 z-10 mt-1 w-auto bg-secundario shadow-3xl flex flex-col gap-3">
+				<div className="absolute end-0 p-2 z-10 mt-1 w-auto bg-secundario shadow-3xl flex flex-col gap-3 transition-all">
 					{children}
 				</div>
 			)}

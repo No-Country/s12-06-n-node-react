@@ -8,20 +8,37 @@ import BottomSheet from "../../components/bottomSheet";
 import { useRestaurantStore } from "../../stores";
 import { getRestaurantById } from "../../api/yumiverse_api";
 import { useFetch } from "../../hooks/useFetch";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { formatAddress } from "../../helpers/formatAddress";
 
 export default function RestaurantPage() {
+	const [location, setLocation] = useState('')
+	const [cat, setCat] = useState([])
+
 	const { restaurantId } = useParams();
 	const showBottomSheet = useRestaurantStore(state => state.showBottomSheet);
 	const setRestaurantName = useRestaurantStore(state => state.setRestaurantName);
 	const restaurantName = useRestaurantStore(state => state.restaurantName);
 
 	const { data = {}, loading, error } = useFetch(() => getRestaurantById(restaurantId));
-	const { name, description, categories, phone, isOpen, stars, totalRatings } = data;
+	const { name, description, categories, address, phone, isOpen, stars, totalRatings } = data;
+
+	console.log(categories);
 
 	useEffect(() => {
 		setRestaurantName(name);
 	}, [setRestaurantName, name]);
+
+	useEffect(() => {
+		if (address) {
+			const formattedAddress = formatAddress(address);
+			const locationFormatted = `${String(formattedAddress).substring(0, 25)}...`;
+			const categoriesName = categories.map(item => item.category)
+
+			setLocation(locationFormatted);
+			setCat(categoriesName);
+		}
+	}, [address, categories])
 
 	return (
 		<main className="flex flex-col">
@@ -30,8 +47,10 @@ export default function RestaurantPage() {
 			</div>
 			<MenuData
 				id={restaurantId}
+				location={location}
+				schedule={'11:00 - 22:00'}
 				phoneNumber={phone}
-				categories={["Pizza", "Grill"]}
+				categories={cat}
 				openRestaurant={isOpen}
 				stars={stars}
 				totalRatings={totalRatings}

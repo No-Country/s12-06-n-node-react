@@ -1,5 +1,4 @@
 import Button from "../../components/button/Button";
-import qualifyIcon from "../../assets/icons/qualify.svg";
 import Comments from "../../components/comments";
 import BarProgress from "../../components/comments/components/BarProgress";
 import StarIcon from "../../icons/StarIcon";
@@ -10,6 +9,7 @@ import { useFetch } from "../../hooks/useFetch";
 import { useRestaurantStore } from "../../stores";
 import Modal from "../../components/modal";
 import RateRestaurant from "../../components/modal/components/RateRestaurant";
+import QualifyIcon from "../../icons/QualifyIcon";
 
 export default function RatingsPage() {
 	const { restaurantId } = useParams();
@@ -47,7 +47,7 @@ export default function RatingsPage() {
 				<Button
 					text="Calificar"
 					onClick={openModal}
-					icon={qualifyIcon}
+					icon={<QualifyIcon />}
 					alt="qualify icon"
 					yellow
 					rounded

@@ -19,7 +19,7 @@ function Slider({ data, children, title }) {
 				className="mySwiper w-full"
 			>
 				{data.map(item => (
-					<SwiperSlide key={item.id} className="w-auto">
+					<SwiperSlide key={item._id} className="w-auto">
 						{children(item)}
 					</SwiperSlide>
 				))}
