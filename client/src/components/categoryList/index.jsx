@@ -4,6 +4,7 @@ import { useFetch } from "../../hooks/useFetch";
 import { useRestaurantStore } from "../../stores/restaurants/useRestaurant.store";
 import { useSearch } from "../../stores/search/useSearch.store";
 import CategoryCard from "../cards/homePage/categoryCard";
+import Loader from "../loader/loader";
 import Slider from "../sliders/section-slider";
 
 const handleMapCategoryIcon = (categoryId) => {
@@ -25,7 +26,9 @@ export default function CategoryList() {
     }
 
     if (categoryLoading) {
-        return <p>Loading...</p>
+        return (
+            <Loader />
+        )
     }
 
     if (!categoryError && !categoryLoading && categoryData) {
