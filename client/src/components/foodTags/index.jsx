@@ -19,6 +19,10 @@ export default function FoodTags() {
 			id: 4,
 			categorie: "Vegano",
 		},
+		{
+			id: 5,
+			categorie: "Bebidas",
+		},
 	];
 
 	return (
