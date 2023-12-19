@@ -2,12 +2,12 @@ import jwt from "jsonwebtoken";
 
 const generateToken = body => {
 	return new Promise((resolve, reject) => {
-		const { id: sub, username, admin} = body;
+		const { id: sub, username, admin } = body;
 
 		const payload = {
 			sub,
 			username,
-			admin
+			admin,
 		};
 
 		jwt.sign(
