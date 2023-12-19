@@ -1,13 +1,15 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import yumiverseLogo from "../../assets/YumiverseLogo.svg";
 import ProfileIcon from "../../assets/icons/profile-circle.svg";
 import SearchIcon from "../../assets/icons/search.svg";
 import ArrowLeft from "../../assets/icons/arrow-left.svg";
+import { useSearch } from "../../stores/search/useSearch.store";
 
 export default function Navbar() {
-	const [isExpanded, setIsExpanded] = useState(false);
+
+	const [isExpanded, setIsExpanded] = useSearch(state => [state.isExpanded, state.setIsExpanded]);
+	const [search, setSearch] = useSearch(state => [state.search, state.setSearch]);
 
 	const handleSearchIconClick = () => {
 		setIsExpanded(!isExpanded);
@@ -24,42 +26,7 @@ export default function Navbar() {
 						<img src={ProfileIcon} alt="Yumiverse logo image" className="max-h-6" />
 					</Link>
 				</div>
-				{/* <div className="flex justify-between items-center">
-					<div
-						className={`flex gap-2 items-center h-full ${
-							searchExpanded ? "w-full" : ""
-						} transition-all duration-300`}
-					>
-						<div className="max-h-6 overflow-hidden">
-							<img onClick={handleOpen} className="cursor-pointer" src={search} alt="Search icon" />
-							<img
-								onClick={handleOpen}
-								className="cursor-pointer"
-								src={arrowLeft}
-								alt="Arrow left icon"
-							/>
-						</div>
-						<input
-							type="text"
-							className={`${
-								searchExpanded ? "w-full" : "w-0"
-							} border-b border-texts placeholder:text-xs placeholder:`}
-							placeholder="Búsqueda del usuario"
-						/>
-					</div>
-					<button
-						className={`${
-							searchExpanded ? "hidden" : ""
-						} max-h-8 text-texts bg-principal px-2 py-1 rounded-lg`}
-					>
-						Publicar tienda
-					</button>
-				</div> */}
-				<div
-					className={`w-full h-20 flex ${
-						isExpanded ? "" : "justify-between"
-					} items-center overflow-x-hidden`}
-				>
+				<div className={`w-full h-20 flex ${isExpanded ? '' : 'justify-between'} items-center overflow-x-hidden`}>
 					<div className="w-full h-full flex items-center gap-4 overflow-x-hidden">
 						<div
 							onClick={handleSearchIconClick}
@@ -87,9 +54,9 @@ export default function Navbar() {
 							} overflow-hidden transition-all ease-in-out duration-300 flex items-center`}
 						>
 							<input
-								className={`${
-									isExpanded ? "w-full" : "w-0 -translate-x-full"
-								} h-auto px-1 bg-transparent border-b-[1px] border-texts outline-none transition-all ease-in-out duration-300 placeholder:text-xs placeholder:text-texts`}
+								value={search}
+								onChange={e => setSearch(e.target.value)}
+								className={`${isExpanded ? 'w-full' : 'w-0 -translate-x-full'} h-auto px-1 bg-transparent border-b-[1px] border-texts outline-none transition-all ease-in-out duration-300 placeholder:text-xs placeholder:text-texts`}
 								type="text"
 								placeholder="Búsqueda ingresada"
 							/>
@@ -107,12 +74,6 @@ export default function Navbar() {
 						>
 							Publicar
 						</button>
-						{/* <button
-							className={`${searchExpanded ? "hidden" : ""
-								} max-h-8 text-texts bg-principal px-2 py-1 rounded-lg`}
-						>
-							Publicar tienda
-						</button> */}
 					</div>
 				</div>
 			</div>
