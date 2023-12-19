@@ -47,12 +47,13 @@ export default function RestaurantPage() {
 			</div>
 			<MenuData
 				id={restaurantId}
+				location={location}
+				schedule={'11:00 - 22:00'}
 				phoneNumber={phone}
 				categories={cat}
 				openRestaurant={isOpen}
 				stars={stars}
 				totalRatings={totalRatings}
-				location={location}
 			/>
 			<FoodTags />
 			<RestaurantCategory showBottomSheet={showBottomSheet} />
