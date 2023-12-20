@@ -35,12 +35,12 @@ const restaurantValidation = {
 				}
 				return true;
 			}),
-		check("categories")
-			.exists()
-			.notEmpty()
-			.isArray()
-			.withMessage("Las categorías son requeridas y deben ser un Array")
-			.custom(value => value.every(categoryId => typeof categoryId === "string")),
+		// check("categories")
+		// 	.exists()
+		// 	.notEmpty()
+		// 	.isArray()
+		// 	.withMessage("Las categorías son requeridas y deben ser un Array")
+		// 	.custom(value => value.every(categoryId => typeof categoryId === "string")),
 		check("description")
 			.exists()
 			.notEmpty()
