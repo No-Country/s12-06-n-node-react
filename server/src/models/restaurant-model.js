@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
 
 const restaurantSchema = new Schema(
 	{
@@ -111,6 +112,7 @@ const restaurantSchema = new Schema(
 	{ timestamps: true, versionKey: false }
 );
 
+restaurantSchema.plugin(mongoosePaginate);
 const RestaurantModel = model("restaurants", restaurantSchema);
 
 export default RestaurantModel;
