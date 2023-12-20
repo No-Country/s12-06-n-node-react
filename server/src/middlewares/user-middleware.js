@@ -232,6 +232,25 @@ const userValidation = {
 		check("phone").optional().notEmpty().withMessage("El teléfono no puede estar vacio"),
 		check("img").optional().notEmpty().withMessage("La imagen no puede estar vacia"),
 	],
+	get: [
+		param("id")
+			.exists().withMessage("El id es requerido")
+			.notEmpty().withMessage("El id no puede estar vacío")
+			.isLength({ min: 24, max: 24 }).withMessage("El id no es válido")
+			.custom(async value => {
+				try{
+					const user = await UserModel.findById(value);
+					if(!user){
+						throw new Error("El usuario no existe");
+					}
+
+					return true;
+				}catch(error){
+					throw new Error(`Error al validar el usuario: ${error.message}`);
+				}
+			}),
+		(req, res, next) => validateResult(req, res, next),
+	],
 	addRestaurant: [
 		param("id")
 			.exists()

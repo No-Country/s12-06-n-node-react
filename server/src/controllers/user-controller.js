@@ -34,16 +34,16 @@ const UserController = {
 			handleHttp(res, "ERROR_PATCH_USER", e);
 		}
 	},
-	// async token(req, res) {
-	//     try{
-	//         const body = req.body;
-	//         const token = await AuthService.token(body);
+	async get(req, res) {
+		try{
+			const id = req.params.id;
+			const user = await UserService.getUser(id);
 
-	//         return res.status(200).json(token);
-	//     }catch(e){
-	//         handleHttp(res, "ERROR_AUTH", e);
-	//     }
-	// },
+			return res.status(200).json(user);
+		}catch(e){
+			handleHttp(res, "ERROR_GET_USER", e);
+		}
+	},
 	async createRestaurant(req, res) {
 		try {
 			const userId = req.params.id;
