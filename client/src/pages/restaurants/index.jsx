@@ -21,9 +21,7 @@ export default function RestaurantPage() {
 	const restaurantName = useRestaurantStore(state => state.restaurantName);
 
 	const { data = {}, loading, error } = useFetch(() => getRestaurantById(restaurantId));
-	const { name, description, categories, address, phone, isOpen, stars, totalRatings } = data;
-
-	console.log(categories);
+	const { name, imgBrand, description, categories, address, phone, isOpen, stars, totalRatings } = data;
 
 	useEffect(() => {
 		setRestaurantName(name);
@@ -43,7 +41,7 @@ export default function RestaurantPage() {
 	return (
 		<main className="flex flex-col">
 			<div className="w-full h-44 flex items-center justify-center overflow-hidden">
-				<img src={HeaderImage} alt="Header image" className="w-full h-auto" />
+				<img src={imgBrand} alt={`${data.name} image`} className="w-full h-full object-cover object-center" />
 			</div>
 			<MenuData
 				id={restaurantId}

@@ -13,6 +13,18 @@ export default function NavbarRestaurant() {
 
 	const restaurantName = useRestaurantStore(state => state.restaurantName);
 
+	const shareContent = () => {
+    navigator.share({
+      url: window.location.href,
+    })
+		
+		// .then(() => {
+    //   console.log('Contenido compartido con éxito');
+    // }).catch((error) => {
+    //   console.error('Error al compartir:', error.message);
+    // });
+  };
+
 	return (
 		<nav className="w-full h-10 flex justify-between items-center opacity-90 bg-secundario top-0 left-0 p-4 sticky">
 			<button onClick={handleGoBack}>
@@ -21,7 +33,9 @@ export default function NavbarRestaurant() {
 			<span className="text-texts font-medium">{restaurantName}</span>
 			<div className="flex gap-3">
 				<img src={MapIcon} alt="Map icon" className="w-6 h-6" />
-				<img src={ShareIcon} alt="Share icon" className="w-6 h-6" />
+				<button onClick={shareContent}>
+					<img src={ShareIcon} alt="Share icon" className="w-6 h-6" />
+				</button>
 			</div>
 		</nav>
 	);

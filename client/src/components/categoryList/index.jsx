@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { getAllCategories } from "../../api/yumiverse_api";
 import categoryIcons from "../../helpers/categoryIcons";
 import { useFetch } from "../../hooks/useFetch";
@@ -16,7 +17,7 @@ export default function CategoryList() {
     const setIsExpanded = useSearch(state => state.setIsExpanded);
     const setSearch = useSearch(state => state.setSearch);
     const setCategoryDataStore = useRestaurantStore(state => state.setCategoryDataStore);
-    const categoryDataStore = useRestaurantStore(state => state.categoryDataStore);
+    // const categoryDataStore = useRestaurantStore(state => state.categoryDataStore);
 
     const { data: categoryData, loading: categoryLoading, error: categoryError } = useFetch(getAllCategories);
 
@@ -44,7 +45,7 @@ export default function CategoryList() {
                             <CategoryCard
                                 title={item.category}
                                 onClick={() => handleCategoryClick(item.category)}
-                                Icon={handleMapCategoryIcon(item._id)} />
+                                Icon={item.urlImgCategories} />
                     }
                 </Slider>
             }

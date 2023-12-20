@@ -45,11 +45,11 @@ export default function SearchModal({ className }) {
 
             {searchResults.map(result =>
                 <SectionCardHomePage
-                    key={result.id}
+                    key={result._id}
                     id={result._id}
                     location={formatAddress(result.address)}
                     nameRestaurant={result.name}
-                    imageRestaurant={result.url_img_restaurant}
+                    imageRestaurant={result.imgBrand}
                     categories={result.categories}
                     openRestaurant={result.isOpen}
                     numberOfScores={result.stars}
