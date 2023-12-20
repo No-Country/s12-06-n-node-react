@@ -8,6 +8,7 @@ const router = Router();
 router.post("/register", userValidation.register, UserController.create);
 router.post("/login", userValidation.login, UserController.login);
 
+router.get("/:id", userValidation.get, UserController.get);
 router.patch("/update/:id", userValidation.update, UserController.update);
 
 // router.get("/token", tokenValidation, AuthController.token);
