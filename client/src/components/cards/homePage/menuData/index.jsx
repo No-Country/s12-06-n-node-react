@@ -21,27 +21,6 @@ export default function MenuData({
 
 	return (
 		<>
-			<div className="items-start justify-start gap-8 p-4 tablet:hidden desktop:flex bg-secundario">
-				<div className="flex flex-col items-start justify-start gap-4 w-full">
-					<p className="text-sm/5 font-medium">Contacto</p>
-					<ContactSection
-						id={id}
-						categories={categories}
-						phoneNumber={phoneNumber}
-						schedule={schedule}
-						location={location}
-						stars={stars}
-						totalRatings={totalRatings}
-					/>
-				</div>
-				<div className="flex flex-col items-start justify-start gap-4 w-full">
-					<div className="flex flex-row items-center justify-between w-full">
-						<p className="text-sm/5 font-medium">Pago y entrega</p>
-						<ButtonOpenOrClose disabled openRestaurant={openRestaurant} />
-					</div>
-					<PaymentsDeliverySection />
-				</div>
-			</div>
 			<div className="flex flex-col items-start justify-start p-4 desktop:hidden bg-secundario">
 				<div className="flex flex-row items-start justify-start gap-4 mb-5 w-full">
 					<button onClick={() => changeSection(true)} className="text-sm/5 font-medium">
