@@ -9,7 +9,6 @@ export default function BottomSheet({ showBottomSheet }) {
 	const handleAddProduct = () => {
 		setShowBottomSheet(!showBottomSheet);
 	};
-	console.log(showBottomSheet);
 	return (
 		// <div className="flex flex-col justify-center items-center w-full h-screen bg-secundario">
 		//     <div className={`flex flex-col justify-end items-center text-texts fixed top-0 left-0 w-full h-full ${showBottomSheet ? 'opacity-1 pointer-events-auto' : 'opacity-0 pointer-events-none'} transition-all z-10`}>

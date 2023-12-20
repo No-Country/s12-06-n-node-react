@@ -19,7 +19,7 @@ export default function FilterBar({ results }) {
                         <div className="flex flex-col gap-2">
                             {
                                 categoryDataStore.length > 0 && categoryDataStore.map(cat =>
-                                    < Checkbox checkboxTitle={cat.category} />
+                                    < Checkbox key={cat._id} checkboxTitle={cat.category} />
                                 )
                             }
                         </div>

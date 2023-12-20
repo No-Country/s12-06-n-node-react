@@ -41,10 +41,11 @@ export default function CategorySection() {
                         <Slider Slider key={section._id} data={section.restaurants} title={section.category} >
                             {item => (
                                 <SectionCardHomePage
+                                key={item._id}
                                     id={item._id}
                                     location={formatAddress(item.address)}
                                     nameRestaurant={item.name}
-                                    imageRestaurant={item.url_img_restaurant}
+                                    imageRestaurant={item.imgBrand}
                                     categories={item.categories}
                                     openRestaurant={item.isOpen}
                                     numberOfScores={item.stars}

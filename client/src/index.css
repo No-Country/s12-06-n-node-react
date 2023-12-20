@@ -26,14 +26,14 @@
 .loader:before {
 	animation: ball1 1s infinite;
 	background-color: #180801;
-	box-shadow: 30px 10px 0 #F2C81B;
+	box-shadow: 30px 0px 0 #F2C81B;
 	margin-bottom: 10px;
 }
 
 .loader:after {
 	animation: ball2 1s infinite;
 	background-color: #F2C81B;
-	box-shadow: 30px 10px 0 #180801;
+	box-shadow: 30px 0 0 #180801;
 }
 
 @keyframes rotate {
@@ -42,7 +42,7 @@
 	}
 
 	50% {
-		transform: rotate(360deg) scale(1.5)
+		transform: rotate(360deg) scale(1.1)
 	}
 
 	100% {
