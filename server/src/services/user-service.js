@@ -26,13 +26,20 @@ const UserService = {
 		 * 	surname: "surname"
 		 * }
 		 */
+		const id = body.id;
         const name = body.name;
 		const surname = body.surname;
 		
         const token = await generateToken(body);
 
-        return { name, surname, bearer_token: token };
+        return { id, name, surname, bearer_token: token };
     },
+	async getUser(id) {
+		const user = await UserModel.findById(id);
+
+		console.log("SERVICE GET USER:", user);
+		return user;
+	},
 	async updateUser(body) {
 		const { id } = body;
 
