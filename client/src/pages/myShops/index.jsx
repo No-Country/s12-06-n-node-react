@@ -1,7 +1,7 @@
-import ShopIcon from "../../assets/icons/shop.svg";
 import ErrorImage from "../../assets/images/errorMyShops.png";
 import Button from "../../components/button/Button";
 import ShopCard from "../../components/cards/myShopsPage/shopCard";
+import ShopIcon from "../../icons/ShopIcon";
 
 const MyShopsPage = () => {
 	const myShopsData = [
@@ -74,7 +74,7 @@ const MyShopsPage = () => {
 						<h4 className="text-texts">Parece que no has agregado ninguna tienda</h4>
 					</div>
 					<div className="mt-[28px]">
-						<Button yellow rounded text={"Añadir tienda"} icon={ShopIcon} />
+						<Button yellow rounded text={"Añadir tienda"} icon={<ShopIcon />} />
 					</div>
 				</div>
 			) : (

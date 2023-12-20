@@ -1,5 +1,4 @@
 import { RestaurantModel } from "../models/index.js";
-import { CommentService } from "../services/index.js";
 
 const RestaurantService = {
 	async getAllRestaurants() {
@@ -74,11 +73,11 @@ const RestaurantService = {
 		// return responseGetById;
 	},
 
-	async getAverageRatingByRestaurantId(restaurantId) {
-		// Call CommentService to get the average rating based on the restaurant ID
-		const averageRating = await CommentService.getAverageRating(restaurantId);
-		return averageRating;
-	},
+	// async getAverageRatingByRestaurantId(restaurantId) {
+	// 	// Call CommentService to get the average rating based on the restaurant ID
+	// 	const averageRating = await CommentService.getAverageRating(restaurantId);
+	// 	return averageRating;
+	// },
 
 	async createRestaurant(body) {
 		const responseInsert = await RestaurantModel.create(body);

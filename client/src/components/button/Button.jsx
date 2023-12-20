@@ -19,7 +19,7 @@ export default function Button({
 				white
 					? "bg-secundario text-texts"
 					: yellow
-					  ? "bg-principal text-texts hover:bg-texts hover:text-principal"
+					  ? "bg-principal text-texts stroke-texts hover:stroke-principal hover:bg-texts hover:text-principal"
 					  : brown
 					    ? "bg-texts text-principal hover:bg-principal hover:text-texts"
 					    : ""
@@ -30,7 +30,7 @@ export default function Button({
 			onClick={onClick}
 		>
 			{text}
-			<img src={icon} alt={alt} />
+			{icon}
 		</button>
 	);
 }
