@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 
-export const useFetch = (fetcher) => {
-
-    const [data, setData] = useState();
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
+export const useFetch = fetcher => {
+	const [data, setData] = useState();
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(false);
 
     useEffect(() => {
 
@@ -17,18 +16,17 @@ export const useFetch = (fetcher) => {
                     setLoading(false);
                 }
 
-            } catch (error) {
-                setError(error);
+            } catch (e) {
+                setError(e);
                 setLoading(false);
 
-                console.error("Error fetching restaurant data:", error);
-
+                console.error("Error fetching restaurant data:", e);
             }
         }
 
         fetchData();
 
-    }, [setData, setLoading, setError]);
+    }, []);
 
-    return { data, loading, error }
-}
+	return { data, loading, error };
+};

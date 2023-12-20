@@ -1,48 +1,57 @@
-import { Navigate, Route, Routes, createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import { Layout } from "./Layout";
 import HomePage from "../pages/home";
 import { AuthRoutes } from "./auth/AuthRoutes";
-import Ratings from "../pages/ratings";
 import RestaurantPage from "../pages/restaurants";
 import LayoutRestaurants from "./LayoutRestaurants";
-
-// export const AppRouter = () => {
-
-// 	return (
-// 		<Routes>
-// 			<Route path="/*" element={<Layout />}>
-// 				<Route path="*" element={<Navigate to={"/"} />} />
-// 				<Route index element={<HomePage />} />
-// 				<Route path="auth/*" element={<AuthRoutes />} />
-// 			</Route>
-// 			<Route path="/restaurant/*" element={<LayoutRestaurants />}>
-// 				<Route index element={<RestaurantPage />} />
-// 				<Route path="calificaciones" element={<Ratings />} />
-// 			</Route>
-// 			<Route path="/restaurant" element={<Navigate to="/restaurant/" />} />
-// 		</Routes>
-
-// 	);
-// };
+import LayoutPages from "./LayoutPages";
+import MyShopsPage from "../pages/myShops";
+import RegisterPage from "../pages/register";
+import RatingsPage from "../pages/ratings";
+import NotFoundPage from "../pages/404";
 
 export const appRouter = createBrowserRouter([
 	{
-		path: "/", element: <Layout />,
+		path: "/",
+		element: <Layout />,
 		children: [
 			{
 				index: true,
-				element: <HomePage />
+				element: <HomePage />,
 			},
-		]
+		],
 	},
 	{
-		path: "restaurant", element: <LayoutRestaurants />,
+		path: "restaurant",
+		element: <LayoutRestaurants />,
 		children: [
 			{
-				path: ":restaurant_id",
-				element: <RestaurantPage />
+				path: ":restaurantId",
+				element: <RestaurantPage />,
 			},
-		]
+			{
+				path: ":restaurantId/ratings",
+				element: <RatingsPage />,
+			},
+			{
+				path: "registerProducts",
+				element: <RegisterPage />,
+			},
+		],
 	},
-	{ path: "*", element: <Navigate to={"/"} /> },
-])
+	{
+		path: "auth/*",
+		element: <AuthRoutes />,
+	},
+	{
+		path: "myShops",
+		element: <LayoutPages pageTitle="Mis Tiendas" />,
+		children: [
+			{
+				index: true,
+				element: <MyShopsPage />,
+			},
+		],
+	},
+	{ path: "*", element: <NotFoundPage /> },
+]);

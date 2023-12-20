@@ -49,6 +49,7 @@ export default function Comments() {
 			<h3 className="text-md text-texts font-bold">Calificaciones</h3>
 			{comments.map(item => (
 				<Commentary
+					key={item.id}
 					name={item.name}
 					image={item.image}
 					commentary={item.commentary}

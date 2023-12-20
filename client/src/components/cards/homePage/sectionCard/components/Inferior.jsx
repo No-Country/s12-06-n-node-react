@@ -25,7 +25,7 @@ export default function Inferior({
 				<p className="font-medium text-sm text-secundario capitalize">{nameRestaurant}</p>
 				<div className="flex flex-row items-center justify-between gap-1">
 					{categories.map((category, index) => (
-						<img key={index} src={categoryIcons[category]} alt={category} className="h-4 w-4" />
+						<img key={index} src={category.urlImgCategories} alt={category} className="h-4 w-4" />
 					))}
 				</div>
 			</div>

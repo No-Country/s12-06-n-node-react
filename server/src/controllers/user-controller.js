@@ -12,6 +12,38 @@ const UserController = {
 			handleHttp(res, "ERROR_POST_USER", e);
 		}
 	},
+	async login(req, res) {
+		try {
+			const body = req.body;
+			const user = await UserService.login(body);
+
+			return res.status(200).json(user);
+		} catch (e) {
+			handleHttp(res, "ERROR_LOGIN", e);
+		}
+	},
+	async update(req, res) {
+		try {
+			const id = req.params.id;
+			const body = { id, ...req.body };
+
+			const user = await UserService.updateUser(body);
+
+			return res.status(200).json(user);
+		} catch (e) {
+			handleHttp(res, "ERROR_PATCH_USER", e);
+		}
+	},
+	async get(req, res) {
+		try{
+			const id = req.params.id;
+			const user = await UserService.getUser(id);
+
+			return res.status(200).json(user);
+		}catch(e){
+			handleHttp(res, "ERROR_GET_USER", e);
+		}
+	},
 	async createRestaurant(req, res) {
 		try {
 			const userId = req.params.id;

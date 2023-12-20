@@ -6,7 +6,7 @@ const RestaurantService = {
 		const responseGetAll = await RestaurantModel.find()
 			.populate("categories", "_id category urlImgCategories")
 			.populate("menus", "_id name description price imgMenus")
-			.populate("comments", "_id userId comment ratting");
+			.populate("comments", "_id userId comment rating");
 
 		const formattedRestaurants = responseGetAll.map(restaurant => ({
 			...restaurant.toObject(),
@@ -26,7 +26,7 @@ const RestaurantService = {
 				_id: comment._id,
 				userId: comment.userId,
 				comment,
-				ratting: comment.ratting,
+				rating: comment.rating,
 			})),
 		}));
 
@@ -41,7 +41,7 @@ const RestaurantService = {
 		const responseGetById = await RestaurantModel.findById(id)
 			.populate("categories", "_id category urlImgCategories")
 			.populate("menus", "_id name description price imgMenus")
-			.populate("comments", "_id userId comment ratting");
+			.populate("comments", "_id userId comment rating");
 
 		const formattedRestaurant = {
 			...responseGetById.toObject(),
@@ -61,7 +61,7 @@ const RestaurantService = {
 				_id: comment._id,
 				userId: comment.userId,
 				comment,
-				ratting: comment.ratting,
+				rating: comment.rating,
 			})),
 		};
 
@@ -73,6 +73,12 @@ const RestaurantService = {
 		// return responseGetById;
 	},
 
+	// async getAverageRatingByRestaurantId(restaurantId) {
+	// 	// Call CommentService to get the average rating based on the restaurant ID
+	// 	const averageRating = await CommentService.getAverageRating(restaurantId);
+	// 	return averageRating;
+	// },
+
 	async createRestaurant(body) {
 		const responseInsert = await RestaurantModel.create(body);
 		console.log("SERVICE CREATE RESTAURANT:", responseInsert);
@@ -83,7 +89,7 @@ const RestaurantService = {
 		const responseUpdate = await RestaurantModel.findOneAndUpdate({ _id: id }, data, { new: true })
 			.populate("categories", "_id category urlImgCategories")
 			.populate("menus", "_id name description price imgMenus")
-			.populate("comments", "_id userId comment ratting");
+			.populate("comments", "_id userId comment rating");
 
 		const formattedResponse = {
 			...responseUpdate.toObject(),
@@ -103,7 +109,7 @@ const RestaurantService = {
 				_id: comment._id,
 				userId: comment.userId,
 				comment,
-				ratting: comment.ratting,
+				rating: comment.rating,
 			})),
 		};
 

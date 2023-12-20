@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
 
 const restaurantSchema = new Schema(
 	{
@@ -26,7 +27,6 @@ const restaurantSchema = new Schema(
 			type: String,
 			required: true,
 			unique: true,
-			// match: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
 		},
 		address: {
 			street: {
@@ -82,13 +82,19 @@ const restaurantSchema = new Schema(
 				_id: false,
 			},
 		],
-		stars: {
-			type: Number,
-			default: 0,
-		},
-		totalRatings: {
-			type: Number,
-			default: 0,
+		rating: {
+			average: {
+				type: Number,
+				default: 0,
+			},
+			total: {
+				type: Number,
+				default: 0,
+			},
+			total_per_starts: {
+				type: [Number],
+				default: [0, 0, 0, 0, 0],
+			},
 		},
 		menus: [
 			{
@@ -106,6 +112,7 @@ const restaurantSchema = new Schema(
 	{ timestamps: true, versionKey: false }
 );
 
+restaurantSchema.plugin(mongoosePaginate);
 const RestaurantModel = model("restaurants", restaurantSchema);
 
 export default RestaurantModel;
