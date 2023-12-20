@@ -7,7 +7,7 @@ import AddIcon from "./assets/addIcon";
 import DropdownItem from "../../components/dropdown/components/DropdownItem";
 import { useRestaurantStore } from "../../stores/restaurants/useRestaurant.store";
 import { useFetch } from "../../hooks/useFetch";
-import { getAllCategories } from "../../api/yumiverse_api";
+import { getAllCategories, postRestaurant } from "../../api/yumiverse_api";
 import CheckboxIcon from "../../icons/CheckboxIcon";
 import SectionTitle from "./components/titles/sectionTitle";
 import CheckButton from "./components/checkButton";
@@ -15,6 +15,17 @@ import RegisterBottomSheet from "./components/bottomSheet";
 import StoreIcon from "./assets/storeIcon";
 
 export default function RegisterPage() {
+	const [formData, setFormData] = useState({
+		address: {
+			city: "",
+			street: "",
+		},
+		categories: [],
+		description: "",
+		email: "",
+		name: "",
+		phone: "",
+	})
 	// Categorías
 	const [selectedCategories, setSelectedCategories] = useState([]);
 	// Productos
@@ -38,11 +49,11 @@ export default function RegisterPage() {
 	});
 
 	const onSubmit = async (data) => {
-		console.log('Datos enviados: ', data);
 		// Acá debo poner la llamada a la API
 		try {
-			// const response = await postRestaurant(data);
-			// console.log('Respuesta del servidor: ', response.data);
+			console.log('Datos enviados: ', data);
+			const response = await postRestaurant(data);
+			console.log('Respuesta del servidor: ', response.data);
 			console.log('Enviando la información');
 		} catch (error) {
 			console.error('Error al enviar la solicitud: ', error);
