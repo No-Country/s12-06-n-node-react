@@ -48,8 +48,8 @@ export default function CategorySection() {
                                     imageRestaurant={item.imgBrand}
                                     categories={item.categories}
                                     openRestaurant={item.isOpen}
-                                    numberOfScores={item.stars}
-                                    scores={item.totalRating}
+                                    numberOfScores={item.rating.total}
+                                    scores={item.rating.average}
                                 />
                             )}
                         </Slider>
