@@ -5,12 +5,12 @@ const restaurantSchema = new Schema(
 	{
 		name: {
 			type: String,
-			unique: true,
-			required: true,
+			// unique: true,
+			// required: true,
 		},
 		description: {
 			type: String,
-			required: true,
+			// required: true,
 		},
 		categories: [
 			{
@@ -20,40 +20,40 @@ const restaurantSchema = new Schema(
 		],
 		phone: {
 			type: String,
-			required: true,
-			unique: true,
+			// required: true,
+			// unique: true,
 		},
 		email: {
 			type: String,
-			required: true,
-			unique: true,
+			// required: true,
+			// unique: true,
 		},
 		address: {
 			street: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 			city: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 			state: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 			country: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 		},
 		imgBrand: {
 			type: String,
-			required: true,
+			// required: true,
 		},
 		isOpen: {
 			type: Boolean,
 			default: true,
-			required: true,
+			// required: true,
 		},
 		hours: [
 			{
@@ -69,15 +69,15 @@ const restaurantSchema = new Schema(
 						"Sunday",
 						"Holidays",
 					],
-					required: true,
+					// required: true,
 				},
 				openingTime: {
 					type: String,
-					required: true,
+					// required: true,
 				},
 				closingTime: {
 					type: String,
-					required: true,
+					// required: true,
 				},
 				_id: false,
 			},

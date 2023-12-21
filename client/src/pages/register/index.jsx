@@ -25,16 +25,23 @@ export default function RegisterPage() {
 		email: "",
 		name: "",
 		phone: "",
-	})
+	});
 	// Categorías
 	const [selectedCategories, setSelectedCategories] = useState([]);
 	// Productos
-	const [showBottomSheet, setShowBottomSheet] = useRestaurantStore(state => [state.showBottomSheet, state.setShowBottomSheet]);
+	const [showBottomSheet, setShowBottomSheet] = useRestaurantStore(state => [
+		state.showBottomSheet,
+		state.setShowBottomSheet,
+	]);
 	const handleAddProduct = () => {
 		setShowBottomSheet(!showBottomSheet);
 	};
 
-	const { data: categoryData, loading: categoryLoading, error: categoryError } = useFetch(getAllCategories);
+	const {
+		data: categoryData,
+		loading: categoryLoading,
+		error: categoryError,
+	} = useFetch(getAllCategories);
 
 	const {
 		control,
@@ -48,23 +55,23 @@ export default function RegisterPage() {
 		name: "categories",
 	});
 
-	const onSubmit = async (data) => {
+	const onSubmit = async data => {
+		console.log("Datos enviados: ", data);
 		// Acá debo poner la llamada a la API
 		try {
-			console.log('Datos enviados: ', data);
 			const response = await postRestaurant(data);
-			console.log('Respuesta del servidor: ', response.data);
-			console.log('Enviando la información');
+			console.log("Respuesta del servidor: ", response.data);
+			console.log("Enviando la información");
 		} catch (error) {
-			console.error('Error al enviar la solicitud: ', error);
+			console.error("Error al enviar la solicitud: ", error);
 		}
 	};
 
-	const handleCategorySelection = (categoryId) => {
+	const handleCategorySelection = categoryId => {
 		if (selectedCategories.length < 2 && !selectedCategories.includes(categoryId)) {
 			const updatedCategories = [...selectedCategories, categoryId];
 			setSelectedCategories(updatedCategories);
-			setValue('categories', updatedCategories);
+			setValue("categories", updatedCategories);
 		}
 	};
 	// Métodos de pago
@@ -87,7 +94,7 @@ export default function RegisterPage() {
 			onSubmit={handleSubmit(onSubmit)}
 		>
 			{/* Fotos de portada */}
-			<div className="flex flex-col gap-2 mt-6" >
+			<div className="flex flex-col gap-2 mt-6">
 				<div className="flex items-center gap-4">
 					<h2 className="leading-none">Fotos de portada</h2>
 					<p className="h-4 text-[10px] bg-disabled px-2 rounded-[4px]">
@@ -107,7 +114,7 @@ export default function RegisterPage() {
 				</div>
 			</div>
 			{/* Nombre del comercio */}
-			<div className="flex flex-col gap-2" >
+			<div className="flex flex-col gap-2">
 				<label htmlFor="name" className="leading-none">
 					Nombre del comercio
 				</label>
@@ -116,15 +123,13 @@ export default function RegisterPage() {
 						name="name"
 						control={control}
 						defaultValue=""
-						render={({ field }) => (
-							<Input idFor="name" {...field} />
-						)}
+						render={({ field }) => <Input idFor="name" {...field} />}
 					/>
 					<p className="text-xs italic">No utilices símbolos ni carácteres especiales.</p>
 				</div>
-			</div >
+			</div>
 			{/* Descripción del comercio */}
-			<div className="flex flex-col gap-2" >
+			<div className="flex flex-col gap-2">
 				<label htmlFor="description" className="leading-none">
 					Descripción
 				</label>
@@ -133,13 +138,11 @@ export default function RegisterPage() {
 						name="description"
 						control={control}
 						defaultValue=""
-						render={({ field }) => (
-							<Input idFor="description" {...field} />
-						)}
+						render={({ field }) => <Input idFor="description" {...field} />}
 					/>
 					<p className="text-xs italic">No utilices símbolos ni carácteres especiales.</p>
 				</div>
-			</div >
+			</div>
 			{/* Categorías */}
 			<div className="flex flex-col gap-2">
 				<h2 className="leading-none">
@@ -147,17 +150,15 @@ export default function RegisterPage() {
 				</h2>
 				<div className="flex items-center gap-[18px]">
 					<DropDownBtn title="Seleccionar">
-						{
-							categoryData?.map(cat => (
-								<DropdownItem
-									key={cat._id}
-									title={cat.category}
-									type={'button'}
-									icon={<CheckboxIcon />}
-									onClick={() => handleCategorySelection(cat._id)}
-								/>
-							))
-						}
+						{categoryData?.map(cat => (
+							<DropdownItem
+								key={cat._id}
+								title={cat.category}
+								type={"button"}
+								icon={<CheckboxIcon id={cat._id} />}
+								onClick={() => handleCategorySelection(cat._id)}
+							/>
+						))}
 					</DropDownBtn>
 					<div className="justify-center items-center bg-principal w-10 h-8 rounded-lg px-2 py-1 flex">
 						<AddIcon />
@@ -167,7 +168,6 @@ export default function RegisterPage() {
 			{/* Contacto */}
 			{/* Horario */}
 			<SectionTitle title="Contacto">
-
 				<div className="flex flex-col gap-2 -mt-2 w-full">
 					<h2 className="leading-none">Horario</h2>
 					<div className="flex items-center gap-2 text-texts">
@@ -194,9 +194,7 @@ export default function RegisterPage() {
 							name="address"
 							control={control}
 							defaultValue=""
-							render={({ field }) => (
-								<Input idFor="address" {...field} />
-							)}
+							render={({ field }) => <Input idFor="address" {...field} />}
 						/>
 					</div>
 				</div>
@@ -210,9 +208,7 @@ export default function RegisterPage() {
 							name="phone"
 							control={control}
 							defaultValue=""
-							render={({ field }) => (
-								<Input idFor="phone" {...field} />
-							)}
+							render={({ field }) => <Input idFor="phone" {...field} />}
 						/>
 					</div>
 				</div>
@@ -226,9 +222,7 @@ export default function RegisterPage() {
 							name="email"
 							control={control}
 							defaultValue=""
-							render={({ field }) => (
-								<Input idFor="email" type="email" {...field} />
-							)}
+							render={({ field }) => <Input idFor="email" type="email" {...field} />}
 						/>
 					</div>
 				</div>
@@ -285,7 +279,10 @@ export default function RegisterPage() {
 				<RegisterBottomSheet showBottomSheet={showBottomSheet} />
 			</SectionTitle>
 			<div className="w-full flex justify-center items-center my-[76px]">
-				<button className="flex items-center gap-1 bg-principal h-8 px-2 py-1 rounded-2xl" type="submit">
+				<button
+					className="flex items-center gap-1 bg-principal h-8 px-2 py-1 rounded-2xl"
+					type="submit"
+				>
 					<span>Publicar tienda</span>
 					<StoreIcon />
 				</button>
