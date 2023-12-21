@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const BottomBar = () => {
 	// We use useState to keep track of the current tab.
@@ -9,6 +9,20 @@ const BottomBar = () => {
 	// The "Mis Tiendas" tab is rendered when currentTab is 4.
 
 	const [currentTab, setCurrentTab] = useState(1);
+
+	// identify in what page we are
+	const location = useLocation();
+	useState(() => {
+		if (location.pathname === "/favorites") {
+			setCurrentTab(0);
+		} else if (location.pathname === "/") {
+			setCurrentTab(1);
+		} else if (location.pathname === "/history") {
+			setCurrentTab(2);
+		} else if (location.pathname === "/myShops") {
+			setCurrentTab(3);
+		}
+	}, [location]);
 
 	// We use the following function to change the current tab.
 	// This function is called when the user clicks on a tab.
