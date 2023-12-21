@@ -4,7 +4,7 @@ import BarProgress from "../../components/comments/components/BarProgress";
 import StarIcon from "../../icons/StarIcon";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getRestaurantById } from "../../api/yumiverse_api";
+import { getCommentsByIdRestaurant, getRestaurantById } from "../../api/yumiverse_api";
 import { useFetch } from "../../hooks/useFetch";
 import { useRestaurantStore } from "../../stores";
 import Modal from "../../components/modal";
@@ -33,15 +33,23 @@ export default function RatingsPage() {
 		setIsModalOpen(false);
 	};
 
+	const {
+		data: commentData,
+		loading: commentLoading,
+		error: commentError,
+	} = useFetch(() => getCommentsByIdRestaurant(restaurantId));
+
+	// const { data: userData } = useFetch(() => getUserById(userId));
+
 	return (
-		<div className="flex items-center flex-col p-4 gap-6 min-w-[375px]">
-			<div className="flex gap-4 items-center">
+		<div className="flex items-center justify-center desktop:items-start flex-col desktop:flex-row p-4 gap-6 min-w-[375px] desktop:gap-12">
+			<div className="flex gap-4 items-center desktop:w-96 desktop:flex-col desktop:gap-6">
 				<div>
 					<div className="flex justify-center items-center">
 						<StarIcon className="fill-principal stroke-principal h-5 w-5" />
-						<p className="text-xl ml-2">{stars}</p>
+						<p className="text-xl desktop:text-2xl ml-2">{stars}</p>
 					</div>
-					<h2 className="text-xs">{totalRatings} opiniones</h2>
+					<h2 className="text-xs desktop:text-base">{totalRatings} opiniones</h2>
 				</div>
 				<BarProgress />
 				<Button
@@ -52,11 +60,11 @@ export default function RatingsPage() {
 					yellow
 					rounded
 				/>
-				<Modal isOpen={isModalOpen} onClose={closeModal} title="Calificar restaurant">
-					<RateRestaurant closeModal={closeModal} />
-				</Modal>
 			</div>
-			<Comments />
+			<Modal isOpen={isModalOpen} onClose={closeModal} title="Calificar restaurant">
+				<RateRestaurant closeModal={closeModal} restaurantId={restaurantId} />
+			</Modal>
+			{commentData && <Comments commentData={commentData} />}
 		</div>
 	);
 }

@@ -1,6 +1,5 @@
 import { MenuService } from "../services/index.js";
 import { handleHttp } from "../utils/error-handle.js";
-import { menuValidation } from "../middlewares/index.js";
 
 const MenuController = {
 	// Obtener todos los menús disponibles
@@ -42,9 +41,6 @@ const MenuController = {
 		try {
 			const { id } = req.params;
 			const body = req.body;
-
-			// Validaciones
-			await menuValidation.checkNameExists(req, res, () => {});
 
 			const response = await MenuService.updateMenu(id, body);
 			return res.status(200).json(response);

@@ -39,7 +39,7 @@ export default function RestaurantPage() {
 	}, [address, categories])
 
 	return (
-		<main className="flex flex-col">
+		<main className="flex flex-col bg-secundario">
 			<div className="w-full h-44 flex items-center justify-center overflow-hidden">
 				<img src={imgBrand} alt={`${data.name} image`} className="w-full h-full object-cover object-center" />
 			</div>

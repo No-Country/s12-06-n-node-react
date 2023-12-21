@@ -1,24 +1,46 @@
 import { useState } from "react";
 import Button from "../../../components/button/Button";
 import StarRating from "../../starRating";
+import axios from "axios";
 
-function RateRestaurant({ closeModal }) {
+function RateRestaurant({ closeModal, restaurantId }) {
 	const [rating, setRating] = useState(1);
-	const [opinion, setOpinion] = useState("");
+	const [comment, setComment] = useState("");
+	const bearer_token = localStorage.getItem("token");
 
 	const handleRatingChange = newRating => {
 		setRating(newRating);
 	};
 
-	const handleOpinionChange = event => {
-		setOpinion(event.target.value);
+	const handleCommentChange = event => {
+		setComment(event.target.value);
 	};
 
-	const handleSubmit = () => {
-		console.log("Puntuación:", rating);
-		console.log("Opinión:", opinion);
+	const handleSubmit = async () => {
+		try {
+			const data = {
+				restaurantId,
+				rating,
+				comment,
+			};
 
-		closeModal();
+			const response = await axios.post(
+				"https://yumi-verse.onrender.com/api/v1/comment/create",
+				data,
+				{
+					headers: {
+						Authorization: `Bearer ${bearer_token}`,
+					},
+				}
+			);
+
+			// Manejar la respuesta si es necesario
+			console.log("Comentario enviado con éxito:", response.data);
+
+			closeModal();
+		} catch (error) {
+			console.error("Error al enviar el comentario:", error);
+		}
 	};
 
 	return (
@@ -30,8 +52,8 @@ function RateRestaurant({ closeModal }) {
 				<p className="text-xs leading-[18px] italic">(500 caracteres máximo)</p>
 			</div>
 			<textarea
-				value={opinion}
-				onChange={handleOpinionChange}
+				value={comment}
+				onChange={handleCommentChange}
 				className="p-2 border border-principal h-32 rounded-lg bg-secundario outline-principal resize-none"
 			></textarea>
 			<div className="m-auto">
