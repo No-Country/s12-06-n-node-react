@@ -35,12 +35,12 @@ const UserController = {
 		}
 	},
 	async get(req, res) {
-		try{
+		try {
 			const id = req.params.id;
 			const user = await UserService.getUser(id);
 
 			return res.status(200).json(user);
-		}catch(e){
+		} catch (e) {
 			handleHttp(res, "ERROR_GET_USER", e);
 		}
 	},

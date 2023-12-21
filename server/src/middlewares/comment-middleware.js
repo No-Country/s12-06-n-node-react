@@ -66,7 +66,7 @@ const commentValidation = {
 						throw new Error("El puntaje debe ser entre 1 y 5");
 					}
 					return true;
-				}catch(error){
+				} catch (error) {
 					throw new Error(`Error al validar el puntaje: ${error.message}`);
 				}
 			})
@@ -79,32 +79,35 @@ const commentValidation = {
 			.notEmpty()
 			.withMessage("El id del comentario es requerido")
 			.custom(async (value, { req }) => {
-				try{
+				try {
 					const comment = await CommentModel.findOne({ _id: value });
 					if (!comment) {
 						throw new Error("No existe el comentario");
 					}
 
 					return true;
-				}catch(error){
+				} catch (error) {
 					throw new Error(`Error al validar el id del comentario: ${error.message}`);
 				}
 			}),
-		check("userId").notEmpty().withMessage("El id del usuario es requerido")
+		check("userId")
+			.notEmpty()
+			.withMessage("El id del usuario es requerido")
 			.custom(async (value, { req }) => {
-				try{
+				try {
 					const comment = await CommentModel.findOne({ _id: req.params.CommentId });
-			
+
 					if (String(comment.userId) !== value) {
 						throw new Error("No puedes editar un comentario que no es tuyo");
 					}
 
 					return true;
-				}catch(error){
+				} catch (error) {
 					throw new Error(`Error al validar el id del usuario: ${error.message}`);
 				}
 			}),
-		check("comment").exists().notEmpty().withMessage("El comentario es requerido"),
+		check("comment").optional().notEmpty().withMessage("El comentario no puede estar vacío"),
+		check("rating").optional().notEmpty().withMessage("El puntaje no puede estar vacío"),
 		(req, res, next) => validateResult(req, res, next),
 	],
 	delete: [
@@ -113,28 +116,30 @@ const commentValidation = {
 			.notEmpty()
 			.withMessage("El id del comentario es requerido")
 			.custom(async (value, { req }) => {
-				try{
+				try {
 					const comment = await CommentModel.findById(value);
 					if (!comment) {
 						throw new Error("No existe el comentario");
 					}
 
 					return true;
-				}catch(error){
+				} catch (error) {
 					throw new Error(`Error al validar el id del comentario: ${error.message}`);
 				}
 			}),
-		check("userId").notEmpty().withMessage("El id del usuario es requerido")
+		check("userId")
+			.notEmpty()
+			.withMessage("El id del usuario es requerido")
 			.custom(async (value, { req }) => {
-				try{
+				try {
 					const comment = await CommentModel.findOne({ _id: req.params.CommentId });
-			
+
 					if (String(comment.userId) !== value) {
 						throw new Error("No puedes eliminar un comentario que no es tuyo");
 					}
 
 					return true;
-				}catch(error){
+				} catch (error) {
 					throw new Error(`Error al validar el id del usuario: ${error.message}`);
 				}
 			}),
