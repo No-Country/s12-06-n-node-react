@@ -26,7 +26,7 @@ export default function FoodTags() {
 	];
 
 	return (
-		<div className="h-auto w-full bg-secundario">
+		<div className="h-auto w-full bg-secundario desktop:flex desktop:justify-center desktop:items-center">
 			<Slider data={tags}>{item => <FoodTag categorie={item.categorie} />}</Slider>
 		</div>
 	);
