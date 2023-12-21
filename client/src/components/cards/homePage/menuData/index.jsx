@@ -26,7 +26,7 @@ export default function MenuData({
 
 	return (
 		<>
-			<div className="items-start w-full justify-start flex-col gap-2 pt-6 p-4 tablet:hidden desktop:flex bg-secundario desktop:max-w-[1200px]">
+			{/* <div className="items-start w-full justify-start flex-col gap-2 pt-6 p-4 tablet:hidden desktop:flex bg-secundario desktop:max-w-[1200px]">
 				<div className="flex flex-row justify-between w-full">
 					<div className="flex flex-col gap-4">
 						<div className="flex flex-row gap-2 h-5">
@@ -54,7 +54,7 @@ export default function MenuData({
 					</div>
 				</div>
 				<SocialSection />
-			</div>
+			</div> */}
 			<div className="flex flex-col items-start justify-start p-4 desktop:hidden bg-secundario w-full">
 				<div className="flex flex-row items-start justify-start gap-4 mb-5 w-full">
 					<button onClick={() => changeSection(true)} className="text-sm/5 font-medium">
