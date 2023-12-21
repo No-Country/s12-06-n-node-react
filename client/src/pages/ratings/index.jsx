@@ -19,8 +19,13 @@ export default function RatingsPage() {
 
 	const setRestaurantName = useRestaurantStore(state => state.setRestaurantName);
 
-	const { data = {}, loading, error } = useFetch(() => getRestaurantById(restaurantId));
-	const { name, stars, totalRatings } = data;
+	const {
+		data: dataRestaurant = {},
+		loading,
+		error,
+	} = useFetch(() => getRestaurantById(restaurantId));
+	const { name, rating } = dataRestaurant;
+	console.log(dataRestaurant);
 
 	useEffect(() => {
 		setRestaurantName(name);
@@ -57,6 +62,7 @@ export default function RatingsPage() {
 		loading: commentLoading,
 		error: commentError,
 	} = useFetch(() => getCommentsByIdRestaurant(restaurantId));
+	console.log(rating);
 
 	// const { data: userData } = useFetch(() => getUserById(userId));
 
@@ -66,11 +72,15 @@ export default function RatingsPage() {
 				<div>
 					<div className="flex justify-center items-center">
 						<StarIcon className="fill-principal stroke-principal h-5 w-5" />
-						<p className="text-xl desktop:text-2xl ml-2">{stars}</p>
+						<p className="text-xl desktop:text-2xl ml-2">{rating?.average}</p>
 					</div>
-					<h2 className="text-xs desktop:text-base">{totalRatings} opiniones</h2>
+					<h2 className="text-xs desktop:text-base whitespace-nowrap">{rating?.total} opiniones</h2>
 				</div>
-				<BarProgress />
+				<div className="flex flex-col w-full">
+					{rating?.total_per_starts.map((value, index) => (
+						<BarProgress value={value} key={index} number={index +1}/>
+					))}
+				</div>
 				<Button
 					text="Calificar"
 					onClick={openModal}
