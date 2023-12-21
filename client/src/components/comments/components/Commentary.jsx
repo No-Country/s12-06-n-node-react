@@ -67,7 +67,7 @@ export default function Commentary({ name, commentary, createdAt, scopes, commen
 				<div className="flex flex-row items-center justify-between gap-auto">
 					<p className="text-texts text-sm font-medium">{name}</p>
 					<div className="flex flex-row items-center justify-end gap-2">
-						<p className="text-disabled text-xs ">{timeAgo}</p>
+						<p className="text-disabled text-xs">{timeAgo}</p>
 						<Dropdown white icon={<DotMenuIcon />} circularButton>
 							<DropdownItem onClick={confirmDeleteComment} title="Eliminar" icon={<DeleteIcon />} />
 							<DropdownItem onClick={openEditModal} title="Editar" icon={<EditIcon />} />
