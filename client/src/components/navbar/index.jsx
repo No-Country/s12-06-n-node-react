@@ -34,24 +34,21 @@ export default function Navbar() {
 							 h-6 flex justify-center items-center relative cursor-pointer"
 						>
 							<div
-								className={`w-6 h-6 flex justify-center items-center rounded-full absolute ${
-									isExpanded ? "-translate-x-full" : ""
-								} transition-transform ease-in-out duration-300`}
+								className={`w-6 h-6 flex justify-center items-center rounded-full absolute ${isExpanded ? "-translate-x-full" : ""
+									} transition-transform ease-in-out duration-300`}
 							>
 								<img src={SearchIcon} alt="Search Icon" />
 							</div>
 							<div
-								className={`w-6 h-6 flex justify-center items-center rounded-full absolute ${
-									isExpanded ? "" : "-translate-x-full"
-								} transition-transform ease-in-out duration-300`}
+								className={`w-6 h-6 flex justify-center items-center rounded-full absolute ${isExpanded ? "" : "-translate-x-full"
+									} transition-transform ease-in-out duration-300`}
 							>
 								<img src={ArrowLeft} alt="Search Icon" />
 							</div>
 						</div>
 						<div
-							className={`${
-								isExpanded ? "w-full" : "w-0 -translate-x-full"
-							} overflow-hidden transition-all ease-in-out duration-300 flex items-center`}
+							className={`${isExpanded ? "w-full" : "w-0 -translate-x-full"
+								} overflow-hidden transition-all ease-in-out duration-300 flex items-center`}
 						>
 							<input
 								value={search}
@@ -63,17 +60,16 @@ export default function Navbar() {
 						</div>
 					</div>
 					<div
-						className={`${
-							isExpanded ? "translate-x-full" : "translate-x-0"
-						} transition-transform ease-in-out duration-300`}
+						className={`${isExpanded ? "translate-x-full" : "translate-x-0"
+							} transition-transform ease-in-out duration-300`}
 					>
-						<button
-							className={`${
-								isExpanded ? "translate-x-full w-0" : "translate-x-0"
-							} bg-principal px-2 py-1 rounded-lg max-h-8 transition-transform ease-in-out duration-300`}
+						<Link
+							to={"/restaurant/registerProducts"}
+							className={`${isExpanded ? "translate-x-full w-0" : "translate-x-0"
+								} bg-principal px-2 py-1 rounded-lg max-h-8 transition-transform ease-in-out duration-300`}
 						>
 							Publicar
-						</button>
+						</Link>
 					</div>
 				</div>
 			</div>

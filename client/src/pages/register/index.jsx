@@ -15,6 +15,17 @@ import RegisterBottomSheet from "./components/bottomSheet";
 import StoreIcon from "./assets/storeIcon";
 
 export default function RegisterPage() {
+	const [formData, setFormData] = useState({
+		address: {
+			city: "",
+			street: "",
+		},
+		categories: [],
+		description: "",
+		email: "",
+		name: "",
+		phone: "",
+	});
 	// Categorías
 	const [selectedCategories, setSelectedCategories] = useState([]);
 	// Productos
