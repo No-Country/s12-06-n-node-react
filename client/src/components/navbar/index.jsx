@@ -64,7 +64,7 @@ export default function Navbar() {
 							} transition-transform ease-in-out duration-300`}
 					>
 						<Link
-							to={"/restaurant/registerProducts"}
+							to="/restaurant/registerProducts"
 							className={`${isExpanded ? "translate-x-full w-0" : "translate-x-0"
 								} bg-principal px-2 py-1 rounded-lg max-h-8 transition-transform ease-in-out duration-300`}
 						>
