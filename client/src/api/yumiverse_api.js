@@ -6,6 +6,7 @@ export const getAllRestaurants = async () => {
 
 export const getAllCategories = async () => {
 	return await axios.get("https://yumi-verse.onrender.com/api/v1/category");
+	// return await axios.get("http://localhost:3000/api/v1/category");
 };
 
 export const getRestaurantById = async id => {
@@ -14,6 +15,7 @@ export const getRestaurantById = async id => {
 
 export const postRestaurant = async data => {
 	return await axios.post("https://yumi-verse.onrender.com/api/v1/restaurant", data);
+	// return await axios.post("http://localhost:3000/api/v1/restaurant", data);
 };
 
 export const postUser = async (name, surname, phone, username, password) => {
