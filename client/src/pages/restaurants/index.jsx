@@ -21,7 +21,7 @@ export default function RestaurantPage() {
 	const restaurantName = useRestaurantStore(state => state.restaurantName);
 
 	const { data = {}, loading, error } = useFetch(() => getRestaurantById(restaurantId));
-	const { name, imgBrand, description, categories, address, phone, isOpen, stars, totalRatings } = data;
+	const { name, imgBrand, description, categories, address, phone, isOpen, rating } = data;
 
 	useEffect(() => {
 		setRestaurantName(name);
@@ -50,8 +50,8 @@ export default function RestaurantPage() {
 				phoneNumber={phone}
 				categories={cat}
 				openRestaurant={isOpen}
-				stars={stars}
-				totalRatings={totalRatings}
+				stars={rating?.average}
+				totalRatings={rating?.total}
 			/>
 			<FoodTags />
 			<RestaurantCategory showBottomSheet={showBottomSheet} />
