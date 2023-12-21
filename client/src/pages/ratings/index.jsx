@@ -3,15 +3,18 @@ import Comments from "../../components/comments";
 import BarProgress from "../../components/comments/components/BarProgress";
 import StarIcon from "../../icons/StarIcon";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getCommentsByIdRestaurant, getRestaurantById } from "../../api/yumiverse_api";
 import { useFetch } from "../../hooks/useFetch";
 import { useRestaurantStore } from "../../stores";
 import Modal from "../../components/modal";
 import RateRestaurant from "../../components/modal/components/RateRestaurant";
 import QualifyIcon from "../../icons/QualifyIcon";
+import Swal from "sweetalert2";
 
 export default function RatingsPage() {
+	const navigate = useNavigate();
+
 	const { restaurantId } = useParams();
 
 	const setRestaurantName = useRestaurantStore(state => state.setRestaurantName);
@@ -26,7 +29,23 @@ export default function RatingsPage() {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const openModal = () => {
-		setIsModalOpen(true);
+		const token = localStorage.getItem("token");
+		if (token) {
+			setIsModalOpen(true);
+		} else {
+			Swal.fire({
+				icon: "error",
+				title: "No estás logueado",
+				text: "Debes iniciar sesión para calificar.",
+				showCancelButton: true,
+				confirmButtonText: "Aceptar",
+			}).then(result => {
+				if (result.isConfirmed) {
+					// Redirigir a la página de inicio de sesión
+					navigate("/auth/splash");
+				}
+			});
+		}
 	};
 
 	const closeModal = () => {
