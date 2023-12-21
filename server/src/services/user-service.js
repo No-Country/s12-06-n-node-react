@@ -15,7 +15,7 @@ const UserService = {
 		console.log("SERVICE CREATE USER:", user);
 		return user;
 	},
-	async login(body){
+	async login(body) {
 		/**
 		 * body = {
 		 * 	username: "username",
@@ -27,13 +27,13 @@ const UserService = {
 		 * }
 		 */
 		const id = body.id;
-        const name = body.name;
+		const name = body.name;
 		const surname = body.surname;
-		
-        const token = await generateToken(body);
 
-        return { id, name, surname, bearer_token: token };
-    },
+		const token = await generateToken(body);
+
+		return { id, name, surname, bearer_token: token };
+	},
 	async getUser(id) {
 		const user = await UserModel.findById(id);
 

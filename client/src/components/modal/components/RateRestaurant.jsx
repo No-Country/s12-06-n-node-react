@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "../../../components/button/Button";
 import StarRating from "../../starRating";
 import axios from "axios";
+import Swal from "sweetalert2";
 
-function RateRestaurant({ closeModal, restaurantId }) {
+function RateRestaurant({ closeModal, restaurantId, commentIdToEdit, existingComment }) {
 	const [rating, setRating] = useState(1);
-	const [comment, setComment] = useState("");
+	const [comment, setComment] = useState(existingComment || "");
+	const [isEditing, setIsEditing] = useState(!!commentIdToEdit);
+
 	const bearer_token = localStorage.getItem("token");
 
 	const handleRatingChange = newRating => {
@@ -34,14 +37,47 @@ function RateRestaurant({ closeModal, restaurantId }) {
 				}
 			);
 
-			// Manejar la respuesta si es necesario
-			console.log("Comentario enviado con éxito:", response.data);
+			Swal.fire("Comentario enviado", "El comentario ha sido enviado correctamente.", "success");
 
 			closeModal();
 		} catch (error) {
-			console.error("Error al enviar el comentario:", error);
+			Swal.fire("¡Ups! ", "Error al enviar el comentario", "error");
 		}
 	};
+
+	const handleEdit = async () => {
+		try {
+			const data = {
+				comment,
+			};
+			const response = await axios.patch(
+				`https://yumi-verse.onrender.com/api/v1/comment/${commentIdToEdit}`,
+				data,
+				{
+					headers: {
+						Authorization: `Bearer ${bearer_token}`,
+					},
+				}
+			);
+
+			Swal.fire(
+				"Comentario actualizado",
+				"El comentario ha sido actualizado con éxito.",
+				"success"
+			);
+
+			closeModal();
+		} catch (error) {
+			Swal.fire("¡Ups! ", "Error al editar el comentario", "error");
+		}
+	};
+
+	useEffect(() => {
+		if (commentIdToEdit) {
+			setComment(existingComment);
+			setIsEditing(true);
+		}
+	}, [commentIdToEdit, existingComment]);
 
 	return (
 		<div className="flex flex-col gap-4">
@@ -57,7 +93,13 @@ function RateRestaurant({ closeModal, restaurantId }) {
 				className="p-2 border border-principal h-32 rounded-lg bg-secundario outline-principal resize-none"
 			></textarea>
 			<div className="m-auto">
-				<Button type="submit" onClick={handleSubmit} text="Publicar calificación" yellow rounded />
+				<Button
+					type="submit"
+					onClick={isEditing ? handleEdit : handleSubmit}
+					text={isEditing ? "Guardar cambios" : "Publicar calificación"}
+					yellow
+					rounded
+				/>
 			</div>
 		</div>
 	);

@@ -3,21 +3,29 @@ import Comments from "../../components/comments";
 import BarProgress from "../../components/comments/components/BarProgress";
 import StarIcon from "../../icons/StarIcon";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getCommentsByIdRestaurant, getRestaurantById } from "../../api/yumiverse_api";
 import { useFetch } from "../../hooks/useFetch";
 import { useRestaurantStore } from "../../stores";
 import Modal from "../../components/modal";
 import RateRestaurant from "../../components/modal/components/RateRestaurant";
 import QualifyIcon from "../../icons/QualifyIcon";
+import Swal from "sweetalert2";
 
 export default function RatingsPage() {
+	const navigate = useNavigate();
+
 	const { restaurantId } = useParams();
 
 	const setRestaurantName = useRestaurantStore(state => state.setRestaurantName);
 
-	const { data = {}, loading, error } = useFetch(() => getRestaurantById(restaurantId));
-	const { name, stars, totalRatings } = data;
+	const {
+		data: dataRestaurant = {},
+		loading,
+		error,
+	} = useFetch(() => getRestaurantById(restaurantId));
+	const { name, rating } = dataRestaurant;
+	console.log(dataRestaurant);
 
 	useEffect(() => {
 		setRestaurantName(name);
@@ -26,7 +34,23 @@ export default function RatingsPage() {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const openModal = () => {
-		setIsModalOpen(true);
+		const token = localStorage.getItem("token");
+		if (token) {
+			setIsModalOpen(true);
+		} else {
+			Swal.fire({
+				icon: "error",
+				title: "No estás logueado",
+				text: "Debes iniciar sesión para calificar.",
+				showCancelButton: true,
+				confirmButtonText: "Aceptar",
+			}).then(result => {
+				if (result.isConfirmed) {
+					// Redirigir a la página de inicio de sesión
+					navigate("/auth/splash");
+				}
+			});
+		}
 	};
 
 	const closeModal = () => {
@@ -38,6 +62,7 @@ export default function RatingsPage() {
 		loading: commentLoading,
 		error: commentError,
 	} = useFetch(() => getCommentsByIdRestaurant(restaurantId));
+	console.log(rating);
 
 	// const { data: userData } = useFetch(() => getUserById(userId));
 
@@ -47,11 +72,15 @@ export default function RatingsPage() {
 				<div>
 					<div className="flex justify-center items-center">
 						<StarIcon className="fill-principal stroke-principal h-5 w-5" />
-						<p className="text-xl desktop:text-2xl ml-2">{stars}</p>
+						<p className="text-xl desktop:text-2xl ml-2">{rating?.average}</p>
 					</div>
-					<h2 className="text-xs desktop:text-base">{totalRatings} opiniones</h2>
+					<h2 className="text-xs desktop:text-base whitespace-nowrap">{rating?.total} opiniones</h2>
 				</div>
-				<BarProgress />
+				<div className="flex flex-col w-full">
+					{rating?.total_per_starts.map((value, index) => (
+						<BarProgress value={value} key={index} number={index +1}/>
+					))}
+				</div>
 				<Button
 					text="Calificar"
 					onClick={openModal}
