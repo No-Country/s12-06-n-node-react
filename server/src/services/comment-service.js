@@ -15,9 +15,32 @@ const CommentService = {
 		const newAverageRating = totalRating / comments.length;
 		const roundedAverageRating = Math.round(newAverageRating * 10) / 10;
 
+		const restaurant = await RestaurantModel.findById(restaurantId);
+		
+		const totalPerStarts = restaurant.rating.total_per_starts;
+
+		comments.forEach((comment) => {
+			if (comment.rating === 1) {
+				totalPerStarts[0] += 1;
+			} else if (comment.rating === 2) {
+				totalPerStarts[1] += 1;
+			} else if (comment.rating === 3) {
+				totalPerStarts[2] += 1;
+			} else if (comment.rating === 4) {
+				totalPerStarts[3] += 1;
+			} else if (comment.rating === 5) {
+				totalPerStarts[4] += 1;
+			}
+		});
+
+		const rating = {
+			average: roundedAverageRating,
+			total: comments.length,
+			total_per_starts: totalPerStarts 
+		}
+
 		await RestaurantModel.findOneAndUpdate(
-			{ _id: restaurantId },
-			{ averageRating: roundedAverageRating },
+			{ _id: restaurantId }, { $set: { rating }},
 			{ new: true }
 		);
 
