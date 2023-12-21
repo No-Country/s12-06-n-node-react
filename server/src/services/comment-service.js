@@ -16,10 +16,10 @@ const CommentService = {
 		const roundedAverageRating = Math.round(newAverageRating * 10) / 10;
 
 		const restaurant = await RestaurantModel.findById(restaurantId);
-		
+
 		const totalPerStarts = restaurant.rating.total_per_starts;
 
-		comments.forEach((comment) => {
+		comments.forEach(comment => {
 			if (comment.rating === 1) {
 				totalPerStarts[0] += 1;
 			} else if (comment.rating === 2) {
@@ -36,11 +36,12 @@ const CommentService = {
 		const rating = {
 			average: roundedAverageRating,
 			total: comments.length,
-			total_per_starts: totalPerStarts 
-		}
+			total_per_starts: totalPerStarts,
+		};
 
 		await RestaurantModel.findOneAndUpdate(
-			{ _id: restaurantId }, { $set: { rating }},
+			{ _id: restaurantId },
+			{ $set: { rating } },
 			{ new: true }
 		);
 
