@@ -17,7 +17,7 @@ router.delete("/:CommentId", authValidation, commentValidation.delete, CommentCo
 export default router;
 /**
  * endpoints a autenticar:
- * - /comment/create - POST 
+ * - /comment/create - POST
  * - /commentId/:UserId - PATCH
- *  - /:commentId/:UserId - DELETE 
+ *  - /:commentId/:UserId - DELETE
  */

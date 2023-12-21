@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { UserController } from "../controllers/index.js";
-import { userValidation,  /** , tokenValidation */
-} from "../middlewares/index.js";
+import { userValidation /** , tokenValidation */ } from "../middlewares/index.js";
 
 const router = Router();
 
