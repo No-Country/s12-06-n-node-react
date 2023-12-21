@@ -7,7 +7,6 @@ export default function AddBtn({ title, storeIcon, type, handleFormSubmit }) {
 	const handleClick = e => {
 		e.preventDefault();
 		setOnClick(!onClick);
-		handleFormSubmit(e);
 	};
 
 	return (

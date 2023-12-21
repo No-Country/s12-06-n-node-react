@@ -21,8 +21,8 @@ export default function RestaurantPage() {
 	const restaurantName = useRestaurantStore(state => state.restaurantName);
 
 	const { data = {}, loading, error } = useFetch(() => getRestaurantById(restaurantId));
-	const { name, imgBrand, description, categories, address, phone, isOpen, rating } = data;
-
+	const { name, imgBrand, description, categories, address, phone, isOpen, rating, menus } = data;
+	console.log(data);
 	useEffect(() => {
 		setRestaurantName(name);
 	}, [setRestaurantName, name]);
@@ -54,7 +54,7 @@ export default function RestaurantPage() {
 				totalRatings={rating?.total}
 			/>
 			<FoodTags />
-			<RestaurantCategory showBottomSheet={showBottomSheet} />
+			<RestaurantCategory showBottomSheet={showBottomSheet} menus={menus} />
 			<BottomSheet showBottomSheet={showBottomSheet} />
 		</main>
 	);
