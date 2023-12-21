@@ -104,7 +104,8 @@ const commentValidation = {
 					throw new Error(`Error al validar el id del usuario: ${error.message}`);
 				}
 			}),
-		check("comment").exists().notEmpty().withMessage("El comentario es requerido"),
+		check("comment").optional().notEmpty().withMessage("El comentario no puede estar vacío"),
+		check("rating").optional().notEmpty().withMessage("El puntaje no puede estar vacío"),
 		(req, res, next) => validateResult(req, res, next),
 	],
 	delete: [

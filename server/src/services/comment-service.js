@@ -64,12 +64,11 @@ const CommentService = {
 		return comment;
 	},
 	async updateComment(body) {
-		const { commentId,  comment } = body;
-		const text = comment;
+		const { commentId } = body;
 
 		const commentUpdated = await CommentModel.findOneAndUpdate(
 			{ _id: commentId },
-			{ comment: text },
+			{ $set: body },
 			{ new: true }
 		);
 
