@@ -3,7 +3,7 @@ export default function DropdownItem({ onClick, type, title, icon }) {
 		<button
 			onClick={onClick}
 			type={type}
-			className="flex items-center gap-2 text-sm text-texts stroke-texts"
+			className="flex items-center gap-2 text-sm text-texts stroke-texts whitespace-nowrap"
 		>
 			{icon}
 			{title}
