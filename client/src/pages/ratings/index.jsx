@@ -68,7 +68,7 @@ export default function RatingsPage() {
 
 	return (
 		<div className="flex items-center justify-center desktop:items-start flex-col desktop:flex-row p-4 gap-6 min-w-[375px] desktop:gap-12">
-			<div className="flex gap-4 items-center desktop:w-96 desktop:flex-col desktop:gap-6">
+			<div className="desktop:sticky top-4 desktop:top-16 flex gap-4 items-center desktop:w-96 desktop:flex-col desktop:gap-6">
 				<div>
 					<div className="flex justify-center items-center">
 						<StarIcon className="fill-principal stroke-principal h-5 w-5" />
@@ -78,7 +78,7 @@ export default function RatingsPage() {
 				</div>
 				<div className="flex flex-col w-full">
 					{rating?.total_per_starts.map((value, index) => (
-						<BarProgress value={value} key={index} number={index +1}/>
+						<BarProgress value={value} key={index} number={index + 1} />
 					))}
 				</div>
 				<Button
