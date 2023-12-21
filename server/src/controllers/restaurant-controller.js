@@ -1,4 +1,4 @@
-import { RestaurantService } from "../services/index.js";
+import { RestaurantService, CommentService } from "../services/index.js";
 import { handleHttp } from "../utils/error-handle.js";
 
 const RestaurantController = {
@@ -15,6 +15,27 @@ const RestaurantController = {
 		const { id } = req.params;
 		try {
 			const response = await RestaurantService.getRestaurantById(id);
+			return res.status(200).json(response);
+		} catch (e) {
+			handleHttp(res, "ERROR_GET_RESTAURANT", e);
+		}
+	},
+
+	async getRestaurantById(req, res) {
+		const { id } = req.params;
+		try {
+			// Call RestaurantService to get restaurant details by ID
+			const restaurant = await RestaurantService.getRestaurantById(id);
+
+			// Call RestaurantService to get the average rating for the restaurant
+			const averageRating = await CommentService.getAverageRating(id);
+
+			// Include the average rating in the response
+			const response = {
+				...restaurant.toObject(),
+				averageRating,
+			};
+
 			return res.status(200).json(response);
 		} catch (e) {
 			handleHttp(res, "ERROR_GET_RESTAURANT", e);

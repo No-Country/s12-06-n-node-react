@@ -1,10 +1,17 @@
-const MenuItem = ({ title, price, description, img }) => {
+import { useRestaurantStore } from "../../stores";
+
+const MenuItem = ({ title, price, description, img, handlerCardClick }) => {
 	// Add a placeholder image for when the image is not available.
 	// receive title, price, description, img
 	// return a div with the following structure:
+	const showBottomSheet = useRestaurantStore(state => state.showBottomSheet);
+	const setShowBottomSheet = useRestaurantStore(state => state.setShowBottomSheet);
 
 	return (
-		<div className="w-[343px] h-36 flex-col justify-start items-start gap-3 inline-flex flex-wrap">
+		<div
+			onClick={handlerCardClick}
+			className="w-full max-w-[343px] h-36 flex-col justify-start items-start gap-3 inline-flex flex-wrap"
+		>
 			<div className="h-32 justify-center items-start gap-2 inline-flex">
 				<img
 					className="w-[105px] self-stretch rounded-lg"
@@ -23,9 +30,7 @@ const MenuItem = ({ title, price, description, img }) => {
 					</div>
 					<div className="self-stretch justify-center items-center gap-2.5 inline-flex">
 						<div className="grow shrink basis-0 text-stone-950 text-xs font-normal font-['DM Sans'] leading-[18px]">
-							<span>
-								{description}
-							</span>
+							<span>{description}</span>
 						</div>
 					</div>
 				</div>

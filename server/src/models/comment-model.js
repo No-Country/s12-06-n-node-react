@@ -2,39 +2,24 @@ import { Schema, model } from "mongoose";
 
 const commentSchema = new Schema(
 	{
-		id: {
-			type: String,
+		userId: {
+			type: Schema.Types.ObjectId,
+			ref: "users",
 			required: true,
-			unique: true,
+		},
+		restaurantId: {
+			type: Schema.Types.ObjectId,
+			ref: "restaurants",
+			required: true,
 		},
 		comment: {
 			type: String,
 			required: true,
 		},
-		user_id: {
-			type: String,
-			required: true,
-		},
-		restaurant_id: {
-			type: Schema.Types.ObjectId,
-			ref: "restaurants",
-			required: true,
-		},
 		rating: {
 			type: Number,
+			enum: [1, 2, 3, 4, 5],
 			required: true,
-		},
-		createdAt: {
-			type: Date,
-			required: true,
-		},
-		like: {
-			type: Number,
-			required: false,
-		},
-		dislike: {
-			type: Number,
-			required: false,
 		},
 	},
 	{ timestamps: true, versionKey: false }
