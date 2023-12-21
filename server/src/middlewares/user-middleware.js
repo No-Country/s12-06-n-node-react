@@ -234,18 +234,21 @@ const userValidation = {
 	],
 	get: [
 		param("id")
-			.exists().withMessage("El id es requerido")
-			.notEmpty().withMessage("El id no puede estar vacío")
-			.isLength({ min: 24, max: 24 }).withMessage("El id no es válido")
+			.exists()
+			.withMessage("El id es requerido")
+			.notEmpty()
+			.withMessage("El id no puede estar vacío")
+			.isLength({ min: 24, max: 24 })
+			.withMessage("El id no es válido")
 			.custom(async value => {
-				try{
+				try {
 					const user = await UserModel.findById(value);
-					if(!user){
+					if (!user) {
 						throw new Error("El usuario no existe");
 					}
 
 					return true;
-				}catch(error){
+				} catch (error) {
 					throw new Error(`Error al validar el usuario: ${error.message}`);
 				}
 			}),
