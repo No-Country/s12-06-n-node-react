@@ -18,5 +18,8 @@ export const useRestaurantStore = create(
 
         restaurantDataStore: [],
         setRestaurantDataStore: (data) => set({ restaurantDataStore: data }),
+
+        restaurantCategoryData: [],
+        setRestaurantCategoryData: (data) => set({ restaurantCategoryData: data }),
     })
 )

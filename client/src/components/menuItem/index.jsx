@@ -14,7 +14,7 @@ const MenuItem = ({ title, price, description, img, handlerCardClick }) => {
 		>
 			<div className="h-32 justify-center items-start gap-2 inline-flex">
 				<img
-					className="w-[105px] self-stretch rounded-lg"
+					className="w-[105px] self-stretch rounded-lg object-center object-cover"
 					src={img == null ? `https://via.placeholder.com/105x128` : img}
 				/>
 				<div className="w-[230px] self-stretch  flex-col justify-start items-start gap-1 inline-flex">
