@@ -46,9 +46,7 @@ _JAVASCRIP_: Lenguaje de programación que se utiliza para hacer paginas web int
 
 _VITE-REACT_: Herramienta de Tooling para frontend.
 
-_BOOTSTRAP_: Es un framework frontend para desarrollar aplicaciones y sitios web.
-
-_STYLED COMPONENTS_: Es una biblioteca de Javascript que se utiliza para estilizar documentos.
+_TAILWIND CSS_: Tailwind CSS es un framework de CSS de código abierto​ para el diseño de páginas web. La principal característica de esta biblioteca es que, a diferencia de otras como Bootstrap, no genera una serie de clases predefinidas para elementos como botones o tablas
 
 ### Backend
 
@@ -107,7 +105,7 @@ _POSTMAN_: Es una plataforma para realizar pruebas y comprobar el correcto funci
 </p>
 *TRELLO*
 
-_SLACK_
+_INSTAGANTT_
 
 ### EQUIPO
 
