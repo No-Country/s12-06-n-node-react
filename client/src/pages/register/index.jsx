@@ -1,29 +1,49 @@
-import { Controller, useForm, useFieldArray } from "react-hook-form";
-import { useState } from "react";
-import Input from "./components/buttons/input";
-import AddBtn from "./components/buttons/addBtn";
 import DropDownBtn from "./components/buttons/dropDownBtn";
 import AddIcon from "./assets/addIcon";
 import DropdownItem from "../../components/dropdown/components/DropdownItem";
 import { useRestaurantStore } from "../../stores/restaurants/useRestaurant.store";
 import { useFetch } from "../../hooks/useFetch";
-import { getAllCategories } from "../../api/yumiverse_api";
+import { getAllCategories, postRestaurant } from "../../api/yumiverse_api";
 import CheckboxIcon from "../../icons/CheckboxIcon";
 import SectionTitle from "./components/titles/sectionTitle";
 import CheckButton from "./components/checkButton";
 import RegisterBottomSheet from "./components/bottomSheet";
 import StoreIcon from "./assets/storeIcon";
+import { useState } from "react";
+import { useForm, useFieldArray, Controller } from 'react-hook-form';
+import AddBtn from "./components/buttons/addBtn";
+import Input from "./components/buttons/input";
 
 export default function RegisterPage() {
+	const [formData, setFormData] = useState({
+		address: {
+			street: "No definida",
+			city: "No definida",
+			state: "No definida",
+			country: "No definida",
+		},
+		categories: [],
+		description: "",
+		email: "",
+		name: "",
+		phone: "",
+	});
 	// Categorías
-	const [selectedCategories, setSelectedCategories] = useState([]);
+	const [selectedCategories, setSelectedCategories] = useState(formData.categories);
 	// Productos
-	const [showBottomSheet, setShowBottomSheet] = useRestaurantStore(state => [state.showBottomSheet, state.setShowBottomSheet]);
+	const [showBottomSheet, setShowBottomSheet] = useRestaurantStore(state => [
+		state.showBottomSheet,
+		state.setShowBottomSheet,
+	]);
 	const handleAddProduct = () => {
 		setShowBottomSheet(!showBottomSheet);
 	};
 
-	const { data: categoryData, loading: categoryLoading, error: categoryError } = useFetch(getAllCategories);
+	const {
+		data: categoryData,
+		loading: categoryLoading,
+		error: categoryError,
+	} = useFetch(getAllCategories);
 
 	const {
 		control,
@@ -31,29 +51,28 @@ export default function RegisterPage() {
 		setValue,
 		formState: { errors },
 	} = useForm();
-
 	const { fields, append, remove } = useFieldArray({
 		control,
 		name: "categories",
 	});
 
-	const onSubmit = async (data) => {
-		console.log('Datos enviados: ', data);
+	const onSubmit = async data => {
+		console.log("Datos enviados: ", data);
 		// Acá debo poner la llamada a la API
 		try {
-			// const response = await postRestaurant(data);
-			// console.log('Respuesta del servidor: ', response.data);
-			console.log('Enviando la información');
+			const response = await postRestaurant(data);
+			console.log("Respuesta del servidor: ", response.data._id);
+			console.log("Información enviada!");
 		} catch (error) {
-			console.error('Error al enviar la solicitud: ', error);
+			console.error("Error al enviar la solicitud: ", error);
 		}
 	};
 
-	const handleCategorySelection = (categoryId) => {
+	const handleCategorySelection = categoryId => {
 		if (selectedCategories.length < 2 && !selectedCategories.includes(categoryId)) {
 			const updatedCategories = [...selectedCategories, categoryId];
 			setSelectedCategories(updatedCategories);
-			setValue('categories', updatedCategories);
+			setValue("categories", updatedCategories);
 		}
 	};
 	// Métodos de pago
@@ -69,14 +88,13 @@ export default function RegisterPage() {
 		{ id: 2, name: "Entrega a Domicilio" },
 		{ id: 3, name: "Retiro en el local" },
 	];
-
 	return (
 		<form
 			className="bg-secundario h-full px-4 flex flex-col gap-6"
 			onSubmit={handleSubmit(onSubmit)}
 		>
 			{/* Fotos de portada */}
-			<div className="flex flex-col gap-2 mt-6" >
+			<div className="flex flex-col gap-2 mt-6">
 				<div className="flex items-center gap-4">
 					<h2 className="leading-none">Fotos de portada</h2>
 					<p className="h-4 text-[10px] bg-disabled px-2 rounded-[4px]">
@@ -96,7 +114,7 @@ export default function RegisterPage() {
 				</div>
 			</div>
 			{/* Nombre del comercio */}
-			<div className="flex flex-col gap-2" >
+			<div className="flex flex-col gap-2">
 				<label htmlFor="name" className="leading-none">
 					Nombre del comercio
 				</label>
@@ -105,15 +123,13 @@ export default function RegisterPage() {
 						name="name"
 						control={control}
 						defaultValue=""
-						render={({ field }) => (
-							<Input idFor="name" {...field} />
-						)}
+						render={({ field }) => <Input idFor="name" {...field} />}
 					/>
 					<p className="text-xs italic">No utilices símbolos ni carácteres especiales.</p>
 				</div>
-			</div >
+			</div>
 			{/* Descripción del comercio */}
-			<div className="flex flex-col gap-2" >
+			<div className="flex flex-col gap-2">
 				<label htmlFor="description" className="leading-none">
 					Descripción
 				</label>
@@ -122,13 +138,11 @@ export default function RegisterPage() {
 						name="description"
 						control={control}
 						defaultValue=""
-						render={({ field }) => (
-							<Input idFor="description" {...field} />
-						)}
+						render={({ field }) => <Input idFor="description" {...field} />}
 					/>
 					<p className="text-xs italic">No utilices símbolos ni carácteres especiales.</p>
 				</div>
-			</div >
+			</div>
 			{/* Categorías */}
 			<div className="flex flex-col gap-2">
 				<h2 className="leading-none">
@@ -136,17 +150,15 @@ export default function RegisterPage() {
 				</h2>
 				<div className="flex items-center gap-[18px]">
 					<DropDownBtn title="Seleccionar">
-						{
-							categoryData?.map(cat => (
-								<DropdownItem
-									key={cat._id}
-									title={cat.category}
-									type={'button'}
-									icon={<CheckboxIcon />}
-									onClick={() => handleCategorySelection(cat._id)}
-								/>
-							))
-						}
+						{categoryData?.map(cat => (
+							<DropdownItem
+								key={cat._id}
+								title={cat.category}
+								type={"button"}
+								icon={<CheckButton key={cat._id} id={cat._id} />}
+								onClick={() => handleCategorySelection(cat._id)}
+							/>
+						))}
 					</DropDownBtn>
 					<div className="justify-center items-center bg-principal w-10 h-8 rounded-lg px-2 py-1 flex">
 						<AddIcon />
@@ -156,7 +168,6 @@ export default function RegisterPage() {
 			{/* Contacto */}
 			{/* Horario */}
 			<SectionTitle title="Contacto">
-
 				<div className="flex flex-col gap-2 -mt-2 w-full">
 					<h2 className="leading-none">Horario</h2>
 					<div className="flex items-center gap-2 text-texts">
@@ -173,23 +184,49 @@ export default function RegisterPage() {
 						</div>
 					</div>
 				</div>
-
 				<div className="flex flex-col gap-2">
 					<label htmlFor="address" className="leading-none">
 						Dirección
 					</label>
-					<div className="w-full h-auto">
-						<Controller
-							name="address"
-							control={control}
-							defaultValue=""
-							render={({ field }) => (
-								<Input idFor="address" {...field} />
-							)}
-						/>
+					<div className="flex flex-col gap-2 pl-4">
+						<label htmlFor="street">Calle o Avenida</label>
+						<div className="w-full h-auto">
+							<Controller
+								name="address.street"
+								control={control}
+								defaultValue=""
+								render={({ field }) => <Input idFor="street" {...field} />}
+							/>
+						</div>
+						<label htmlFor="city">Ciudad</label>
+						<div className="w-full h-auto">
+							<Controller
+								name="address.city"
+								control={control}
+								defaultValue=""
+								render={({ field }) => <Input idFor="city" {...field} />}
+							/>
+						</div>
+						<label htmlFor="state">Provincia</label>
+						<div className="w-full h-auto">
+							<Controller
+								name="address.state"
+								control={control}
+								defaultValue=""
+								render={({ field }) => <Input idFor="state" {...field} />}
+							/>
+						</div>
+						<label htmlFor="country">País</label>
+						<div className="w-full h-auto">
+							<Controller
+								name="address.country"
+								control={control}
+								defaultValue=""
+								render={({ field }) => <Input idFor="country" {...field} />}
+							/>
+						</div>
 					</div>
 				</div>
-
 				<div className="flex flex-col gap-2">
 					<label htmlFor="phone" className="leading-none">
 						Número de teléfono
@@ -199,13 +236,10 @@ export default function RegisterPage() {
 							name="phone"
 							control={control}
 							defaultValue=""
-							render={({ field }) => (
-								<Input idFor="phone" {...field} />
-							)}
+							render={({ field }) => <Input idFor="phone" {...field} />}
 						/>
 					</div>
 				</div>
-
 				<div className="flex flex-col gap-2">
 					<label htmlFor="email" className="leading-none">
 						Correo electrónico (email)
@@ -215,9 +249,7 @@ export default function RegisterPage() {
 							name="email"
 							control={control}
 							defaultValue=""
-							render={({ field }) => (
-								<Input idFor="email" type="email" {...field} />
-							)}
+							render={({ field }) => <Input idFor="email" type="email" {...field} />}
 						/>
 					</div>
 				</div>
@@ -274,7 +306,10 @@ export default function RegisterPage() {
 				<RegisterBottomSheet showBottomSheet={showBottomSheet} />
 			</SectionTitle>
 			<div className="w-full flex justify-center items-center my-[76px]">
-				<button className="flex items-center gap-1 bg-principal h-8 px-2 py-1 rounded-2xl" type="submit">
+				<button
+					className="flex items-center gap-1 bg-principal h-8 px-2 py-1 rounded-2xl"
+					type="submit"
+				>
 					<span>Publicar tienda</span>
 					<StoreIcon />
 				</button>

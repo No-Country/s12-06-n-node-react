@@ -21,8 +21,8 @@ export default function RestaurantPage() {
 	const restaurantName = useRestaurantStore(state => state.restaurantName);
 
 	const { data = {}, loading, error } = useFetch(() => getRestaurantById(restaurantId));
-	const { name, imgBrand, description, categories, address, phone, isOpen, stars, totalRatings } = data;
-
+	const { name, imgBrand, description, categories, address, phone, isOpen, rating, menus } = data;
+	console.log(data);
 	useEffect(() => {
 		setRestaurantName(name);
 	}, [setRestaurantName, name]);
@@ -39,7 +39,7 @@ export default function RestaurantPage() {
 	}, [address, categories])
 
 	return (
-		<main className="flex flex-col">
+		<main className="flex flex-col bg-secundario">
 			<div className="w-full h-44 flex items-center justify-center overflow-hidden">
 				<img src={imgBrand} alt={`${data.name} image`} className="w-full h-full object-cover object-center" />
 			</div>
@@ -50,11 +50,11 @@ export default function RestaurantPage() {
 				phoneNumber={phone}
 				categories={cat}
 				openRestaurant={isOpen}
-				stars={stars}
-				totalRatings={totalRatings}
+				stars={rating?.average}
+				totalRatings={rating?.total}
 			/>
 			<FoodTags />
-			<RestaurantCategory showBottomSheet={showBottomSheet} />
+			<RestaurantCategory showBottomSheet={showBottomSheet} menus={menus} />
 			<BottomSheet showBottomSheet={showBottomSheet} />
 		</main>
 	);

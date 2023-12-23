@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const BottomBar = () => {
 	// We use useState to keep track of the current tab.
@@ -8,6 +9,20 @@ const BottomBar = () => {
 	// The "Mis Tiendas" tab is rendered when currentTab is 4.
 
 	const [currentTab, setCurrentTab] = useState(1);
+
+	// identify in what page we are
+	const location = useLocation();
+	useState(() => {
+		if (location.pathname === "/favorites") {
+			setCurrentTab(0);
+		} else if (location.pathname === "/") {
+			setCurrentTab(1);
+		} else if (location.pathname === "/history") {
+			setCurrentTab(2);
+		} else if (location.pathname === "/myShops") {
+			setCurrentTab(3);
+		}
+	}, [location]);
 
 	// We use the following function to change the current tab.
 	// This function is called when the user clicks on a tab.
@@ -21,11 +36,11 @@ const BottomBar = () => {
 	return (
 		<div className="w-full h-14 rounded-t-xl bg-yellow-400 desktop:hidden z-10 sticky bottom-0">
 			<div className="flex flex-row  content-center h-full">
-				<div
-					className={
-						`transition-all flex flex-col flex-wrap items-center justify-center content-center cursor-pointer px-5  w-2/4` +
-						(currentTab === 0 ? " bg-neutral-950 shrink rounded-tl-xl" : "")
-					}
+				<Link
+					to="/favorites"
+					className={`transition-all flex flex-col flex-wrap items-center justify-center content-center cursor-pointer px-5 w-2/4 ${
+						currentTab === 0 ? "bg-neutral-950 shrink rounded-tl-xl" : ""
+					}`}
 					onClick={() => changeTab(0)}
 				>
 					<svg
@@ -46,12 +61,12 @@ const BottomBar = () => {
 					<span className={`text-xs transition-all` + (currentTab === 0 ? " text-yellow-400" : "")}>
 						Favoritos
 					</span>
-				</div>
-				<div
-					className={
-						`transition-all flex flex-col flex-wrap items-center justify-center content-center cursor-pointer px-5 w-2/4` +
-						(currentTab === 1 ? " bg-neutral-950 shrink" : "")
-					}
+				</Link>
+				<Link
+					to="/"
+					className={`transition-all flex flex-col flex-wrap items-center justify-center content-center cursor-pointer px-5 w-2/4 ${
+						currentTab === 1 ? "bg-neutral-950 shrink" : ""
+					}`}
 					onClick={() => changeTab(1)}
 				>
 					<svg
@@ -79,12 +94,12 @@ const BottomBar = () => {
 					<span className={`text-xs transition-all` + (currentTab === 1 ? " text-yellow-400" : "")}>
 						Inicio
 					</span>
-				</div>
-				<div
-					className={
-						`transition-all flex flex-col flex-wrap items-center justify-center content-center cursor-pointer px-5 w-2/4` +
-						(currentTab === 2 ? " bg-neutral-950 shrink" : "")
-					}
+				</Link>
+				<Link
+					to="/history"
+					className={`transition-all flex flex-col flex-wrap items-center justify-center content-center cursor-pointer px-5 w-2/4 ${
+						currentTab === 2 ? "bg-neutral-950 shrink" : ""
+					}`}
 					onClick={() => changeTab(2)}
 				>
 					<svg
@@ -103,12 +118,12 @@ const BottomBar = () => {
 					<span className={`text-xs transition-all` + (currentTab === 2 ? " text-yellow-400" : "")}>
 						Historial
 					</span>
-				</div>
-				<div
-					className={
-						`transition-all flex flex-col flex-wrap items-center justify-center content-center text-center cursor-pointer px-5 w-2/4` +
-						(currentTab === 3 ? " bg-neutral-950 shrink rounded-tr-xl" : "")
-					}
+				</Link>
+				<Link
+					to="/myShops"
+					className={`transition-all flex flex-col flex-wrap items-center justify-center content-center text-center cursor-pointer px-5 w-2/4 ${
+						currentTab === 3 ? "bg-neutral-950 shrink rounded-tr-xl" : ""
+					}`}
 					onClick={() => changeTab(3)}
 				>
 					<svg
@@ -152,7 +167,7 @@ const BottomBar = () => {
 					>
 						Mis Tiendas
 					</span>
-				</div>
+				</Link>
 			</div>
 		</div>
 	);
