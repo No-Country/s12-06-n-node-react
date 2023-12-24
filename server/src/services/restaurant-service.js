@@ -40,7 +40,7 @@ const RestaurantService = {
 	async getRestaurantById(id) {
 		const responseGetById = await RestaurantModel.findById(id)
 			.populate("categories", "_id category urlImgCategories")
-			.populate("menus", "_id name description price imgMenus")
+			.populate("menus", "_id name description price imgMenus menuCategory")
 			.populate("comments", "_id userId comment rating");
 
 		const formattedRestaurant = {
@@ -56,6 +56,7 @@ const RestaurantService = {
 				description: menu.description,
 				price: menu.price,
 				imgMenus: menu.imgMenus,
+				menuCategory: menu.menuCategory
 			})),
 			comments: responseGetById.comments.map(comment => ({
 				_id: comment._id,
