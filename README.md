@@ -7,7 +7,7 @@ El objetivo de este proyecto es desarrollar una plataforma que permita visualiza
 
 </p>
 
-Link [Yumiverse](https://yumiverse-gip1sybvv-yumiverses-projects.vercel.app/ "Yumiverse")
+Link [Yumiverse](https://yumiverse.vercel.app/"Yumiverse")
 
 Link [Figma](https://www.figma.com/file/JtfUmoUezgVkhz9uewHclu/Yumiverse?type=design&node-id=0-1&mode=design&t=CpkeBA8teQyxgU7J-0 "Figma")
 
